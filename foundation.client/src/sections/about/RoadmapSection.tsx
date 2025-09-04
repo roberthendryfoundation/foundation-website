@@ -1,13 +1,13 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/Card';
 import { Badge } from '../../components/ui/badge';
 
 export function RoadmapSection() {
     const milestones = [
-        { year: "Current", title: "Informational Launch", description: "We focus on education about anxiety—what it is, common signs, and how to seek qualified help." },
-        { year: "Next", title: "Community Listening", description: "We’ll gather feedback from individuals and partners to understand local needs and gaps." },
+        { year: "Current", title: "Informational Launch", description: "We focus on education about anxiety what it is, common signs, and how to seek qualified help." },
+        { year: "Next", title: "Community Listening", description: "We'll gather feedback from individuals and partners to understand local needs and gaps." },
         { year: "Planned", title: "Resource Directory", description: "We aim to curate a simple, reputable list of external hotlines, clinics, and self-help materials." },
         { year: "Future", title: "Workshops & Events", description: "Subject to capacity and partnerships, we hope to host educational sessions led by qualified speakers." },
-        { year: "Future", title: "Supportive Programs", description: "As we grow, we’ll explore safe, non-clinical peer spaces and referrals to licensed care." },
+        { year: "Future", title: "Supportive Programs", description: "As we grow, we'll explore safe, non clinical peer spaces and referrals to licensed care." },
         { year: "Ongoing", title: "Responsible Growth", description: "We will expand only when we can do so ethically, sustainably, and with appropriate safeguards." },
     ];
 

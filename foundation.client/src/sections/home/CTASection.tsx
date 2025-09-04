@@ -11,7 +11,7 @@ export function CTASection() {
                 <h2 className="text-3xl lg:text-4xl mb-6 text-white">Help Us Grow Responsibly</h2>
                 <p className="text-xl text-white/90 mb-8 leading-relaxed">
                     Your support helps us create accessible resources and plan future programs with care.
-                    We’re information-first and community-driven.
+                    We're information-first and community-driven.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Button size="lg" className="bg-white text-primary hover:bg-white/90" onClick={() => navigate('/contact')}>

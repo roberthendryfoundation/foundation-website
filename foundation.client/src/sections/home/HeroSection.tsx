@@ -18,10 +18,10 @@ export function HeroSection() {
                                 The Robert A. Henry Foundation
                             </Badge>
                             <h1 className="text-4xl lg:text-6xl text-white">
-                                Anxiety is real. It’s treatable. And no one should face it alone.
+                                Anxiety is real. It's treatable. And no one should face it alone.
                             </h1>
                             <p className="text-xl text-white/90 leading-relaxed">
-                                We’re here to educate, support, and prevent the silent suffering that took Robert Hendry and many others’ life.
+                                We're here to educate, support, and prevent the silent suffering that took Robert Hendry and many others life.
                             </p>
                         </div>
 
@@ -37,7 +37,7 @@ export function HeroSection() {
                         <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
                             <p className="text-sm text-white/90 mb-2"><strong>In Crisis?</strong></p>
                             <p className="text-white/80">
-                                If you’re in crisis, call or text <a href="tel:988" className="underline font-semibold">988</a> (U.S.) for the Suicide & Crisis Lifeline,
+                                If you're in crisis, call or text <a href="tel:988" className="underline font-semibold">988</a> (U.S.) for the Suicide & Crisis Lifeline,
                                 or contact your local emergency services.
                             </p>
                         </div>

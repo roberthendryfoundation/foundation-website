@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Layout } from './layout/Layout';
 import { HomePage } from './pages/Homepage';
 import { AboutPage } from './pages/AboutPage';
+import { ServicesPage } from './pages/ServicesPage';
+import { ResourcesPage } from './pages/ResourcesPage';
+import { ContactPage } from './pages/ContactPage';  
 
 
 
@@ -14,7 +17,12 @@ export default function App() {
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/about" element={<AboutPage />} />
-                  
+                    <Route path="/services" element={<ServicesPage />} />
+                    <Route path="/resources" element={<ResourcesPage />} />
+                    <Route path="/contact" element={<ContactPage />} />
+
+                    {/* Fallback route */}
+                    <Route path="*" element={<HomePage />} />
 
                 </Routes>
             </Layout>

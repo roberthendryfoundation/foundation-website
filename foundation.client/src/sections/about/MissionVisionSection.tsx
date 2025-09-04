@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/Card';
 import { Target, Lightbulb, Heart } from 'lucide-react';
 
 export function MissionVisionSection() {

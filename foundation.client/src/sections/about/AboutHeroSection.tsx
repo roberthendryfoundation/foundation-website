@@ -18,11 +18,11 @@ export function AboutHeroSection() {
                         Clear, Compassionate Information About Anxiety
                     </h1>
                     <p className="text-xl text-muted-foreground leading-relaxed mb-8">
-                        Andrew Hendry founded this organization after losing his son Robert to a tragic combination of untreated anxiety and alcoholism. Robert was 33. He was brilliant, kind, and deeply loved but he felt he had to hide his pain. This foundation exists so others don’t have to.
+                        Andrew Hendry founded this organization after losing his son Robert to a tragic combination of untreated anxiety and alcoholism. Robert was 33. He was brilliant, kind, and deeply loved but he felt he had to hide his pain. This foundation exists so others don't have to.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Button size="lg" onClick={() => navigate('/services')}>
-                            What We’re Building <ArrowRight className="h-4 w-4 ml-2" />
+                            What We're Building <ArrowRight className="h-4 w-4 ml-2" />
                         </Button>
                         <Button size="lg" variant="outline" onClick={() => navigate('/contact')}>
                             Contact Us

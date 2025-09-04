@@ -9,7 +9,7 @@ export function TestimonialsSection() {
             role: "Reader",
         },
         {
-            quote: "I shared your resource list with a friend — it was clear, compassionate, and easy to follow.",
+            quote: "I shared your resource list with a friend. it was clear, compassionate, and easy to follow.",
             author: "Local Advocate",
             role: "Volunteer",
         },

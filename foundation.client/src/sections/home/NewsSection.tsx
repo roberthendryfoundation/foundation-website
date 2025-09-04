@@ -29,7 +29,7 @@ export function NewsSection() {
                     <Card className="border-border shadow-soft">
                         <CardHeader>
                             <Badge variant="secondary" className="w-fit mb-2">Anxiety Basics</Badge>
-                            <CardTitle className="text-lg">What Anxiety Feels Like (and Why That’s Normal)</CardTitle>
+                            <CardTitle className="text-lg">What Anxiety Feels Like (and Why That's Normal)</CardTitle>
                             <CardDescription>Published August 1, 2025</CardDescription>
                         </CardHeader>
                         <CardContent>
@@ -48,7 +48,7 @@ export function NewsSection() {
                         </CardHeader>
                         <CardContent>
                             <p className="text-muted-foreground mb-4">
-                                We’re exploring short, informational sessions with qualified speakers. No therapy—education only.
+                                We're exploring short, informational sessions with qualified speakers. No therapy education only.
                             </p>
                             <Button variant="ghost" size="sm">Join Interest List <ArrowRight className="h-3 w-3 ml-1" /></Button>
                         </CardContent>
