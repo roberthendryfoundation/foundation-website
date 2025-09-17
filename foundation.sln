@@ -1,11 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36414.22 d17.14
+VisualStudioVersion = 17.14.36414.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "foundation.client", "foundation.client\foundation.client.esproj", "{5D1979C3-37E9-F24D-73AB-3B8038C485D5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "foundation.Server", "foundation.Server\foundation.Server.csproj", "{CF423038-03AD-4ED1-A9B7-D1FB0CB3E472}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nonprofit-resource-hub", "nonprofit-resource-hub", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		nonprofit-resource-hub\package.json = nonprofit-resource-hub\package.json
+		nonprofit-resource-hub\sanity.config.ts = nonprofit-resource-hub\sanity.config.ts
+		nonprofit-resource-hub\tsconfig.json = nonprofit-resource-hub\tsconfig.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "schemaTypes", "schemaTypes", "{C19B97D7-29A4-4C95-BC48-D451E1EF655C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +35,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C19B97D7-29A4-4C95-BC48-D451E1EF655C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {698E6D82-9E92-4B44-9F22-1128F54ACF9C}

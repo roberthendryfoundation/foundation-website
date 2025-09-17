@@ -8,31 +8,31 @@ export function ExternalResourcesSection() {
         {
             title: "988 Suicide & Crisis Lifeline",
             description: "Call or text 988 for free, confidential support (U.S.).",
-            url: "988lifeline.org",
+            url: "https://988lifeline.org",
             category: "Crisis Support"
         },
         {
             title: "Crisis Text Line",
             description: "Text HOME to 741741 for 24/7 text support (U.S.).",
-            url: "crisistextline.org",
+            url: "https://crisistextline.org",
             category: "Crisis Support"
         },
         {
             title: "National Alliance on Mental Illness (NAMI)",
             description: "Education, support, and advocacy.",
-            url: "nami.org",
+            url: "https://nami.org",
             category: "Support Organization"
         },
         {
             title: "Anxiety & Depression Association of America",
-            description: "Research‑informed information on anxiety and depression.",
-            url: "adaa.org",
+            description: "Research-informed information on anxiety and depression.",
+            url: "https://adaa.org",
             category: "Education"
         },
         {
             title: "Mental Health America",
             description: "Information and external screenings.",
-            url: "mhanational.org",
+            url: "https://mhanational.org",
             category: "Education"
         }
     ];
@@ -59,12 +59,29 @@ export function ExternalResourcesSection() {
                                         </div>
                                         <h4 className="font-semibold text-foreground mb-1">{resource.title}</h4>
                                         <p className="text-sm text-muted-foreground mb-2">{resource.description}</p>
-                                        <p className="text-sm text-primary">{resource.url}</p>
+
+                                        {/* clickable link */}
+                                        <a
+                                            href={resource.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-sm text-primary hover:underline"
+                                        >
+                                            {resource.url.replace(/^https?:\/\//, '')}
+                                        </a>
                                     </div>
-                                    <Button size="sm" variant="outline">
-                                        <ExternalLink className="h-3 w-3 mr-2" />
-                                        Visit
-                                    </Button>
+
+                                    {/* make Visit button link out */}
+                                    <a
+                                        href={resource.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <Button size="sm" variant="outline">
+                                            <ExternalLink className="h-3 w-3 mr-2" />
+                                            Visit
+                                        </Button>
+                                    </a>
                                 </div>
                             </CardContent>
                         </Card>

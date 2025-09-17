@@ -16,7 +16,7 @@ export function NewsSection() {
                             Latest News &amp; Resources
                         </h2>
                         <p className="text-xl text-muted-foreground">
-                            Short reads and links we find helpful—focused on anxiety awareness and support.
+                            Short reads and links we find helpful-focused on anxiety awareness and support.
                         </p>
                     </div>
                     <Button variant="outline" onClick={() => navigate('/resources')}>
@@ -34,7 +34,7 @@ export function NewsSection() {
                         </CardHeader>
                         <CardContent>
                             <p className="text-muted-foreground mb-4">
-                                A plain language starting point: common signs, everyday triggers, and ideas for talking to a professional…
+                                A plain language starting point: common signs, everyday triggers, and ideas for talking to a professional
                             </p>
                             <Button variant="ghost" size="sm">Read More <ArrowRight className="h-3 w-3 ml-1" /></Button>
                         </CardContent>

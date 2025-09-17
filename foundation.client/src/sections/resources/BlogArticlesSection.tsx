@@ -1,13 +1,58 @@
-﻿import { useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/Card';
 import { Badge } from '../../components/ui/badge';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
 import { Search, BookOpen, ArrowRight } from 'lucide-react';
+import { client } from '../../sanityClient';
+import { Link } from "react-router-dom";
+
+interface Article {
+    title: string;
+    excerpt: string;
+    author: string;
+    date: string;
+    readTime: number;
+    category?: { name: string };
+    tags?: string[];
+    slug: string;
+    body?: any; // Sanity block content is complex, we’ll render it with @portabletext/react
+}
 
 export function BlogArticlesSection() {
+    const [articles, setArticles] = useState<Article[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('all');
+
+    useEffect(() => {
+        const fetchArticles = async () => {
+            const query = `*[_type == "article"] | order(date desc)[0...6]{
+                title,
+                  excerpt,
+                  author,
+                  date,
+                  readTime,
+                  "slug": slug.current,
+                  category->{name},
+                  tags,
+                  body
+             }`;
+
+            const data = await client.fetch(query);
+            setArticles(data);
+        };
+        fetchArticles();
+    }, []);
+
+    const filteredPosts = articles.filter(post => {
+        const matchesSearch =
+            post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            post.tags?.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+        const matchesCategory =
+            selectedCategory === 'all' || post.category?.name.toLowerCase() === selectedCategory;
+        return matchesSearch && matchesCategory;
+    });
 
     const categories = [
         { id: 'all', name: 'All Resources', icon: BookOpen },
@@ -17,84 +62,6 @@ export function BlogArticlesSection() {
         { id: 'family', name: 'Family & Caregivers', icon: BookOpen },
         { id: 'videos', name: 'Videos & Audio', icon: BookOpen },
     ];
-
-    const blogPosts = [
-        {
-            id: 1,
-            title: "Understanding Anxiety: A Plain-Language Starter",
-            excerpt: "Common signs, everyday triggers, and how to talk with a licensed professional if you choose.",
-            author: "Editorial Team",
-            date: "August 1, 2025",
-            readTime: "6 min read",
-            category: "mental-health",
-            featured: true,
-            tags: ["anxiety", "coping", "help-seeking"]
-        },
-        {
-            id: 2,
-            title: "Small Skills, Real Relief: 5-Minute Grounding",
-            excerpt: "Simple techniques you can try today—no app required.",
-            author: "Guest Contributor",
-            date: "July 25, 2025",
-            readTime: "5 min read",
-            category: "self-care",
-            featured: false,
-            tags: ["grounding", "breathing", "skills"]
-        },
-        {
-            id: 3,
-            title: "Supporting a Loved One (Without Fixing Everything)",
-            excerpt: "Ways to listen, validate, and share resources without pressure.",
-            author: "Editorial Team",
-            date: "July 18, 2025",
-            readTime: "7 min read",
-            category: "family",
-            featured: true,
-            tags: ["family", "support", "validation"]
-        },
-        {
-            id: 4,
-            title: "Mindfulness: Getting Started When You're Anxious",
-            excerpt: "Short practices, realistic expectations, and common pitfalls.",
-            author: "Guest Contributor",
-            date: "July 10, 2025",
-            readTime: "8 min read",
-            category: "self-care",
-            featured: false,
-            tags: ["mindfulness", "practice", "anxiety"]
-        },
-        {
-            id: 5,
-            title: "How to Find Affordable Care",
-            excerpt: "Sliding‑scale options, directories, and questions to ask providers.",
-            author: "Editorial Team",
-            date: "June 28, 2025",
-            readTime: "6 min read",
-            category: "mental-health",
-            featured: false,
-            tags: ["cost", "directories", "access"]
-        },
-        {
-            id: 6,
-            title: "Make a Personal Calm Plan",
-            excerpt: "Create a simple plan you can use on tougher days.",
-            author: "Editorial Team",
-            date: "June 20, 2025",
-            readTime: "6 min read",
-            category: "self-care",
-            featured: false,
-            tags: ["planning", "wellness", "routine"]
-        }
-    ];
-
-    const filteredPosts = blogPosts.filter(post => {
-        const matchesSearch =
-            post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            post.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
-        const matchesCategory = selectedCategory === 'all' || post.category === selectedCategory;
-        return matchesSearch && matchesCategory;
-    });
 
     return (
         <section className="py-20 bg-muted/30">
@@ -140,11 +107,11 @@ export function BlogArticlesSection() {
 
                 {/* Articles */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {filteredPosts.map((post) => (
-                        <Card key={post.id} className="border-border shadow-soft">
+                    {filteredPosts.map((post, idx) => (
+                        <Card key={idx} className="border-border shadow-soft">
                             <CardHeader>
                                 <Badge variant="secondary" className="w-fit mb-2 text-xs">
-                                    {categories.find(cat => cat.id === post.category)?.name}
+                                    {post.category?.name || 'Uncategorized'}
                                 </Badge>
                                 <CardTitle className="text-lg">{post.title}</CardTitle>
                                 <CardDescription>{post.excerpt}</CardDescription>
@@ -156,10 +123,15 @@ export function BlogArticlesSection() {
                                         <span>{post.readTime}</span>
                                     </div>
                                     <div className="flex items-center justify-between pt-2 border-t border-border">
-                                        <span className="text-sm text-muted-foreground">{post.date}</span>
-                                        <Button variant="ghost" size="sm">
-                                            Read <ArrowRight className="h-3 w-3 ml-1" />
+                                        <span className="text-sm text-muted-foreground">
+                                            {new Date(post.date).toLocaleDateString()}
+                                        </span>
+                                        <Button variant="ghost" size="sm" asChild>
+                                            <Link to={`/resources/${post.slug}`}>
+                                                Read <ArrowRight className="h-3 w-3 ml-1" />
+                                            </Link>
                                         </Button>
+
                                     </div>
                                 </div>
                             </CardContent>

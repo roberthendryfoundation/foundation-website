@@ -21,7 +21,7 @@ export function PrimaryServicesSection() {
             description: "Point you in the right direction via email: how to find licensed providers, hotlines, and low-cost options.",
             features: ["Provider-finding tips", "Financial aid links", "Crisis resources", "Local & national directories"],
             price: "Free",
-            availability: "Mon–Fri (email response)"
+            availability: "Mon-Fri (email response)"
         },
         {
             icon: Video,
