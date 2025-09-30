@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/Card';
 import { Button } from '../../components/ui/button';
-import { Phone, Brain, Headphones, Users } from 'lucide-react';
+import { Phone, Brain, PlayCircle, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export function QuickResourcesSection() {
@@ -23,8 +23,8 @@ export function QuickResourcesSection() {
         },
         {
             title: "Breathing Exercises",
-            description: "Short, guided audio you can try right now.",
-            icon: Headphones,
+            description: "Short, guided videos you can try right now.",
+            icon: PlayCircle,
             type: "audio",
             action: "Listen",
             url: "/resources/breathing" // internal route

@@ -12,7 +12,7 @@ export function AboutHeroSection() {
                 <div className="max-w-4xl mx-auto text-center">
                     <Badge variant="secondary" className="mb-6">
                         <Heart className="h-3 w-3 mr-1" />
-                        About The Robert A. Henry Foundation
+                        About The Robert A. Hendry Foundation
                     </Badge>
                     <h1 className="text-4xl lg:text-6xl mb-6 text-foreground">
                         Clear, Compassionate Information About Anxiety

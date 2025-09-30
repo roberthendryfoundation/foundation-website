@@ -15,7 +15,7 @@ export function HeroSection() {
                         <div className="space-y-4">
                             <Badge variant="secondary" className="bg-white/20 text-white border-white/30">
                                 <Heart className="h-3 w-3 mr-1" />
-                                The Robert A. Henry Foundation
+                                The Robert A. Hendry Foundation
                             </Badge>
                             <h1 className="text-4xl lg:text-6xl text-white">
                                 Anxiety is real. It's treatable. And no one should face it alone.

@@ -11,7 +11,7 @@ export function SpecialtyServicesSection() {
         },
         {
             title: "Provider Office Hours (Planned)",
-            description: "Short informational Q&A sessions with licensed professionals—education only, not patient care.",
+            description: "Short informational Q&A sessions with licensed professionals education only, not patient care.",
             specialist: "Guest clinicians (external)"
         },
         {

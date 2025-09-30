@@ -6,6 +6,7 @@ import { Input } from '../../components/ui/input';
 import { Search, BookOpen, ArrowRight } from 'lucide-react';
 import { client } from '../../sanityClient';
 import { Link } from "react-router-dom";
+import * as LucideIcons from "lucide-react"; // 👈 import all icons
 
 interface Article {
     title: string;
@@ -13,35 +14,50 @@ interface Article {
     author: string;
     date: string;
     readTime: number;
-    category?: { name: string };
+    category?: { _id: string; name: string; icon?: string };
     tags?: string[];
     slug: string;
-    body?: any; // Sanity block content is complex, we’ll render it with @portabletext/react
+    body?: any;
+}
+
+interface Category {
+    _id: string;
+    name: string;
+    icon?: string;
 }
 
 export function BlogArticlesSection() {
     const [articles, setArticles] = useState<Article[]>([]);
+    const [categories, setCategories] = useState<Category[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('all');
 
     useEffect(() => {
-        const fetchArticles = async () => {
-            const query = `*[_type == "article"] | order(date desc)[0...6]{
-                title,
-                  excerpt,
-                  author,
-                  date,
-                  readTime,
-                  "slug": slug.current,
-                  category->{name},
-                  tags,
-                  body
-             }`;
+        const fetchData = async () => {
+            const articlesQuery = `*[_type == "article"] | order(date desc)[0...6]{
+        title,
+        excerpt,
+        author,
+        date,
+        readTime,
+        "slug": slug.current,
+        category->{_id, name, icon},
+        tags,
+        body
+      }`;
 
-            const data = await client.fetch(query);
-            setArticles(data);
+            const categoriesQuery = `*[_type == "category"]{ _id, name, icon }`;
+
+            const [articlesData, categoriesData] = await Promise.all([
+                client.fetch(articlesQuery),
+                client.fetch(categoriesQuery),
+            ]);
+
+            setArticles(articlesData);
+            setCategories([{ _id: "all", name: "All", icon: "BookOpen" }, ...categoriesData]);
         };
-        fetchArticles();
+
+        fetchData();
     }, []);
 
     const filteredPosts = articles.filter(post => {
@@ -49,19 +65,12 @@ export function BlogArticlesSection() {
             post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
             post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
             post.tags?.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+
         const matchesCategory =
-            selectedCategory === 'all' || post.category?.name.toLowerCase() === selectedCategory;
+            selectedCategory === "all" || post.category?._id === selectedCategory;
+
         return matchesSearch && matchesCategory;
     });
-
-    const categories = [
-        { id: 'all', name: 'All Resources', icon: BookOpen },
-        { id: 'mental-health', name: 'Anxiety Info', icon: BookOpen },
-        { id: 'self-care', name: 'Self-Care', icon: BookOpen },
-        { id: 'crisis', name: 'Crisis Resources', icon: BookOpen },
-        { id: 'family', name: 'Family & Caregivers', icon: BookOpen },
-        { id: 'videos', name: 'Videos & Audio', icon: BookOpen },
-    ];
 
     return (
         <section className="py-20 bg-muted/30">
@@ -90,18 +99,25 @@ export function BlogArticlesSection() {
                         />
                     </div>
                     <div className="flex gap-2 overflow-x-auto">
-                        {categories.map((category) => (
-                            <Button
-                                key={category.id}
-                                variant={selectedCategory === category.id ? "default" : "outline"}
-                                size="sm"
-                                onClick={() => setSelectedCategory(category.id)}
-                                className="whitespace-nowrap"
-                            >
-                                <category.icon className="h-3 w-3 mr-2" />
-                                {category.name}
-                            </Button>
-                        ))}
+                        {categories.map((category) => {
+                            const IconComponent =
+                                category.icon && (LucideIcons as any)[category.icon]
+                                    ? (LucideIcons as any)[category.icon]
+                                    : BookOpen;
+
+                            return (
+                                <Button
+                                    key={category._id}
+                                    variant={selectedCategory === category._id ? "default" : "outline"}
+                                    size="sm"
+                                    onClick={() => setSelectedCategory(category._id)}
+                                    className="whitespace-nowrap"
+                                >
+                                    <IconComponent className="h-3 w-3 mr-2" />
+                                    {category.name}
+                                </Button>
+                            );
+                        })}
                     </div>
                 </div>
 
@@ -120,8 +136,20 @@ export function BlogArticlesSection() {
                                 <div className="space-y-3">
                                     <div className="flex items-center justify-between text-sm text-muted-foreground">
                                         <span>{post.author}</span>
-                                        <span>{post.readTime}</span>
+                                        <span>{post.readTime} min read</span>
                                     </div>
+
+                                    {/* Tags */}
+                                    {post.tags && post.tags.length > 0 && (
+                                        <div className="flex flex-wrap gap-2">
+                                            {post.tags.map((tag, i) => (
+                                                <Badge key={i} variant="outline" className="text-xs">
+                                                    {tag}
+                                                </Badge>
+                                            ))}
+                                        </div>
+                                    )}
+
                                     <div className="flex items-center justify-between pt-2 border-t border-border">
                                         <span className="text-sm text-muted-foreground">
                                             {new Date(post.date).toLocaleDateString()}
@@ -131,10 +159,10 @@ export function BlogArticlesSection() {
                                                 Read <ArrowRight className="h-3 w-3 ml-1" />
                                             </Link>
                                         </Button>
-
                                     </div>
                                 </div>
                             </CardContent>
+
                         </Card>
                     ))}
                 </div>

@@ -26,7 +26,7 @@ export function ContactInfoSection() {
             icon: Mail,
             title: "General Inquiries",
             description: "Questions, feedback, partnerships, volunteering",
-            contact: "info@roberthenryfoundation.org",
+            contact: "info@roberthendryfoundation.org",
             subtext: "We typically reply within 2-3 business days",
             type: "secondary",
             available: "Business days"

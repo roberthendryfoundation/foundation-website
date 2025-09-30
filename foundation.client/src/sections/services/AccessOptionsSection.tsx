@@ -6,13 +6,13 @@ export function AccessOptionsSection() {
         {
             icon: MapPin,
             title: "Online Resource Hub",
-            description: "Read articles and guides—free and available anytime.",
-            location: "roberthenryfoundation.org/resources"
+            description: "Read articles and guides free and available anytime.",
+            location: "roberthendryfoundation.org/resources"
         },
         {
             icon: Video,
             title: "Talks & Webinars (Planned)",
-            description: "Short educational sessions—sign up for updates.",
+            description: "Short educational sessions sign up for updates.",
             location: "Join interest list via Contact"
         },
         {

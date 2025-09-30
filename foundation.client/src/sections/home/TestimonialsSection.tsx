@@ -1,4 +1,4 @@
-import { Card, CardContent } from '../../components/ui/card';
+import { Card, CardContent } from '../../components/ui/Card';
 import { Heart } from 'lucide-react';
 
 export function TestimonialsSection() {
@@ -19,9 +19,9 @@ export function TestimonialsSection() {
         <section className="py-20 bg-muted/30">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
-                    <h2 className="text-3xl lg:text-4xl mb-4 text-foreground">Community Voices</h2>
+                    <h2 className="text-3xl lg:text-4xl mb-4 text-foreground">Personal Testimonials</h2>
                     <p className="text-xl text-muted-foreground">
-                        Stories of resilience from those who have found connection, clarity, and healing through our programs.
+                        Real experiences shared by individuals who've benefited from our resources.
                     </p>
                 </div>
 

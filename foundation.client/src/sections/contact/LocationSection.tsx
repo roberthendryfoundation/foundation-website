@@ -14,7 +14,7 @@ export function LocationSection() {
             <CardContent>
                 <div className="space-y-3">
                     <div>
-                        <div className="font-medium text-foreground">The Robert A. Henry Foundation</div>
+                        <div className="font-medium text-foreground">The Robert A. Hendry Foundation</div>
                         <div className="text-muted-foreground">
                             We currently do not offer in-person services or maintain a public office.
                         </div>

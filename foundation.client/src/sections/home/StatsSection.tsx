@@ -2,8 +2,9 @@ export function StatsSection() {
     const stats = [
         { number: "40 Million", label: "Adults in the U.S. affected by anxiety each year" },
         { number: "1 in 5", label: "Adults in the U.S. experience anxiety each year" },
+        { number: "31.9%", label: "of adolescents (ages 13-18) have experienced an anxiety disorder." },
         { number: "24/7", label: "Access to national crisis lines" },
-        { number: "100%", label: "Commitment to free access" },
+        
     ];
 
     return (

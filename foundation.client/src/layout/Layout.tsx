@@ -45,7 +45,7 @@ export function Layout({ children }: LayoutProps) {
                                 <Heart className="h-6 w-6 text-primary-foreground" />
                             </div>
                             <div>
-                                <h1 className="text-lg font-semibold text-foreground">The Robert A. Henry Foundation</h1>
+                                <h1 className="text-lg font-semibold text-foreground">The Robert A. Hendry Foundation</h1>
                                 <p className="text-xs text-muted-foreground">Anxiety awareness &amp; trustworthy information</p>
                             </div>
                         </Link>
@@ -129,7 +129,7 @@ export function Layout({ children }: LayoutProps) {
                                     <Heart className="h-5 w-5 text-primary-foreground" />
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold">The Robert A. Henry Foundation</h3>
+                                    <h3 className="font-semibold">The Robert A. Hendry Foundation</h3>
                                     <p className="text-sm text-muted-foreground">Information only nonprofit (no clinical services)</p>
                                 </div>
                             </Link>
@@ -184,7 +184,7 @@ export function Layout({ children }: LayoutProps) {
                                     <Mail className="h-4 w-4 text-muted-foreground" />
                                     <span className="text-sm text-muted-foreground">
                                         <a href="mailto:info@mindwellfoundation.org" className="text-primary hover:underline">
-                                            info@robertahenryfoundation.org
+                                            info@robertahendryfoundation.org
                                         </a>
                                     </span>
                                 </div>
@@ -218,7 +218,7 @@ export function Layout({ children }: LayoutProps) {
                     <div className="mt-8 pt-8 border-t border-border">
                         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                             <p className="text-sm text-muted-foreground">
-                                &copy; {new Date().getFullYear()} The Robert A. Henry Foundation. All rights reserved.
+                                &copy; {new Date().getFullYear()} The Robert A. Hendry Foundation. All rights reserved.
                             </p>
                             <div className="flex space-x-6">
                                 <button className="text-sm text-muted-foreground hover:text-foreground transition-colors">
