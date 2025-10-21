@@ -3,16 +3,7 @@
 @tailwind utilities;
 
 /* Brand Colors */
-/*:root {
-    --background: #fafbfc;
-    --foreground: #2c3e50;
-    --primary: #4a90a4;
-    --primary-foreground: #ffffff;
-    --muted: #f1f5f7;
-    --muted-foreground: #6b7280;
-    --border: rgba(74, 144, 164, 0.2);
-    --radius: 0.75rem;
-}*/
+
 :root {
     --font-size: 14px;
     /* Mental Health Foundation Brand Colors */
@@ -27,14 +18,14 @@
     --primary-foreground: #ffffff;
     --primary-light: #7fb6c5; /* lighter shade of your #4a90a4 */
     /* Soft secondary colors */
-    --secondary: #e8f4f8;
-    --secondary-foreground: #2c3e50;
+    --secondary: #f3f4f6;
+    --secondary-foreground: #1f2937;
     /* Muted colors for less emphasis */
     --muted: #f1f5f7;
-    --muted-foreground: #6b7280;
+    --muted-foreground: #4b5563; /* 6b7280 */
     /* Accent colors - warm and inviting */
-    --accent: #dbeafe;
-    --accent-foreground: #1e40af;
+    --accent: #bfdbfe;
+    --accent-foreground: #1e3a8a;
     /* Success green for positive actions */
     --success: #059669;
     --success-foreground: #ffffff;
@@ -63,6 +54,57 @@
     --chart-5: #ef4444;
     --radius: 0.75rem;
 }
+
+/*:root {
+    --font-size: 14px;*/
+    /* Mental Health Foundation Brand Colors */
+    /*--background: #fafbfc;
+    --foreground: #2c3e50;
+    --card: #ffffff;
+    --card-foreground: #2c3e50;
+    --popover: #ffffff;
+    --popover-foreground: #2c3e50;*/
+    /* Calming primary blue-green */
+    /*--primary: #4a90a4;
+    --primary-foreground: #ffffff;
+    --primary-light: #7fb6c5;*/ /* lighter shade of your #4a90a4 */
+    /* Soft secondary colors */
+    /*--secondary: #e8f4f8;
+    --secondary-foreground: #2c3e50;*/
+    /* Muted colors for less emphasis */
+    /*--muted: #f1f5f7;
+    --muted-foreground: #6b7280;*/
+    /* Accent colors - warm and inviting */
+    /*--accent: #dbeafe;
+    --accent-foreground: #1e40af;*/
+    /* Success green for positive actions */
+    /*--success: #059669;
+    --success-foreground: #ffffff;*/
+    /* Warm orange for donate/CTA buttons */
+    /*--donate: #f59e0b;
+    --donate-foreground: #ffffff;*/
+    /* Soft destructive for alerts */
+    /*--destructive: #dc2626;
+    --destructive-foreground: #ffffff;*/
+    /* Border and input styling */
+    /*--border: rgba(74, 144, 164, 0.2);
+    --input: transparent;
+    --input-background: #ffffff;
+    --switch-background: #e5e7eb;*/
+    /* Typography weights */
+    /*--font-weight-medium: 500;
+    --font-weight-normal: 400;
+    --font-weight-semibold: 600;*/
+    /* Focus ring for accessibility */
+    /*--ring: #4a90a4;*/
+    /* Chart colors for data visualization */
+    /*--chart-1: #4a90a4;
+    --chart-2: #059669;
+    --chart-3: #f59e0b;
+    --chart-4: #8b5cf6;
+    --chart-5: #ef4444;
+    --radius: 0.75rem;
+}*/
 
 .dark {
     --background: #1a202c;
@@ -123,34 +165,6 @@
     --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* Base styles */
-/*@layer base {
-    * {
-        @apply border-border;
-    }
-
-    body {
-        @apply bg-background text-foreground;
-        font-family: 'Inter', sans-serif;
-    }
-
-    h1 {
-        font-size: 2.25rem;
-        font-weight: 600;
-        line-height: 1.2;
-    }
-
-    h2 {
-        font-size: 1.75rem;
-        font-weight: 600;
-        line-height: 1.3;
-    }
-
-    p {
-        font-size: 1rem;
-        line-height: 1.6;
-    }
-}*/
 
 
 @layer base {
@@ -160,7 +174,7 @@
 
     body {
         @apply bg-background text-foreground;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        font-family: 'Nunito Sans','Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
     }
 }
 

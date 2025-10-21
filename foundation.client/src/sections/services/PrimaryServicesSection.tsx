@@ -1,44 +1,94 @@
 import { useNavigate } from 'react-router-dom';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/Card';
 import { Button } from '../../components/ui/button';
-import { CheckCircle, Heart, Users, Video, Clock } from 'lucide-react';
+import { CheckCircle, Heart, BookOpen, Activity, Megaphone } from 'lucide-react';
 
 export function PrimaryServicesSection() {
     const navigate = useNavigate();
 
+    //const primaryServices = [
+    //    {
+    //        icon: Heart,
+    //        title: "Anxiety Education",
+    //        description: "Clear, evidence-informed information about anxiety: common signs, coping skills, and how to seek qualified care.",
+    //        features: ["Plain-language guides", "Curated external links", "Downloadable handouts", "Inclusive, stigma-reducing tone"],
+    //        price: "Free",
+    //        availability: "Available online"
+    //    },
+    //    {
+    //        icon: Users,
+    //        title: "Resource Navigation (Non-Clinical)",
+    //        description: "Point you in the right direction via email: how to find licensed providers, hotlines, and low-cost options.",
+    //        features: ["Provider-finding tips", "Financial aid links", "Crisis resources", "Local & national directories"],
+    //        price: "Free",
+    //        availability: "Mon-Fri (email response)"
+    //    },
+    //    {
+    //        icon: Video,
+    //        title: "Learning Events (Planning)",
+    //        description: "As capacity allows, we'll host short educational talks/webinars led by qualified speakers. Not therapy.",
+    //        features: ["Short talks", "Q&A time", "Best-practice content", "Recorded summaries when possible"],
+    //        price: "Free or low-cost",
+    //        availability: "TBD (join interest list)"
+    //    },
+    //    {
+    //        icon: Clock,
+    //        title: "Newsletter & Updates",
+    //        description: "Periodic updates with practical tips, new pages, and community announcements. No spam, no diagnosis.",
+    //        features: ["Actionable tips", "New resource highlights", "Event announcements", "Unsubscribe anytime"],
+    //        price: "Free",
+    //        availability: "Monthly (approx.)"
+    //    }
+    //];
     const primaryServices = [
         {
             icon: Heart,
             title: "Anxiety Education",
-            description: "Clear, evidence-informed information about anxiety: common signs, coping skills, and how to seek qualified care.",
-            features: ["Plain-language guides", "Curated external links", "Downloadable handouts", "Inclusive, stigma-reducing tone"],
-            price: "Free",
-            availability: "Available online"
+            description:
+                "Accessible, evidence-informed information about anxiety: common signs, coping strategies, and how to seek qualified care.",
+            features: [
+                "Plain-language guides",
+                "Curated trusted resources",
+                "Downloadable tip sheets",
+            ],
+            availability: "Available online now",
         },
         {
-            icon: Users,
-            title: "Resource Navigation (Non-Clinical)",
-            description: "Point you in the right direction via email: how to find licensed providers, hotlines, and low-cost options.",
-            features: ["Provider-finding tips", "Financial aid links", "Crisis resources", "Local & national directories"],
-            price: "Free",
-            availability: "Mon-Fri (email response)"
+            icon: BookOpen,
+            title: "Resource Directory",
+            description:
+                "A curated list of national hotlines, local programs, and low-cost care directories-organized in one place for easy access.",
+            features: [
+                "Crisis and helpline numbers",
+                "Affordable therapy directories",
+                "Local and national support links",
+            ],
+            availability: "Available online now",
         },
         {
-            icon: Video,
-            title: "Learning Events (Planning)",
-            description: "As capacity allows, we'll host short educational talks/webinars led by qualified speakers. Not therapy.",
-            features: ["Short talks", "Q&A time", "Best-practice content", "Recorded summaries when possible"],
-            price: "Free or low-cost",
-            availability: "TBD (join interest list)"
+            icon: Activity,
+            title: "Self-Help Tools",
+            description:
+                "Simple, practical tools you can use at home to manage stress and anxiety in everyday life.",
+            features: [
+                "Breathing exercise videos",
+                "Grounding and journaling prompts",
+                "Healthy sleep and lifestyle checklists",
+            ],
+            availability: "Available online now",
         },
         {
-            icon: Clock,
-            title: "Newsletter & Updates",
-            description: "Periodic updates with practical tips, new pages, and community announcements. No spam, no diagnosis.",
-            features: ["Actionable tips", "New resource highlights", "Event announcements", "Unsubscribe anytime"],
-            price: "Free",
-            availability: "Monthly (approx.)"
-        }
+            icon: Megaphone,
+            title: "Updates & Blog",
+            description:
+                "News, practical tips, and community announcements shared directly on our site. No subscriptions required.",
+            features: [
+                "Articles on coping and wellness",
+                "Highlights of new resources",
+                "Community updates and announcements",
+            ],
+            availability: "Available online now",
+        },
     ];
 
     return (
@@ -80,11 +130,11 @@ export function PrimaryServicesSection() {
                                     </div>
                                     <div className="flex justify-between items-center pt-4 border-t border-border">
                                         <div className="text-sm">
-                                            <div className="text-muted-foreground">Cost: <span className="text-foreground font-medium">{service.price}</span></div>
+                                          {/*  <div className="text-muted-foreground">Cost: <span className="text-foreground font-medium">{service.price}</span></div>*/}
                                             <div className="text-muted-foreground">Available: <span className="text-foreground">{service.availability}</span></div>
                                         </div>
-                                        <Button variant="outline" size="sm" onClick={() => navigate('/contact')}>
-                                            Ask a Question
+                                        <Button variant="outline" size="sm" onClick={() => navigate('/resources')}>
+                                            Explore Resources
                                         </Button>
                                     </div>
                                 </div>

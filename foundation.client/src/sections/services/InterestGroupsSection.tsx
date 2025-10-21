@@ -8,19 +8,20 @@ export function InterestGroupsSection() {
     const navigate = useNavigate();
 
     const supportGroups = [
-        { name: "Anxiety 101: Understanding & Coping (Interest List)", time: "TBD", type: "Virtual" },
-        { name: "Caregivers Supporting Loved Ones (Interest List)", time: "TBD", type: "Virtual" },
-        { name: "Mindfulness for Anxiety (Interest List)", time: "TBD", type: "Virtual" },
-        { name: "Young Adults & Anxiety (Interest List)", time: "TBD", type: "Virtual" }
+        { name: "Anxiety 101: Understanding & Coping (Planned)", time: "TBD", type: "Virtual" },
+        { name: "Caregivers Supporting Loved Ones (Planned)", time: "TBD", type: "Virtual" },
+        { name: "Mindfulness for Anxiety (Planned)", time: "TBD", type: "Virtual" },
+        { name: "Young Adults & Anxiety (Planned)", time: "TBD", type: "Virtual" }
     ];
+
 
     return (
         <section className="py-20 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
-                    <h2 className="text-3xl lg:text-4xl mb-4 text-foreground">Topics People Ask About</h2>
+                    <h2 className="text-3xl lg:text-4xl mb-4 text-foreground">Interest Groups (Planned)</h2>
                     <p className="text-xl text-muted-foreground">
-                        Add your name to an interest list; we'll email updates if a session is scheduled.
+                        Sign up for updates: if enough interest builds, we'll explore scheduling a session
                     </p>
                 </div>
 

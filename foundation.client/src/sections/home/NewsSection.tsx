@@ -1,11 +1,44 @@
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '../../components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/Card';
 import { Badge } from '../../components/ui/badge';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Newspaper } from 'lucide-react';
+import { client } from '../../sanityClient';
+
+interface Article {
+    title: string;
+    excerpt: string;
+    slug: string;
+    date: string;
+    category?: { name: string };
+}
 
 export function NewsSection() {
     const navigate = useNavigate();
+    const [articles, setArticles] = useState<Article[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchArticles = async () => {
+            try {
+                const query = `*[_type == "article"] | order(date desc)[0...3]{
+          title,
+          excerpt,
+          "slug": slug.current,
+          date,
+          category->{ name }
+        }`;
+                const data = await client.fetch(query);
+                setArticles(data);
+            } catch (error) {
+                console.error("Error fetching articles:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchArticles();
+    }, []);
 
     return (
         <section className="py-20 bg-white" aria-labelledby="news-heading">
@@ -24,54 +57,54 @@ export function NewsSection() {
                     </Button>
                 </div>
 
-                {/* Static content now, replace with CMS later */}
+                {/* Loading state */}
+                {loading && (
+                    <div className="text-center py-12">
+                        <p className="text-muted-foreground">Loading latest articles...</p>
+                    </div>
+                )}
+
+                {/* No articles fallback */}
+                {!loading && articles.length === 0 && (
+                    <div className="text-center py-12">
+                        <Newspaper className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                        <h3 className="text-lg mb-2 text-foreground">No articles yet</h3>
+                        <p className="text-muted-foreground">
+                            Check back soon for updates from our editorial team.
+                        </p>
+                    </div>
+                )}
+
+                {/* Dynamic articles */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <Card className="border-border shadow-soft">
-                        <CardHeader>
-                            <Badge variant="secondary" className="w-fit mb-2">Anxiety Basics</Badge>
-                            <CardTitle className="text-lg">What Anxiety Feels Like (and Why That's Normal)</CardTitle>
-                            <CardDescription>Published August 1, 2025</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                            <p className="text-muted-foreground mb-4">
-                                A plain language starting point: common signs, everyday triggers, and ideas for talking to a professional
-                            </p>
-                            <Button variant="ghost" size="sm">Read More <ArrowRight className="h-3 w-3 ml-1" /></Button>
-                        </CardContent>
-                    </Card>
-
-                    <Card className="border-border shadow-soft">
-                        <CardHeader>
-                            <Badge variant="secondary" className="w-fit mb-2">Community</Badge>
-                            <CardTitle className="text-lg">Interest List: Short Talks on Anxiety</CardTitle>
-                            <CardDescription>Published July 20, 2025</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                            <p className="text-muted-foreground mb-4">
-                                We're exploring short, informational sessions with qualified speakers. No therapy education only.
-                            </p>
-                            <Button variant="ghost" size="sm">Join Interest List <ArrowRight className="h-3 w-3 ml-1" /></Button>
-                        </CardContent>
-                    </Card>
-
-                    <Card className="border-border shadow-soft">
-                        <CardHeader>
-                            <Badge variant="secondary" className="w-fit mb-2">Resources</Badge>
-                            <CardTitle className="text-lg">Free Coping Skills Workbook for Teens</CardTitle>
-                            <CardDescription>Published January 5, 2025</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                            <p className="text-muted-foreground mb-4">
-                                Download our free guide designed for adolescents, featuring cognitive behavioral tools and exercises endorsed by licensed therapists...
-                            </p>
-                            <Button variant="ghost" size="sm">Download PDF <ArrowRight className="h-3 w-3 ml-1" /></Button>
-                        </CardContent>
-                    </Card>
+                    {articles.map((article, idx) => (
+                        <Card key={idx} className="border-border shadow-soft">
+                            <CardHeader>
+                                {article.category?.name && (
+                                    <Badge variant="secondary" className="w-fit mb-2">
+                                        {article.category.name}
+                                    </Badge>
+                                )}
+                                <CardTitle className="text-lg">{article.title}</CardTitle>
+                                <CardDescription>
+                                    Published {new Date(article.date).toLocaleDateString()}
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <p className="text-muted-foreground mb-4">{article.excerpt}</p>
+                                <Button variant="ghost" size="sm" asChild>
+                                    <Link to={`/resources/${article.slug}`}>
+                                        Read More <ArrowRight className="h-3 w-3 ml-1" />
+                                    </Link>
+                                </Button>
+                            </CardContent>
+                        </Card>
+                    ))}
                 </div>
 
                 <div className="mt-8 p-4 bg-muted/50 rounded-lg border border-border">
                     <p className="text-sm text-muted-foreground">
-                        <strong>CMS Integration Ready:</strong> This section is designed to integrate with content management systems like Strapi, Contentful, or WordPress.
+                        <strong>CMS Integration Ready:</strong> This section now pulls content directly from Sanity.
                     </p>
                 </div>
             </div>

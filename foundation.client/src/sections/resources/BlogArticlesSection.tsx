@@ -6,7 +6,7 @@ import { Input } from '../../components/ui/input';
 import { Search, BookOpen, ArrowRight } from 'lucide-react';
 import { client } from '../../sanityClient';
 import { Link } from "react-router-dom";
-import * as LucideIcons from "lucide-react"; // 👈 import all icons
+import * as LucideIcons from "lucide-react"; 
 
 interface Article {
     title: string;

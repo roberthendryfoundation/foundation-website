@@ -6,7 +6,7 @@ export function ValuesSection() {
         { icon: Heart, title: "Compassion", description: "We meet every person with empathy..." },
         { icon: Lightbulb, title: "Accuracy", description: "We share clear, evidence-informed info..." },
         { icon: Handshake, title: "Inclusivity", description: "We welcome people of all backgrounds..." },
-        { icon: Shield, title: "Transparency", description: "We communicate honestly about what we can and cannot provide." },
+        { icon: Shield, title: "Resilience", description: "We rise through challenges together, building strength, hope, and lasting well-being." },
     ];
 
     return (

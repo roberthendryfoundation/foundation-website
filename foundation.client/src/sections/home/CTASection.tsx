@@ -17,7 +17,7 @@ export function CTASection() {
                     <Button size="lg" className="bg-white text-primary hover:bg-white/90" onClick={() => navigate('/contact')}>
                         <Phone className="h-4 w-4 mr-2" /> Ask a Question
                     </Button>
-                    <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary" onClick={() => navigate('/donate')}>
+                    <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary" onClick={() => navigate('/contact')}>
                         <Heart className="h-4 w-4 mr-2" /> Support Our Mission
                     </Button>
                 </div>

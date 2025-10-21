@@ -19,7 +19,7 @@ export function AboutCTASection() {
                     <Button size="lg" className="bg-white text-primary hover:bg-white/90" onClick={() => navigate('/contact')}>
                         Get Involved <ArrowRight className="h-4 w-4 ml-2" />
                     </Button>
-                    <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary" onClick={() => navigate('/donate')}>
+                    <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary" onClick={() => navigate('/contact')}>
                         <Heart className="h-4 w-4 mr-2" /> Support Our Work
                     </Button>
                 </div>
