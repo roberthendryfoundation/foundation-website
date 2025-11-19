@@ -14,7 +14,7 @@ VITE_SANITY_API_VERSION=2024-01-01
 VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 
 # ===== SITE CONFIGURATION =====
-VITE_SITE_URL=https://robertahendryfoundation.org
+VITE_SITE_URL=https://hendryanxietyfoundation.org
 
 # ===== CONTACT FORM =====
 VITE_FORMSPREE_ID=your-formspree-id-here
@@ -46,7 +46,7 @@ VITE_FORMSPREE_ID=your-formspree-id-here
 
 ### Site URL
 
-Your production domain (e.g., https://robertahendryfoundation.org)
+Your production domain (e.g., https://hendryanxietyfoundation.org or https://anxietymatters.org)
 
 ## Quick Setup
 

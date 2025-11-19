@@ -11,7 +11,7 @@ export function RoadmapSection() {
   const milestones = [
     {
       year: "2024",
-      title: "Phase 1: Foundation Building",
+      title: "Foundation Building",
       description:
         "Established 501(c)(3) status, launched our educational resource library, shared Robert's story, and defined our mission: to make clear, trustworthy information about anxiety easier to access.",
       status: "active",

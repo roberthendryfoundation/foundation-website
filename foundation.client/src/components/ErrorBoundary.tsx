@@ -22,7 +22,10 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error("ErrorBoundary caught an error:", error, errorInfo);
+    // Log errors in development, or in production if Sentry is not available
+    if (import.meta.env.DEV) {
+      console.error("ErrorBoundary caught an error:", error, errorInfo);
+    }
 
     // Error tracking can be enabled via Sentry (see utils/sentry.ts)
     // Sentry.captureException(error, { extra: errorInfo });

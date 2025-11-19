@@ -84,4 +84,3 @@ describe("ResourceCard", () => {
     expect(link).toHaveStyle({ animationDelay: "100ms" });
   });
 });
-

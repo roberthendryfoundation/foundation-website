@@ -16,8 +16,8 @@ export function Layout({ children }: LayoutProps) {
   const navItems = [
     { name: "Home", path: "/" },
     { name: "About Us", path: "/about" },
-    { name: "Get Involved", path: "/get-involved" },
     { name: "Resources", path: "/resources" },
+    { name: "Stories", path: "/stories" },
     { name: "Contact", path: "/contact" },
   ];
 
@@ -203,9 +203,9 @@ export function Layout({ children }: LayoutProps) {
               </Link>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 We're a 501(c)(3) nonprofit building an action-based foundation
-                that will identify, collaborate on, and complete projects to
-                help people with anxiety. Currently in Phase 1: sharing
-                educational resources while building our infrastructure.
+                that identifies, collaborates on, and completes projects to help
+                people with anxiety. We share educational resources and build
+                infrastructure to support our mission.
               </p>
             </div>
 
@@ -236,7 +236,7 @@ export function Layout({ children }: LayoutProps) {
 
             {/* Contact Info */}
             <div>
-              <h4 className="font-semibold mb-4">Get Involved</h4>
+              <h4 className="font-semibold mb-4">Connect</h4>
               <div className="space-y-3">
                 <div className="flex items-start space-x-3">
                   <Mail className="h-4 w-4 text-muted-foreground mt-0.5" />

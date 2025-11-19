@@ -193,10 +193,10 @@ export function PrivacyPage() {
               <p className="text-muted-foreground leading-relaxed mt-4">
                 To exercise these rights, email us at:{" "}
                 <a
-                  href="mailto:info@robertahendryfoundation.org"
+                  href="mailto:roberthendryfoundation@gmail.com"
                   className="text-primary hover:underline"
                 >
-                  info@robertahendryfoundation.org
+                  roberthendryfoundation@gmail.com
                 </a>
               </p>
             </section>
@@ -233,10 +233,10 @@ export function PrivacyPage() {
                 <p className="text-muted-foreground mt-2">
                   Email:{" "}
                   <a
-                    href="mailto:info@robertahendryfoundation.org"
+                    href="mailto:roberthendryfoundation@gmail.com"
                     className="text-primary hover:underline"
                   >
-                    info@robertahendryfoundation.org
+                    roberthendryfoundation@gmail.com
                   </a>
                 </p>
               </div>
