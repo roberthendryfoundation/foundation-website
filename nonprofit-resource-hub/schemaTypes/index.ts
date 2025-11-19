@@ -1,5 +1,6 @@
-import {article} from './article'
 import {resource} from './resource'
 import {category} from './category'
+import testimonial from './testimonial'
+import {story} from './story'
 
-export const schemaTypes = [article, resource, category]
+export const schemaTypes = [resource, category, testimonial, story]

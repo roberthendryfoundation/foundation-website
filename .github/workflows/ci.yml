@@ -1,0 +1,162 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  # Job 1: Test and Build Frontend
+  frontend-test:
+    name: Frontend Tests & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: foundation.client/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./foundation.client
+        run: npm ci
+
+      - name: Run linter
+        working-directory: ./foundation.client
+        run: npm run lint
+
+      - name: Run tests
+        working-directory: ./foundation.client
+        run: npm run test:coverage
+
+      - name: Upload coverage reports
+        uses: codecov/codecov-action@v4
+        with:
+          directory: ./foundation.client/coverage
+          flags: frontend
+          fail_ci_if_error: false
+
+      - name: Build frontend
+        working-directory: ./foundation.client
+        env:
+          VITE_SANITY_PROJECT_ID: ${{ secrets.VITE_SANITY_PROJECT_ID }}
+          VITE_SANITY_DATASET: production
+          VITE_SANITY_API_VERSION: 2024-01-01
+        run: npm run build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-dist
+          path: foundation.client/dist
+          retention-days: 7
+
+  # Job 2: Build and Test Backend
+  backend-build:
+    name: Backend Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore dependencies
+        working-directory: ./foundation.Server
+        run: dotnet restore
+
+      - name: Build backend
+        working-directory: ./foundation.Server
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Run backend tests
+        working-directory: ./foundation.Server
+        run: dotnet test --no-build --configuration Release --verbosity normal
+
+  # Job 3: Security Scanning
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run npm audit
+        working-directory: ./foundation.client
+        run: npm audit --audit-level=high
+        continue-on-error: true
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: "fs"
+          scan-ref: "."
+          format: "sarif"
+          output: "trivy-results.sarif"
+
+      - name: Upload Trivy results to GitHub Security
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: "trivy-results.sarif"
+
+  # Job 4: Deploy (only on main branch)
+  deploy:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [frontend-test, backend-build]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-dist
+          path: foundation.client/dist
+
+      - name: Deploy to hosting
+        run: |
+          echo "🚀 Deployment step"
+          echo "Configure your deployment here (Vercel, Netlify, Azure, etc.)"
+          # Example for Vercel:
+          # npx vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Notify deployment
+        if: success()
+        run: |
+          echo "✅ Deployment successful!"
+          # Add notification logic here (Slack, Discord, email, etc.)
+
+  # Job 5: Performance Testing (optional, runs on schedule)
+  lighthouse:
+    name: Lighthouse Performance Test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v11
+        with:
+          urls: |
+            https://your-production-url.com
+            https://your-production-url.com/resources
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+

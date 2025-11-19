@@ -1,0 +1,82 @@
+name: PR Checks
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  pr-validation:
+    name: Validate PR
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: foundation.client/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./foundation.client
+        run: npm ci
+
+      - name: Check code formatting
+        working-directory: ./foundation.client
+        run: npm run lint
+
+      - name: Run tests with coverage
+        working-directory: ./foundation.client
+        run: npm run test:coverage
+
+      - name: Check test coverage thresholds
+        working-directory: ./foundation.client
+        run: |
+          echo "Checking coverage thresholds..."
+          # Coverage thresholds are enforced in vitest.config.ts
+
+      - name: Comment PR with test results
+        uses: actions/github-script@v7
+        if: always()
+        with:
+          script: |
+            const coverage = require('./foundation.client/coverage/coverage-summary.json');
+            const comment = `
+            ## Test Results 🧪
+
+            **Coverage Summary:**
+            - Lines: ${coverage.total.lines.pct}%
+            - Branches: ${coverage.total.branches.pct}%
+            - Functions: ${coverage.total.functions.pct}%
+            - Statements: ${coverage.total.statements.pct}%
+
+            ${coverage.total.lines.pct >= 50 ? '✅' : '⚠️'} Coverage threshold: 50%
+            `;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+      - name: Build preview
+        working-directory: ./foundation.client
+        env:
+          VITE_SANITY_PROJECT_ID: ${{ secrets.VITE_SANITY_PROJECT_ID }}
+          VITE_SANITY_DATASET: production
+          VITE_SANITY_API_VERSION: 2024-01-01
+        run: npm run build
+
+      - name: Check bundle size
+        working-directory: ./foundation.client
+        run: |
+          echo "Checking bundle size..."
+          du -sh dist/
+          # Add bundle size checks here
+

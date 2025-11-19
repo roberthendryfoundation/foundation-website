@@ -1,0 +1,78 @@
+# Security Headers for Robert A. Hendry Foundation
+
+# These headers improve security and privacy for all visitors
+
+/\*
+
+# Prevent clickjacking attacks
+
+X-Frame-Options: DENY
+
+# Prevent MIME type sniffing
+
+X-Content-Type-Options: nosniff
+
+# Enable XSS protection in older browsers
+
+X-XSS-Protection: 1; mode=block
+
+# Control referrer information
+
+Referrer-Policy: strict-origin-when-cross-origin
+
+# Permissions Policy (restrict access to browser features)
+
+Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=()
+
+# Content Security Policy
+
+Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://_.sentry.io; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https://_.sanity.io https://_.sanity.io/v_ https://www.google-analytics.com https://formspree.io https://\*.sentry.io; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://formspree.io;
+
+# Force HTTPS (uncomment when you have SSL certificate)
+
+# Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+# Cache control for HTML (don't cache pages)
+
+Cache-Control: public, max-age=0, must-revalidate
+
+# Cache static assets for 1 year
+
+/assets/\*
+Cache-Control: public, max-age=31536000, immutable
+
+# Cache images for 1 week
+
+_.jpg
+Cache-Control: public, max-age=604800
+_.jpeg
+Cache-Control: public, max-age=604800
+_.png
+Cache-Control: public, max-age=604800
+_.gif
+Cache-Control: public, max-age=604800
+_.webp
+Cache-Control: public, max-age=604800
+_.svg
+Cache-Control: public, max-age=604800
+
+# Cache fonts forever (they're content-addressed)
+
+_.woff
+Cache-Control: public, max-age=31536000, immutable
+_.woff2
+Cache-Control: public, max-age=31536000, immutable
+\*.ttf
+Cache-Control: public, max-age=31536000, immutable
+
+# Don't cache service worker
+
+/sw.js
+Cache-Control: public, max-age=0, must-revalidate
+
+# Robots and sitemap
+
+/robots.txt
+Cache-Control: public, max-age=3600
+/sitemap.xml
+Cache-Control: public, max-age=3600
