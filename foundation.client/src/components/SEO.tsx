@@ -18,7 +18,7 @@ export function SEO({
   canonical,
 }: SEOProps) {
   const siteUrl =
-    import.meta.env.VITE_SITE_URL || "https://robertahendryfoundation.org";
+    import.meta.env.VITE_SITE_URL || "https://hendryanxietyfoundation.org";
   const fullCanonical = canonical ? `${siteUrl}${canonical}` : siteUrl;
 
   return (

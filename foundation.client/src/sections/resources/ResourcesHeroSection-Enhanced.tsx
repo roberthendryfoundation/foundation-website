@@ -68,8 +68,8 @@ export function ResourcesHeroSection() {
             evidence-based educational resources to help you understand anxiety.
           </p>
           <p className="text-sm text-muted-foreground mb-10">
-            <strong>Phase 1:</strong> Education & Resource Library |{" "}
-            <strong>Next:</strong> Project collaboration & completion (2025)
+            Evidence-based educational resources to help you understand anxiety,
+            its symptoms, and available support options.
           </p>
 
           {/* Search Bar */}

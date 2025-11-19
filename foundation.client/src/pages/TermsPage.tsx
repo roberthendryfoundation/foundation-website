@@ -192,7 +192,7 @@ export function TermsPage() {
                 resources for personal, non-commercial use.
                 <strong className="block mt-2">Commercial Use:</strong> Requires
                 written permission. Contact us at
-                info@robertahendryfoundation.org.
+                roberthendryfoundation@gmail.com.
               </p>
             </section>
 
@@ -271,10 +271,10 @@ export function TermsPage() {
                 <p className="text-muted-foreground mt-2">
                   Email:{" "}
                   <a
-                    href="mailto:info@robertahendryfoundation.org"
+                    href="mailto:roberthendryfoundation@gmail.com"
                     className="text-primary hover:underline"
                   >
-                    info@robertahendryfoundation.org
+                    roberthendryfoundation@gmail.com
                   </a>
                 </p>
                 <p className="text-muted-foreground mt-1">

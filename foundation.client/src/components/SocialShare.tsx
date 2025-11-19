@@ -29,7 +29,7 @@ export function SocialShare({
 
   const fullUrl = url.startsWith("http")
     ? url
-    : `https://robertahendryfoundation.org${url}`;
+    : `https://hendryanxietyfoundation.org${url}`;
   const encodedUrl = encodeURIComponent(fullUrl);
   const encodedTitle = encodeURIComponent(title);
   const encodedDescription = encodeURIComponent(description || title);

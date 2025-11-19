@@ -14,7 +14,7 @@ export function CTASection() {
         <p className="text-xl text-white/90 mb-8 leading-relaxed">
           We are building an action-based foundation that identifies,
           collaborates on, and completes projects that make a real difference.
-          Help us prepare for Phase 2.
+          Join us in creating meaningful change.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button

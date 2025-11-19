@@ -2,9 +2,9 @@
 
 > A 501(c)(3) nonprofit building an action-based anxiety foundation. Started in memory of Robert A. Hendry.
 
-**Website:** [Live Site]  
-**Status:** ✅ Development Active  
-**Tech Stack:** React + TypeScript + Vite + Sanity CMS + .NET
+**Website:** https://hendryanxietyfoundation.org (or https://anxietymatters.org)  
+**Status:** ✅ Production Ready  
+**Tech Stack:** React 19 + TypeScript + Vite + Sanity CMS + .NET 8
 
 ---
 
@@ -45,8 +45,9 @@ cd ../nonprofit-resource-hub
 npm install
 
 # Configure environment
-cp .env.example .env
-# Add your VITE_SANITY_PROJECT_ID to .env
+cd foundation.client
+# Create .env file (see docs/ENVIRONMENT-SETUP.md for template)
+# Add your VITE_SANITY_PROJECT_ID, VITE_FORMSPREE_ID, etc.
 ```
 
 ### Run Development Server
@@ -96,44 +97,39 @@ foundation-1/
 │   ├── schemaTypes/            # Content schemas
 │   │   ├── resource.ts         # Resource content type
 │   │   ├── category.ts         # Category content type
-│   │   ├── article.ts          # Article content type
+│   │   ├── story.ts            # Story content type
 │   │   └── testimonial.ts      # Testimonial content type
+│   ├── structure.ts            # Custom desk structure
+│   ├── components/             # Sanity components
 │   └── sanity.config.ts        # Sanity configuration
 │
 └── docs/                       # Documentation
     ├── ENVIRONMENT-SETUP.md    # Environment setup guide
     ├── CATEGORIES-QUICK-REFERENCE.md
-    ├── RESOURCE-HUB-REUSABILITY-GUIDE.md
-    └── [other docs]
+    └── CATEGORY-CREATION-GUIDE.md
 ```
 
 ---
 
 ## 🎯 Recent Updates
 
-### October 2025 - UX/UI Improvements
+### November 2024 - Production Ready
 
-✅ **Keyboard Navigation** - Search with ⌘K, navigate with arrows  
-✅ **Enhanced Accessibility** - ARIA labels, focus states, WCAG AA compliant  
-✅ **Mobile Optimized** - 44px touch targets, better inputs  
-✅ **Empty States** - Helpful suggestions when no results  
-✅ **Loading Animations** - Professional spinners and shimmer effects
+✅ **Production Optimizations** - Code splitting, build optimizations  
+✅ **Security Hardening** - Dev-only fallbacks, secure environment handling  
+✅ **Domain Configuration** - Updated to hendryanxietyfoundation.org  
+✅ **Sanity Studio Enhancements** - Custom desk structure, document badges  
+✅ **Image Support** - Ready for client assets (logos, photos, images)  
+✅ **Clean Codebase** - Removed unused files, optimized structure
 
-See [`UX-UI-IMPROVEMENTS.md`](UX-UI-IMPROVEMENTS.md) for details.
+### Key Features
 
-### Infrastructure
-
-✅ **Testing Setup** - Vitest + React Testing Library  
-✅ **CI/CD Pipeline** - GitHub Actions workflows  
-✅ **Rate Limiting** - IP-based protection (100 req/min)  
-✅ **Monitoring** - Sanity API usage tracking
-
-See individual docs:
-
-- [`TESTING-SETUP-COMPLETE.md`](TESTING-SETUP-COMPLETE.md)
-- [`CI-CD-SETUP-COMPLETE.md`](CI-CD-SETUP-COMPLETE.md)
-- [`RATE-LIMITING-COMPLETE.md`](RATE-LIMITING-COMPLETE.md)
-- [`SANITY-MONITORING-GUIDE.md`](SANITY-MONITORING-GUIDE.md)
+✅ **10 Pages** - Home, About, Resources, Stories, Contact, and more  
+✅ **31 Sections** - Modular, reusable page sections  
+✅ **Advanced Search** - Keyword search with filters and categories  
+✅ **Sanity CMS** - Custom structure for content editors  
+✅ **Formspree Integration** - Contact form handling  
+✅ **SEO Optimized** - Meta tags, sitemap, robots.txt
 
 ---
 
@@ -141,36 +137,24 @@ See individual docs:
 
 ### For Developers
 
-| Document                                                 | Description                             |
-| -------------------------------------------------------- | --------------------------------------- |
-| [`ENVIRONMENT-SETUP.md`](docs/ENVIRONMENT-SETUP.md)      | Environment variables and configuration |
-| [`UX-UI-IMPROVEMENTS.md`](UX-UI-IMPROVEMENTS.md)         | Complete UX/UI improvement guide        |
-| [`TESTING-SETUP-COMPLETE.md`](TESTING-SETUP-COMPLETE.md) | Testing infrastructure and examples     |
-| [`CI-CD-SETUP-COMPLETE.md`](CI-CD-SETUP-COMPLETE.md)     | CI/CD pipeline documentation            |
+| Document                                             | Description                     |
+| ---------------------------------------------------- | ------------------------------- |
+| [`ENVIRONMENT-SETUP.md`](docs/ENVIRONMENT-SETUP.md)  | Environment variables and setup |
+| [`DOMAIN-CONFIGURATION.md`](DOMAIN-CONFIGURATION.md) | Domain setup and configuration  |
 
 ### For Content Editors
 
-| Document                                                                      | Description                  |
-| ----------------------------------------------------------------------------- | ---------------------------- |
-| [`CATEGORIES-QUICK-REFERENCE.md`](docs/CATEGORIES-QUICK-REFERENCE.md)         | Category system overview     |
-| [`CATEGORY-CREATION-GUIDE.md`](docs/CATEGORY-CREATION-GUIDE.md)               | How to create new categories |
-| [`RESOURCE-HUB-REUSABILITY-GUIDE.md`](docs/RESOURCE-HUB-REUSABILITY-GUIDE.md) | Resource hub usage guide     |
+| Document                                                              | Description                  |
+| --------------------------------------------------------------------- | ---------------------------- |
+| [`CATEGORIES-QUICK-REFERENCE.md`](docs/CATEGORIES-QUICK-REFERENCE.md) | Category system overview     |
+| [`CATEGORY-CREATION-GUIDE.md`](docs/CATEGORY-CREATION-GUIDE.md)       | How to create new categories |
 
-### Strategy & Phase Documentation
+### For Asset Management
 
-| Document                                                                                    | Description                     |
-| ------------------------------------------------------------------------------------------- | ------------------------------- |
-| [`ACTION-BASED-MISSION-STRATEGY.md`](docs/ACTION-BASED-MISSION-STRATEGY.md)                 | Foundation mission and strategy |
-| [`STARTUP-PHASE-STRATEGY.md`](docs/STARTUP-PHASE-STRATEGY.md)                               | Startup phase overview          |
-| [`STARTUP-PHASE-IMPLEMENTATION-COMPLETE.md`](docs/STARTUP-PHASE-IMPLEMENTATION-COMPLETE.md) | Phase 1 implementation details  |
-
-### Technical Guides
-
-| Document                                                                           | Description                           |
-| ---------------------------------------------------------------------------------- | ------------------------------------- |
-| [`PROJECT-ANALYSIS-SCALABILITY-REPORT.md`](PROJECT-ANALYSIS-SCALABILITY-REPORT.md) | Architecture and scalability analysis |
-| [`RATE-LIMITING-COMPLETE.md`](RATE-LIMITING-COMPLETE.md)                           | API rate limiting setup               |
-| [`SANITY-MONITORING-GUIDE.md`](SANITY-MONITORING-GUIDE.md)                         | Sanity usage monitoring               |
+| Document                                               | Description                         |
+| ------------------------------------------------------ | ----------------------------------- |
+| [`ASSETS-PENDING.md`](ASSETS-PENDING.md)               | Guide for adding client assets      |
+| [`IMAGE-PLACEMENT-GUIDE.md`](IMAGE-PLACEMENT-GUIDE.md) | Image placement locations and specs |
 
 ---
 
@@ -246,15 +230,7 @@ npm run test:coverage
 
 ### Test Coverage
 
-Current coverage:
-
-- Hooks: 85%
-- Components: 70%
-- Utils: 90%
-
-**Goal:** 80% overall coverage
-
-See [`TESTING-SETUP-COMPLETE.md`](TESTING-SETUP-COMPLETE.md) for more details.
+Test infrastructure is set up with Vitest and React Testing Library. Example tests are included for components, hooks, and utilities.
 
 ---
 
@@ -290,9 +266,22 @@ dotnet publish -c Release
 **Required for Frontend:**
 
 ```env
-VITE_SANITY_PROJECT_ID=your_project_id
+# Sanity CMS (Required)
+VITE_SANITY_PROJECT_ID=your-project-id
 VITE_SANITY_DATASET=production
-VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX  # Optional
+VITE_SANITY_API_VERSION=2024-01-01
+
+# Site Configuration (Required)
+VITE_SITE_URL=https://hendryanxietyfoundation.org
+
+# Contact Form (Required)
+VITE_FORMSPREE_ID=your-formspree-id
+
+# Analytics (Optional)
+VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+
+# Error Tracking (Optional)
+# VITE_SENTRY_DSN=your-sentry-dsn
 ```
 
 **Required for Backend:**
@@ -341,41 +330,44 @@ refactor: Clean up CSS comments
 
 ### For Users
 
-- **Resource Hub** - Educational content about anxiety
-- **Advanced Search** - Keyword search with filters
-- **Keyboard Shortcuts** - ⌘K to search, arrow navigation
-- **Mobile Optimized** - Touch-friendly interface
-- **Accessibility** - WCAG AA compliant, screen reader support
+- **Resource Hub** - Educational content about anxiety and support
+- **Advanced Search** - Keyword search with filters (category, type, learning level)
+- **Stories & Voices** - Community stories and testimonials
+- **Mobile Optimized** - Fully responsive, touch-friendly interface
+- **Accessibility** - WCAG AA compliant, keyboard navigation, screen reader support
+- **Crisis Support** - Quick access to crisis resources (988, Crisis Text Line)
 
 ### For Developers
 
-- **Modern Stack** - React 19, TypeScript, Vite, Tailwind CSS
-- **Headless CMS** - Sanity for content management
-- **Type Safety** - Full TypeScript coverage
+- **Modern Stack** - React 19, TypeScript 5, Vite 7, Tailwind CSS
+- **Headless CMS** - Sanity with custom desk structure
+- **Type Safety** - Full TypeScript coverage, strict mode
 - **Testing** - Vitest + React Testing Library
-- **CI/CD** - Automated testing and deployment
-- **Performance** - Code splitting, lazy loading, image optimization
+- **Performance** - Code splitting, lazy loading, optimized builds
+- **Production Ready** - Security headers, SEO optimization, error tracking
 
 ### For Content Editors
 
-- **Sanity Studio** - User-friendly CMS interface
-- **Dynamic Categories** - Flexible category system
-- **Rich Text** - Portable Text for content
-- **Media Management** - Image uploads and optimization
-- **Preview Mode** - See changes before publishing
+- **Custom Sanity Studio** - Organized desk structure with filtered views
+- **Document Badges** - Visual status indicators (Published, Draft, Featured)
+- **Field Groups** - Organized editing experience with tabs
+- **Dynamic Categories** - Flexible category system with icons and colors
+- **Rich Content** - Portable Text for stories and resources
+- **Media Management** - Image uploads with automatic optimization
 
 ---
 
-## 📈 Performance Metrics
+## 📈 Project Statistics
 
-| Metric                    | Target | Current |
-| ------------------------- | ------ | ------- |
-| Lighthouse Performance    | 90+    | 92      |
-| Lighthouse Accessibility  | 95+    | 95      |
-| Lighthouse Best Practices | 90+    | 92      |
-| Lighthouse SEO            | 95+    | 98      |
-| Mobile Usability          | 95+    | 95      |
-| Touch Target Compliance   | 100%   | 100%    |
+| Category          | Count                 |
+| ----------------- | --------------------- |
+| **Pages**         | 10                    |
+| **Sections**      | 31                    |
+| **Components**    | 16                    |
+| **Hooks**         | 2                     |
+| **Content Types** | 4                     |
+| **Build Size**    | ~284KB (88KB gzipped) |
+| **Build Time**    | ~1.7s                 |
 
 ---
 
@@ -406,15 +398,20 @@ npm run dev -- --host 127.0.0.1 --port 5174
 
 **Issue:** Hitting 10,000 request/month limit
 
-**Solution:** See [`SANITY-MONITORING-GUIDE.md`](SANITY-MONITORING-GUIDE.md) for optimization strategies.
+**Solution:**
+
+- Enable CDN caching (already configured)
+- Use React Query caching (already configured)
+- Monitor API usage in Sanity dashboard
+- Consider upgrading Sanity plan if needed
 
 ---
 
 ## 📞 Contact
 
 **Foundation:** The Robert A. Hendry Foundation  
-**Website:** [Coming Soon]  
-**Email:** [Contact Info]
+**Website:** https://hendryanxietyfoundation.org  
+**Email:** roberthendryfoundation@gmail.com
 
 ---
 
@@ -433,7 +430,6 @@ This project is proprietary. All rights reserved.
 
 ---
 
-**Last Updated:** October 2025  
+**Last Updated:** November 2024  
 **Version:** 1.0.0  
-**Status:** Active Development 🚀
-
+**Status:** ✅ Production Ready 🚀
