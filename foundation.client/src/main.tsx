@@ -5,6 +5,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HelmetProvider } from "react-helmet-async";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import App from "./App";
+import { initGoogleAnalytics } from "./utils/analytics";
+
+// Initialize Google Analytics
+initGoogleAnalytics();
 
 // Sentry error tracking can be enabled by:
 // 1. Installing: npm install @sentry/react

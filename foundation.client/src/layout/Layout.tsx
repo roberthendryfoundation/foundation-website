@@ -325,27 +325,6 @@ export function Layout({ children }: LayoutProps) {
             </div>
           </div>
         </div>
-
-        {/* Analytics Script Placeholder */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              / Google Analytics 4 Integration
-              // Replace 'GA_MEASUREMENT_ID' with your actual Google Analytics 4 measurement ID
-              // (function() {
-              //   var script = document.createElement('script');
-              //   script.async = true;
-              //   script.src = 'https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID';
-              //   document.head.appendChild(script);
-              //   
-              //   window.dataLayer = window.dataLayer || [];
-              //   function gtag(){dataLayer.push(arguments);}
-              //   gtag('js', new Date());
-              //   gtag('config', 'GA_MEASUREMENT_ID');
-              // })();
-            `,
-          }}
-        />
       </footer>
 
       {/* Back to Top Button */}
