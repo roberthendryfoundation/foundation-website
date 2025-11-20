@@ -1,11 +1,56 @@
 // Google Analytics 4 Helper Functions
 
 /**
+ * Initialize Google Analytics 4
+ * Call this once when the app loads
+ */
+export const initGoogleAnalytics = () => {
+  const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;
+
+  // Only initialize if measurement ID is provided
+  if (!measurementId || typeof window === "undefined") {
+    if (import.meta.env.DEV) {
+      console.log("Google Analytics not initialized (no measurement ID)");
+    }
+    return;
+  }
+
+  // Prevent double initialization
+  if (window.gtag) {
+    return;
+  }
+
+  // Create dataLayer
+  window.dataLayer = window.dataLayer || [];
+  function gtag(...args: any[]) {
+    window.dataLayer!.push(args);
+  }
+  window.gtag = gtag;
+
+  // Load Google Analytics script
+  const script = document.createElement("script");
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
+  document.head.appendChild(script);
+
+  // Initialize GA4
+  gtag("js", new Date());
+  gtag("config", measurementId, {
+    page_path: window.location.pathname,
+  });
+
+  if (import.meta.env.DEV) {
+    console.log("Google Analytics initialized:", measurementId);
+  }
+};
+
+/**
  * Track a page view
  */
 export const trackPageView = (url: string) => {
-  if (typeof window !== "undefined" && window.gtag) {
-    window.gtag("config", import.meta.env.VITE_GA_MEASUREMENT_ID, {
+  const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;
+  if (typeof window !== "undefined" && window.gtag && measurementId) {
+    window.gtag("config", measurementId, {
       page_path: url,
     });
   }

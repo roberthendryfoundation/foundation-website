@@ -1,7 +1,13 @@
-import { lazy, Suspense } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { lazy, Suspense, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import { Layout } from "./layout/Layout";
 import { Loading } from "./components/Loading";
+import { trackPageView } from "./utils/analytics";
 
 // Lazy load pages for code splitting
 const HomePage = lazy(() =>
@@ -35,9 +41,22 @@ const NotFoundPage = lazy(() =>
   import("./pages/NotFoundPage").then((m) => ({ default: m.NotFoundPage }))
 );
 
+// Component to track page views on route changes
+function PageViewTracker() {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Track page view when route changes
+    trackPageView(location.pathname + location.search);
+  }, [location]);
+
+  return null;
+}
+
 export default function App() {
   return (
     <Router>
+      <PageViewTracker />
       <Layout>
         <Suspense fallback={<Loading fullScreen message="Loading page..." />}>
           <Routes>

@@ -151,10 +151,11 @@ foundation-1/
 
 ### For Asset Management
 
-| Document                                               | Description                         |
-| ------------------------------------------------------ | ----------------------------------- |
-| [`ASSETS-PENDING.md`](ASSETS-PENDING.md)               | Guide for adding client assets      |
-| [`IMAGE-PLACEMENT-GUIDE.md`](IMAGE-PLACEMENT-GUIDE.md) | Image placement locations and specs |
+See the code comments in components for image placement guidance. Key locations:
+
+- Logo: `/public/logo.png` (or `.svg`, `.jpg`)
+- Hero images: `/public/hero-image.jpg`, `/public/about-hero-image.jpg`
+- Robert's photo: `/public/robert-photo.jpg`
 
 ---
 
