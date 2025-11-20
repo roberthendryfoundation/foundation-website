@@ -13,12 +13,6 @@ interface TopicExplorerProps {
   onFindResources: (topics: string[]) => void;
 }
 
-interface Topic {
-  id: string;
-  label: string;
-  emoji: string;
-}
-
 const topicCategories = [
   {
     category: "Understanding Anxiety",

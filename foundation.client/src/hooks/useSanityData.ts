@@ -29,7 +29,7 @@ interface Resource {
   contentDepth?: string;
   shareable?: boolean;
   slug?: { current: string };
-  body?: any[];
+  body?: unknown[];
   // For latest resources display
   publishedAt?: string;
   isExternal?: boolean;
@@ -50,7 +50,7 @@ interface Article {
   _id: string;
   title: string;
   excerpt: string;
-  body?: any[];
+  body?: unknown[];
   author: string;
   date: string;
   readTime: number;
@@ -67,7 +67,7 @@ export interface Testimonial {
   photo: string;
   role: string;
   quote: string;
-  fullStory?: any[];
+  fullStory?: unknown[];
   category: string;
   featured: boolean;
   showOnHomepage: boolean;

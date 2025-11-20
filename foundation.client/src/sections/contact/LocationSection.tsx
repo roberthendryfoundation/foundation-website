@@ -4,8 +4,7 @@ import {
   CardHeader,
   CardTitle,
 } from "../../components/ui/Card";
-import { Button } from "../../components/ui/button";
-import { MapPin, Mail } from "lucide-react";
+import { MapPin } from "lucide-react";
 
 export function LocationSection() {
   return (

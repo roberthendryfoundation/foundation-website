@@ -22,7 +22,7 @@ export const initGoogleAnalytics = () => {
 
   // Create dataLayer
   window.dataLayer = window.dataLayer || [];
-  function gtag(...args: any[]) {
+  function gtag(...args: unknown[]) {
     window.dataLayer!.push(args);
   }
   window.gtag = gtag;
@@ -59,7 +59,10 @@ export const trackPageView = (url: string) => {
 /**
  * Track a custom event
  */
-export const trackEvent = (eventName: string, params?: Record<string, any>) => {
+export const trackEvent = (
+  eventName: string,
+  params?: Record<string, unknown>
+) => {
   if (typeof window !== "undefined" && window.gtag) {
     window.gtag("event", eventName, params);
   }
@@ -204,7 +207,7 @@ export const trackScrollDepth = (pageUrl: string, depthPercentage: number) => {
 // Declare gtag for TypeScript
 declare global {
   interface Window {
-    gtag?: (...args: any[]) => void;
-    dataLayer?: any[];
+    gtag?: (...args: unknown[]) => void;
+    dataLayer?: unknown[];
   }
 }
