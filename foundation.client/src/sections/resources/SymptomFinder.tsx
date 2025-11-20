@@ -13,12 +13,6 @@ interface SymptomFinderProps {
   onFindResources: (symptoms: string[]) => void;
 }
 
-interface Symptom {
-  id: string;
-  label: string;
-  emoji: string;
-}
-
 const symptomCategories = [
   {
     category: "Physical Symptoms",

@@ -5,7 +5,7 @@ describe("analytics utilities", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     // Mock gtag
-    (window as any).gtag = vi.fn();
+    (window as Window & { gtag?: ReturnType<typeof vi.fn> }).gtag = vi.fn();
   });
 
   describe("trackSearch", () => {
@@ -13,13 +13,15 @@ describe("analytics utilities", () => {
       const searchQuery = "anxiety symptoms";
       trackSearch(searchQuery);
 
-      expect((window as any).gtag).toHaveBeenCalledWith("event", "search", {
+      const mockGtag = (window as Window & { gtag?: ReturnType<typeof vi.fn> })
+        .gtag;
+      expect(mockGtag).toHaveBeenCalledWith("event", "search", {
         search_term: searchQuery,
       });
     });
 
     it("should not throw when gtag is undefined", () => {
-      delete (window as any).gtag;
+      delete (window as Window & { gtag?: ReturnType<typeof vi.fn> }).gtag;
 
       expect(() => trackSearch("test")).not.toThrow();
     });
@@ -27,10 +29,11 @@ describe("analytics utilities", () => {
     it("should handle empty search queries", () => {
       trackSearch("");
 
-      expect((window as any).gtag).toHaveBeenCalledWith("event", "search", {
+      const mockGtag = (window as Window & { gtag?: ReturnType<typeof vi.fn> })
+        .gtag;
+      expect(mockGtag).toHaveBeenCalledWith("event", "search", {
         search_term: "",
       });
     });
   });
 });
-
