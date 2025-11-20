@@ -104,7 +104,9 @@ foundation-1/
 │   └── sanity.config.ts        # Sanity configuration
 │
 └── docs/                       # Documentation
-    └── ENVIRONMENT-SETUP.md    # Environment setup guide
+    ├── ENVIRONMENT-SETUP.md    # Environment setup guide
+    ├── CATEGORIES-QUICK-REFERENCE.md
+    └── CATEGORY-CREATION-GUIDE.md
 ```
 
 ---
@@ -142,7 +144,10 @@ foundation-1/
 
 ### For Content Editors
 
-Content editors can use Sanity Studio to manage resources, categories, stories, and testimonials. See the [Sanity Studio documentation](https://www.sanity.io/docs) for detailed guides.
+| Document                                                              | Description                  |
+| --------------------------------------------------------------------- | ---------------------------- |
+| [`CATEGORIES-QUICK-REFERENCE.md`](docs/CATEGORIES-QUICK-REFERENCE.md) | Category system overview     |
+| [`CATEGORY-CREATION-GUIDE.md`](docs/CATEGORY-CREATION-GUIDE.md)       | How to create new categories |
 
 ### For Asset Management
 

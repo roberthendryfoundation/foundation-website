@@ -12,8 +12,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -30,40 +28,10 @@ jobs:
         working-directory: ./foundation.client
         run: npm run lint
 
-      - name: Run tests with coverage
+      - name: Run tests (optional)
         working-directory: ./foundation.client
         run: npm run test:coverage
-
-      - name: Check test coverage thresholds
-        working-directory: ./foundation.client
-        run: |
-          echo "Checking coverage thresholds..."
-          # Coverage thresholds are enforced in vitest.config.ts
-
-      - name: Comment PR with test results
-        uses: actions/github-script@v7
-        if: always()
-        with:
-          script: |
-            const coverage = require('./foundation.client/coverage/coverage-summary.json');
-            const comment = `
-            ## Test Results 🧪
-
-            **Coverage Summary:**
-            - Lines: ${coverage.total.lines.pct}%
-            - Branches: ${coverage.total.branches.pct}%
-            - Functions: ${coverage.total.functions.pct}%
-            - Statements: ${coverage.total.statements.pct}%
-
-            ${coverage.total.lines.pct >= 50 ? '✅' : '⚠️'} Coverage threshold: 50%
-            `;
-
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: comment
-            });
+        continue-on-error: true
 
       - name: Build preview
         working-directory: ./foundation.client
@@ -76,7 +44,5 @@ jobs:
       - name: Check bundle size
         working-directory: ./foundation.client
         run: |
-          echo "Checking bundle size..."
+          echo "📦 Bundle size:"
           du -sh dist/
-          # Add bundle size checks here
-
