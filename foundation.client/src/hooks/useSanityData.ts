@@ -536,5 +536,34 @@ export function useStories(options?: { limit?: number; featured?: boolean }) {
   });
 }
 
+// Hook: Fetch single story by slug
+export function useStoryBySlug(slug: string) {
+  return useQuery({
+    queryKey: ["story", slug],
+    queryFn: async () => {
+      if (!slug) return null;
+      const query = `*[_type == "story" && slug.current == $slug && status == "published"][0] {
+        _id,
+        title,
+        summary,
+        slug,
+        wordCount,
+        themes,
+        featured,
+        publishedAt,
+        _createdAt,
+        body,
+        "image": {
+          "url": image.asset->url,
+          "alt": image.alt
+        }
+      }`;
+      return client.fetch<Story & { body?: unknown[] }>(query, { slug });
+    },
+    staleTime: 30 * 60 * 1000, // 30 minutes
+    enabled: !!slug,
+  });
+}
+
 // Export types for use in components
 export type { Resource, Category, Article };

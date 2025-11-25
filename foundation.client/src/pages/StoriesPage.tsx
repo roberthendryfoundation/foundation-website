@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   Card,
   CardContent,
@@ -93,49 +94,65 @@ export function StoriesPage() {
 
           {hasStories ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {stories.map((story: Story) => (
-                <Card
-                  key={story._id}
-                  className="h-full border-border shadow-soft"
-                >
-                  {story.image?.url && (
-                    <div className="h-48 w-full overflow-hidden rounded-t-xl">
-                      <img
-                        src={story.image.url}
-                        alt={story.image.alt || story.title}
-                        className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
-                        loading="lazy"
-                      />
-                    </div>
-                  )}
-                  <CardHeader>
-                    <CardTitle className="text-xl leading-tight">
-                      {story.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-3">
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {story.summary}
-                    </p>
-                    <div className="flex flex-wrap items-center gap-2">
-                      {story.wordCount ? (
-                        <Badge variant="outline" className="text-xs">
-                          {story.wordCount} words
-                        </Badge>
-                      ) : null}
-                      {story.themes?.map((theme: string) => (
-                        <Badge
-                          key={theme}
-                          variant="secondary"
-                          className="text-xs bg-primary/10 text-primary"
-                        >
-                          {theme}
-                        </Badge>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+              {stories.map((story: Story) => {
+                const storySlug = story.slug?.current;
+                const storyUrl = storySlug ? `/stories/${storySlug}` : "#";
+
+                return (
+                  <Link key={story._id} to={storyUrl} className="block h-full">
+                    <Card className="h-full border-border shadow-soft hover:shadow-md transition-shadow cursor-pointer">
+                      {story.image?.url && (
+                        <div className="h-48 w-full overflow-hidden rounded-t-xl">
+                          <img
+                            src={story.image.url}
+                            alt={story.image.alt || story.title}
+                            className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                            loading="lazy"
+                          />
+                        </div>
+                      )}
+                      <CardHeader>
+                        <CardTitle className="text-xl leading-tight">
+                          {story.title}
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-3">
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {story.summary}
+                        </p>
+                        <div className="flex flex-wrap items-center gap-2">
+                          {story.wordCount ? (
+                            <Badge variant="outline" className="text-xs">
+                              {story.wordCount} words
+                            </Badge>
+                          ) : null}
+                          {story.themes?.map((theme: string) => (
+                            <Badge
+                              key={theme}
+                              variant="secondary"
+                              className="text-xs bg-primary/10 text-primary"
+                            >
+                              {theme}
+                            </Badge>
+                          ))}
+                        </div>
+                        {storySlug && (
+                          <div className="pt-2">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="w-full justify-center text-primary hover:text-primary"
+                            >
+                              Read Story
+                              <ArrowRight className="h-4 w-4 ml-2" />
+                            </Button>
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </Link>
+                );
+              })}
             </div>
           ) : (
             !storiesLoading && (
