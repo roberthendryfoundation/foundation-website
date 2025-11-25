@@ -135,14 +135,8 @@ export function ResourceLibrarySection({
     if (newSearch !== currentSearch) {
       navigate(`?${newSearch}`, { replace: true });
     }
-  }, [
-    selectedCategories,
-    selectedTypes,
-    selectedTags,
-    searchTerm,
-    navigate,
-    location.search,
-  ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCategories, selectedTypes, selectedTags, searchTerm, navigate]);
 
   // Listen for search events from hero section + learning level/topic events
   useEffect(() => {
