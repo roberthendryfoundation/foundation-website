@@ -46,11 +46,18 @@ const NotFoundPage = lazy(() =>
   import("./pages/NotFoundPage").then((m) => ({ default: m.NotFoundPage }))
 );
 
-// Component to track page views on route changes
+// Component to track page views and scroll to top on route changes
 function PageViewTracker() {
   const location = useLocation();
 
   useEffect(() => {
+    // Scroll to top when route changes
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant", // Use instant for immediate scroll, not smooth
+    });
+
     // Track page view when route changes
     trackPageView(location.pathname + location.search);
   }, [location]);

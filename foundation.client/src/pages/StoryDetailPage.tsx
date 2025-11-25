@@ -86,7 +86,7 @@ export function StoryDetailPage() {
 
         {/* Main Content */}
         <article className="max-w-4xl mx-auto px-4 py-12">
-          <Card className="overflow-hidden">
+          <Card className="overflow-visible">
             {/* Story Image */}
             {story.image?.url && (
               <div className="h-64 md:h-96 w-full overflow-hidden">
@@ -133,7 +133,7 @@ export function StoryDetailPage() {
               )}
             </CardHeader>
 
-            <CardContent className="space-y-6">
+            <CardContent className="space-y-6 overflow-visible">
               {/* Story Body */}
               {story.body && story.body.length > 0 ? (
                 <div className="prose prose-lg max-w-none">
@@ -148,7 +148,7 @@ export function StoryDetailPage() {
               {/* Share Section */}
               <div className="pt-6 border-t border-border">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                  <div>
+                  <div className="relative overflow-visible">
                     <h3 className="text-sm font-semibold mb-2">
                       Share this story
                     </h3>

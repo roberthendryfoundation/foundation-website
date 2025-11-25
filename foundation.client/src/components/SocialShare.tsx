@@ -60,7 +60,7 @@ export function SocialShare({
   };
 
   return (
-    <div className={`relative ${className}`}>
+    <div className={`relative overflow-visible ${className}`}>
       <Button
         variant="outline"
         size="sm"
@@ -79,8 +79,8 @@ export function SocialShare({
             onClick={() => setShowMenu(false)}
           />
 
-          {/* Share Menu */}
-          <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-border z-50 py-2">
+          {/* Share Menu - positioned to avoid cutoff */}
+          <div className="absolute left-0 bottom-full mb-2 sm:bottom-auto sm:top-full sm:left-auto sm:right-0 sm:mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-border z-50 py-2">
             <button
               onClick={() => handleShare("twitter")}
               className="w-full px-4 py-2 text-left text-sm hover:bg-muted flex items-center gap-3 transition-colors"
