@@ -62,7 +62,8 @@ export function ResourcesPage() {
     if (newSearch !== currentSearch) {
       navigate(`?${newSearch}`, { replace: true });
     }
-  }, [selectedLearningLevel, selectedTopics, navigate, location.search]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedLearningLevel, selectedTopics, navigate]);
 
   const handleLearningLevelSelect = (level: string) => {
     if (level === "all") {
