@@ -30,6 +30,11 @@ const ContactPage = lazy(() =>
 const StoriesPage = lazy(() =>
   import("./pages/StoriesPage").then((m) => ({ default: m.StoriesPage }))
 );
+const StoryDetailPage = lazy(() =>
+  import("./pages/StoryDetailPage").then((m) => ({
+    default: m.StoryDetailPage,
+  }))
+);
 const BreathingPage = lazy(() => import("./pages/BreathingPage"));
 const PrivacyPage = lazy(() =>
   import("./pages/PrivacyPage").then((m) => ({ default: m.PrivacyPage }))
@@ -66,6 +71,7 @@ export default function App() {
             <Route path="/resources/breathing" element={<BreathingPage />} />
             <Route path="/resources/:slug" element={<ResourceDetailPage />} />
             <Route path="/stories" element={<StoriesPage />} />
+            <Route path="/stories/:slug" element={<StoryDetailPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/terms" element={<TermsPage />} />
