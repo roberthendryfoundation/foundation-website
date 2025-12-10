@@ -1,7 +1,19 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "../components/ui/button";
-import { Heart, Phone, Mail, MapPin, Shield, Menu, X } from "lucide-react";
+import {
+  Heart,
+  Phone,
+  Mail,
+  MapPin,
+  Shield,
+  Menu,
+  X,
+  TrendingUp,
+  Users,
+  Handshake,
+  Zap,
+} from "lucide-react";
 import { GlobalSearch } from "../components/GlobalSearch";
 import { BackToTop } from "../components/BackToTop";
 
@@ -285,11 +297,23 @@ export function Layout({ children }: LayoutProps) {
                     Transparency
                   </span>
                 </div>
-                <div className="text-xs text-muted-foreground">
-                  <p className="mb-1">✊ Resilience - We get things done</p>
-                  <p className="mb-1">🤝 Inclusivity - For everyone</p>
-                  <p className="mb-1">🔗 Collaboration - Working together</p>
-                  <p>⚡ Action-Focused - Making change</p>
+                <div className="text-xs text-muted-foreground space-y-1">
+                  <p className="flex items-center gap-1">
+                    <TrendingUp className="h-3 w-3" />
+                    Resilience - We get things done
+                  </p>
+                  <p className="flex items-center gap-1">
+                    <Users className="h-3 w-3" />
+                    Inclusivity - For everyone
+                  </p>
+                  <p className="flex items-center gap-1">
+                    <Handshake className="h-3 w-3" />
+                    Collaboration - Working together
+                  </p>
+                  <p className="flex items-center gap-1">
+                    <Zap className="h-3 w-3" />
+                    Action-Focused - Making change
+                  </p>
                 </div>
               </div>
             </div>

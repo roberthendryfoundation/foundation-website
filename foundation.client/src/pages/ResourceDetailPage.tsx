@@ -16,6 +16,13 @@ import {
   Download,
   BookmarkPlus,
   ExternalLink,
+  BookOpen,
+  Brain,
+  Microscope,
+  FileText,
+  Newspaper,
+  Book,
+  Lightbulb,
 } from "lucide-react";
 import { SEO } from "../components/SEO";
 import { ResourceCard } from "../components/ResourceCard";
@@ -77,18 +84,18 @@ export function ResourceDetailPage() {
   const getLevelBadge = (level?: string) => {
     const badges = {
       beginner: {
-        emoji: "📖",
+        icon: BookOpen,
         text: "Beginner",
         class: "bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300",
       },
       intermediate: {
-        emoji: "🧠",
+        icon: Brain,
         text: "Intermediate",
         class:
           "bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300",
       },
       advanced: {
-        emoji: "🔬",
+        icon: Microscope,
         text: "Advanced",
         class:
           "bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-300",
@@ -99,10 +106,10 @@ export function ResourceDetailPage() {
 
   const getDepthBadge = (depth?: string) => {
     const badges = {
-      quick: { text: "Quick Read (2-5 min)", icon: "📄" },
-      article: { text: "Article (5-15 min)", icon: "📰" },
-      deep: { text: "Deep Dive (15-30 min)", icon: "📚" },
-      research: { text: "Research Paper (30+ min)", icon: "🔬" },
+      quick: { text: "Quick Read (2-5 min)", icon: FileText },
+      article: { text: "Article (5-15 min)", icon: Newspaper },
+      deep: { text: "Deep Dive (15-30 min)", icon: Book },
+      research: { text: "Research Paper (30+ min)", icon: Microscope },
     };
     return badges[depth as keyof typeof badges] || badges.article;
   };
@@ -219,12 +226,28 @@ export function ResourceDetailPage() {
                 {/* Metadata */}
                 <div className="flex flex-wrap items-center gap-2 pt-2 border-t">
                   <Badge className={levelBadge.class} variant="outline">
-                    {levelBadge.emoji} {levelBadge.text}
+                    {(() => {
+                      const LevelIcon = levelBadge.icon;
+                      return (
+                        <>
+                          <LevelIcon className="h-3.5 w-3.5 mr-1 inline" />
+                          {levelBadge.text}
+                        </>
+                      );
+                    })()}
                   </Badge>
                   <span className="text-muted-foreground">•</span>
                   <span className="text-sm text-muted-foreground flex items-center gap-1">
                     <Clock className="h-3.5 w-3.5" />
-                    {depthBadge.text}
+                    {(() => {
+                      const DepthIcon = depthBadge.icon;
+                      return (
+                        <>
+                          <DepthIcon className="h-3.5 w-3.5 mr-1" />
+                          {depthBadge.text}
+                        </>
+                      );
+                    })()}
                   </span>
                   {resource.topicAreas && resource.topicAreas.length > 0 && (
                     <>
@@ -241,8 +264,9 @@ export function ResourceDetailPage() {
             {/* Related Resources */}
             {relatedResources.length > 0 && (
               <div className="mt-8">
-                <h2 className="text-xl font-bold text-foreground mb-4">
-                  📚 Related Resources
+                <h2 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
+                  <Book className="h-5 w-5 text-primary" />
+                  Related Resources
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {relatedResources.map((related, index) => (
@@ -321,11 +345,27 @@ export function ResourceDetailPage() {
 
                 <div className="flex flex-wrap gap-2 mb-4">
                   <Badge className={levelBadge.class}>
-                    {levelBadge.emoji} {levelBadge.text}
+                    {(() => {
+                      const LevelIcon = levelBadge.icon;
+                      return (
+                        <>
+                          <LevelIcon className="h-3.5 w-3.5 mr-1 inline" />
+                          {levelBadge.text}
+                        </>
+                      );
+                    })()}
                   </Badge>
                   <Badge variant="outline" className="flex items-center gap-1">
                     <Clock className="h-3 w-3" />
-                    {depthBadge.text}
+                    {(() => {
+                      const DepthIcon = depthBadge.icon;
+                      return (
+                        <>
+                          <DepthIcon className="h-3.5 w-3.5 mr-1" />
+                          {depthBadge.text}
+                        </>
+                      );
+                    })()}
                   </Badge>
                   {resource.topicAreas && resource.topicAreas.length > 0 && (
                     <Badge variant="secondary">
@@ -361,8 +401,11 @@ export function ResourceDetailPage() {
                     {/* Example: <PortableText value={resource.body} /> */}
 
                     <p className="text-muted-foreground italic">
-                      💡 <strong>Note:</strong> Add rich content to this
-                      resource in your Sanity Studio to see it displayed here.
+                      <span className="flex items-center gap-2">
+                        <Lightbulb className="h-4 w-4" />
+                        <strong>Note:</strong> Add rich content to this resource
+                        in your Sanity Studio to see it displayed here.
+                      </span>
                     </p>
                   </div>
                 </CardContent>
@@ -427,15 +470,31 @@ export function ResourceDetailPage() {
                   <div>
                     <p className="text-sm font-semibold mb-1">Learning Level</p>
                     <Badge className={levelBadge.class}>
-                      {levelBadge.emoji} {levelBadge.text}
+                      {(() => {
+                        const LevelIcon = levelBadge.icon;
+                        return (
+                          <>
+                            <LevelIcon className="h-3.5 w-3.5 mr-1 inline" />
+                            {levelBadge.text}
+                          </>
+                        );
+                      })()}
                     </Badge>
                   </div>
 
                   {/* Content Depth */}
                   <div>
                     <p className="text-sm font-semibold mb-1">Reading Time</p>
-                    <p className="text-sm text-muted-foreground">
-                      {depthBadge.icon} {depthBadge.text}
+                    <p className="text-sm text-muted-foreground flex items-center gap-1">
+                      {(() => {
+                        const DepthIcon = depthBadge.icon;
+                        return (
+                          <>
+                            <DepthIcon className="h-3.5 w-3.5" />
+                            {depthBadge.text}
+                          </>
+                        );
+                      })()}
                     </p>
                   </div>
 
@@ -544,8 +603,9 @@ export function ResourceDetailPage() {
           {relatedResources.length > 0 && (
             <div className="mt-12 no-print">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 className="text-2xl font-bold text-foreground mb-6">
-                  📚 Related Resources
+                <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
+                  <Book className="h-6 w-6 text-primary" />
+                  Related Resources
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {relatedResources.map((related, index) => (

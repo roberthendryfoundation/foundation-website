@@ -15,6 +15,8 @@ import {
   Star,
   Clock,
   Share2,
+  Brain,
+  Microscope,
 } from "lucide-react";
 import { useFeaturedResources } from "../../hooks/useSanityData";
 
@@ -43,28 +45,28 @@ export function FeaturedResourcesWidget() {
   const getLevelIcon = (level?: string) => {
     switch (level) {
       case "beginner":
-        return "📖";
+        return BookOpen;
       case "intermediate":
-        return "🧠";
+        return Brain;
       case "advanced":
-        return "🔬";
+        return Microscope;
       default:
-        return "📚";
+        return BookOpen;
     }
   };
 
   const getDepthBadge = (depth?: string) => {
     switch (depth) {
       case "quick":
-        return "📄 Quick Read";
+        return { text: "Quick Read", icon: FileText };
       case "article":
-        return "📰 Article";
+        return { text: "Article", icon: FileText };
       case "deep":
-        return "📚 Deep Dive";
+        return { text: "Deep Dive", icon: BookOpen };
       case "research":
-        return "🔬 Research";
+        return { text: "Research", icon: Microscope };
       default:
-        return "📄 Read";
+        return { text: "Read", icon: FileText };
     }
   };
 
@@ -114,9 +116,10 @@ export function FeaturedResourcesWidget() {
                 {/* Resource Type Icon */}
                 <div className="mb-3">
                   <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 border-2 border-primary/20 group-hover:scale-110 transition-transform">
-                    <span className="text-2xl">
-                      {getLevelIcon(resource.learningLevel)}
-                    </span>
+                    {(() => {
+                      const LevelIcon = getLevelIcon(resource.learningLevel);
+                      return <LevelIcon className="h-6 w-6 text-primary" />;
+                    })()}
                   </div>
                 </div>
 
@@ -132,15 +135,21 @@ export function FeaturedResourcesWidget() {
               <CardContent className="space-y-3">
                 {/* Badges */}
                 <div className="flex flex-wrap gap-2">
-                  {resource.contentDepth && (
-                    <Badge
-                      variant="outline"
-                      className="text-xs flex items-center gap-1"
-                    >
-                      <Clock className="h-3 w-3" />
-                      {getDepthBadge(resource.contentDepth)}
-                    </Badge>
-                  )}
+                  {resource.contentDepth &&
+                    (() => {
+                      const depthBadge = getDepthBadge(resource.contentDepth);
+                      const DepthIcon = depthBadge.icon;
+                      return (
+                        <Badge
+                          variant="outline"
+                          className="text-xs flex items-center gap-1"
+                        >
+                          <Clock className="h-3 w-3" />
+                          <DepthIcon className="h-3 w-3" />
+                          {depthBadge.text}
+                        </Badge>
+                      );
+                    })()}
                 </div>
 
                 {/* Additional Info */}
