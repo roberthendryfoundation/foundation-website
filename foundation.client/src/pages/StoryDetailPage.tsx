@@ -1,4 +1,4 @@
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useStoryBySlug } from "../hooks/useSanityData";
 import { Badge } from "../components/ui/badge";
 import { Button } from "../components/ui/button";
@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "../components/ui/Card";
-import { ArrowLeft, Share2, Calendar } from "lucide-react";
+import { ArrowLeft, Calendar } from "lucide-react";
 import { SEO } from "../components/SEO";
 import { SocialShare } from "../components/SocialShare";
 import { Breadcrumbs } from "../components/Breadcrumbs";
@@ -137,6 +137,7 @@ export function StoryDetailPage() {
               {/* Story Body */}
               {story.body && story.body.length > 0 ? (
                 <div className="prose prose-lg max-w-none">
+                  {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                   <PortableText value={story.body as any} />
                 </div>
               ) : (

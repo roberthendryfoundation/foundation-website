@@ -6,6 +6,13 @@ import {
   CardTitle,
 } from "../../components/ui/Card";
 import { Badge } from "../../components/ui/badge";
+import {
+  Building2,
+  BookOpen,
+  MessageSquare,
+  Handshake,
+  Sprout,
+} from "lucide-react";
 
 export function RoadmapSection() {
   const milestones = [
@@ -15,7 +22,7 @@ export function RoadmapSection() {
       description:
         "Established 501(c)(3) status, launched our educational resource library, shared Robert's story, and defined our mission: to make clear, trustworthy information about anxiety easier to access.",
       status: "active",
-      icon: "🏗️",
+      icon: Building2,
     },
     {
       year: "2024-2025",
@@ -23,7 +30,7 @@ export function RoadmapSection() {
       description:
         "Continuing to expand guides, articles, and lived-experience stories. Each resource is shaped by community input and the real needs shared with us by people affected by anxiety and alcohol use.",
       status: "active",
-      icon: "📚",
+      icon: BookOpen,
     },
     {
       year: "Ongoing",
@@ -31,7 +38,7 @@ export function RoadmapSection() {
       description:
         "We gather insights from individuals, families, and contributors who share their experiences. Their voices help us understand where information is missing and what tools would make the biggest difference.",
       status: "active",
-      icon: "🗣️",
+      icon: MessageSquare,
     },
     {
       year: "Ongoing",
@@ -39,7 +46,7 @@ export function RoadmapSection() {
       description:
         "We are in early conversations with mission-aligned organizations to explore where shared work could be helpful. Collaboration will grow as our capacity grows and as community needs guide our direction.",
       status: "active",
-      icon: "🤝",
+      icon: Handshake,
     },
     {
       year: "Long-Term",
@@ -47,7 +54,7 @@ export function RoadmapSection() {
       description:
         "We are working toward long-term, steady growth: strengthening our resource library, expanding collaboration capacity responsibly, and staying grounded in our core values as we scale.",
       status: "future",
-      icon: "🌱",
+      icon: Sprout,
     },
   ];
 
@@ -65,20 +72,25 @@ export function RoadmapSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {milestones.map((milestone, i) => (
-            <Card key={i} className="border-border shadow-soft">
-              <CardHeader>
-                <div className="text-3xl mb-3">{milestone.icon}</div>
-                <Badge variant="secondary" className="w-fit mb-2">
-                  {milestone.year}
-                </Badge>
-                <CardTitle className="text-lg">{milestone.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>{milestone.description}</CardDescription>
-              </CardContent>
-            </Card>
-          ))}
+          {milestones.map((milestone, i) => {
+            const Icon = milestone.icon;
+            return (
+              <Card key={i} className="border-border shadow-soft">
+                <CardHeader>
+                  <div className="mb-3">
+                    <Icon className="h-8 w-8 text-primary" />
+                  </div>
+                  <Badge variant="secondary" className="w-fit mb-2">
+                    {milestone.year}
+                  </Badge>
+                  <CardTitle className="text-lg">{milestone.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription>{milestone.description}</CardDescription>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -7,7 +7,31 @@ import {
 } from "../../components/ui/Card";
 import { Button } from "../../components/ui/button";
 import { Badge } from "../../components/ui/badge";
-import { X, Search } from "lucide-react";
+import {
+  X,
+  Search,
+  Heart,
+  Wind,
+  CircleDot,
+  Dumbbell,
+  Gauge,
+  Thermometer,
+  Activity,
+  Brain,
+  Zap,
+  HelpCircle,
+  Cloud,
+  AlertTriangle,
+  Frown,
+  AlertCircle,
+  Meh,
+  Ban,
+  Moon,
+  UtensilsCrossed,
+  Home,
+  Clock,
+  Lightbulb,
+} from "lucide-react";
 
 interface SymptomFinderProps {
   onFindResources: (symptoms: string[]) => void;
@@ -16,54 +40,62 @@ interface SymptomFinderProps {
 const symptomCategories = [
   {
     category: "Physical Symptoms",
-    emoji: "😰",
+    icon: Activity,
     color: "from-red-400 to-red-500",
     symptoms: [
-      { id: "racing_heart", label: "Racing Heart", emoji: "💓" },
-      { id: "breathing_difficulty", label: "Shortness of Breath", emoji: "😮‍💨" },
-      { id: "nausea", label: "Nausea / Upset Stomach", emoji: "🤢" },
-      { id: "muscle_tension", label: "Muscle Tension", emoji: "💪" },
-      { id: "dizziness", label: "Dizziness", emoji: "😵" },
-      { id: "sweating", label: "Sweating / Hot Flashes", emoji: "🥵" },
-      { id: "chest_pain", label: "Chest Pain / Tightness", emoji: "🫀" },
+      { id: "racing_heart", label: "Racing Heart", icon: Heart },
+      { id: "breathing_difficulty", label: "Shortness of Breath", icon: Wind },
+      { id: "nausea", label: "Nausea / Upset Stomach", icon: CircleDot },
+      { id: "muscle_tension", label: "Muscle Tension", icon: Dumbbell },
+      { id: "dizziness", label: "Dizziness", icon: Gauge },
+      { id: "sweating", label: "Sweating / Hot Flashes", icon: Thermometer },
+      { id: "chest_pain", label: "Chest Pain / Tightness", icon: Activity },
     ],
   },
   {
     category: "Mental Symptoms",
-    emoji: "🧠",
+    icon: Brain,
     color: "from-purple-400 to-purple-500",
     symptoms: [
-      { id: "racing_thoughts", label: "Racing Thoughts", emoji: "🌀" },
-      { id: "concentration", label: "Can't Concentrate", emoji: "🤷" },
-      { id: "intrusive_thoughts", label: "Intrusive Thoughts", emoji: "💭" },
-      { id: "brain_fog", label: "Brain Fog", emoji: "🌫️" },
-      { id: "overwhelmed", label: "Feeling Overwhelmed", emoji: "😵‍💫" },
-      { id: "catastrophizing", label: "Catastrophic Thinking", emoji: "⚠️" },
+      { id: "racing_thoughts", label: "Racing Thoughts", icon: Zap },
+      { id: "concentration", label: "Can't Concentrate", icon: HelpCircle },
+      { id: "intrusive_thoughts", label: "Intrusive Thoughts", icon: Brain },
+      { id: "brain_fog", label: "Brain Fog", icon: Cloud },
+      { id: "overwhelmed", label: "Feeling Overwhelmed", icon: AlertCircle },
+      {
+        id: "catastrophizing",
+        label: "Catastrophic Thinking",
+        icon: AlertTriangle,
+      },
     ],
   },
   {
     category: "Emotional Symptoms",
-    emoji: "😔",
+    icon: Frown,
     color: "from-blue-400 to-blue-500",
     symptoms: [
-      { id: "fear", label: "Feeling Scared / Fearful", emoji: "😨" },
-      { id: "sadness", label: "Feeling Sad", emoji: "😢" },
-      { id: "irritability", label: "Irritability / Anger", emoji: "😠" },
-      { id: "numbness", label: "Feeling Numb", emoji: "😶" },
-      { id: "guilt", label: "Guilt / Shame", emoji: "😔" },
-      { id: "restlessness", label: "Restlessness", emoji: "😣" },
+      { id: "fear", label: "Feeling Scared / Fearful", icon: AlertCircle },
+      { id: "sadness", label: "Feeling Sad", icon: Frown },
+      {
+        id: "irritability",
+        label: "Irritability / Anger",
+        icon: AlertTriangle,
+      },
+      { id: "numbness", label: "Feeling Numb", icon: Meh },
+      { id: "guilt", label: "Guilt / Shame", icon: Frown },
+      { id: "restlessness", label: "Restlessness", icon: Zap },
     ],
   },
   {
     category: "Behavioral Symptoms",
-    emoji: "🏃",
+    icon: Activity,
     color: "from-orange-400 to-orange-500",
     symptoms: [
-      { id: "avoidance", label: "Avoidance Behaviors", emoji: "🚫" },
-      { id: "sleep_issues", label: "Can't Sleep / Insomnia", emoji: "😴" },
-      { id: "appetite", label: "Appetite Changes", emoji: "🍽️" },
-      { id: "withdrawal", label: "Social Withdrawal", emoji: "🏠" },
-      { id: "procrastination", label: "Procrastination", emoji: "⏰" },
+      { id: "avoidance", label: "Avoidance Behaviors", icon: Ban },
+      { id: "sleep_issues", label: "Can't Sleep / Insomnia", icon: Moon },
+      { id: "appetite", label: "Appetite Changes", icon: UtensilsCrossed },
+      { id: "withdrawal", label: "Social Withdrawal", icon: Home },
+      { id: "procrastination", label: "Procrastination", icon: Clock },
     ],
   },
 ];
@@ -167,7 +199,10 @@ export function SymptomFinder({ onFindResources }: SymptomFinderProps) {
                     <div
                       className={`bg-gradient-to-br ${category.color} rounded-lg p-2`}
                     >
-                      <span className="text-2xl">{category.emoji}</span>
+                      {(() => {
+                        const CategoryIcon = category.icon;
+                        return <CategoryIcon className="h-6 w-6 text-white" />;
+                      })()}
                     </div>
                     <h3 className="text-lg font-bold text-foreground">
                       {category.category}
@@ -178,6 +213,7 @@ export function SymptomFinder({ onFindResources }: SymptomFinderProps) {
                   <div className="flex flex-wrap gap-2">
                     {category.symptoms.map((symptom) => {
                       const isSelected = selectedSymptoms.includes(symptom.id);
+                      const SymptomIcon = symptom.icon;
                       return (
                         <Button
                           key={symptom.id}
@@ -190,7 +226,7 @@ export function SymptomFinder({ onFindResources }: SymptomFinderProps) {
                               : "hover:scale-105"
                           }`}
                         >
-                          <span className="mr-2">{symptom.emoji}</span>
+                          <SymptomIcon className="h-4 w-4 mr-2" />
                           {symptom.label}
                         </Button>
                       );
@@ -220,10 +256,13 @@ export function SymptomFinder({ onFindResources }: SymptomFinderProps) {
 
             {/* Help Text */}
             <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-950/20 border-2 border-blue-200 dark:border-blue-800 rounded-xl text-center">
-              <p className="text-sm text-muted-foreground">
-                💡 <strong>Tip:</strong> You can select multiple symptoms to
-                find resources that address all of them. Don't worry about being
-                exact—we'll show you everything that might help.
+              <p className="text-sm text-muted-foreground flex items-center justify-center gap-2">
+                <Lightbulb className="h-4 w-4" />
+                <span>
+                  <strong>Tip:</strong> You can select multiple symptoms to find
+                  resources that address all of them. Don't worry about being
+                  exact—we'll show you everything that might help.
+                </span>
               </p>
             </div>
 

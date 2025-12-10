@@ -138,10 +138,7 @@ export function LearningPathNavigator({
                   </div>
 
                   {/* Title */}
-                  <CardTitle className="text-xl flex items-center gap-2">
-                    <span className="text-2xl">{path.emoji}</span>
-                    {path.title}
-                  </CardTitle>
+                  <CardTitle className="text-xl">{path.title}</CardTitle>
 
                   <CardDescription className="text-base leading-relaxed">
                     {path.description}
@@ -187,15 +184,18 @@ export function LearningPathNavigator({
 
         {/* Info Banner */}
         <div className="bg-primary/5 border-2 border-primary/20 rounded-xl p-6 text-center">
-          <p className="text-muted-foreground">
-            💡 <strong>Not sure where to start?</strong> Begin with{" "}
-            <button
-              onClick={() => onSelectLevel("beginner")}
-              className="text-primary hover:underline font-semibold"
-            >
-              Anxiety 101
-            </button>{" "}
-            to build a foundation, then explore topics that interest you.
+          <p className="text-muted-foreground flex items-center justify-center gap-2">
+            <Sparkles className="h-4 w-4 text-primary" />
+            <span>
+              <strong>Not sure where to start?</strong> Begin with{" "}
+              <button
+                onClick={() => onSelectLevel("beginner")}
+                className="text-primary hover:underline font-semibold"
+              >
+                Anxiety 101
+              </button>{" "}
+              to build a foundation, then explore topics that interest you.
+            </span>
           </p>
         </div>
       </div>

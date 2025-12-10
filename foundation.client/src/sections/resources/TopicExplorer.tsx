@@ -7,7 +7,39 @@ import {
 } from "../../components/ui/Card";
 import { Button } from "../../components/ui/button";
 import { Badge } from "../../components/ui/badge";
-import { X, Search } from "lucide-react";
+import {
+  X,
+  Search,
+  BookOpen,
+  HelpCircle,
+  ClipboardList,
+  Search as SearchIcon,
+  HelpCircle as HelpCircleIcon,
+  Brain,
+  Dumbbell,
+  Frown,
+  Activity,
+  Eye,
+  Microscope,
+  Dna,
+  Globe,
+  BarChart3,
+  Pill,
+  Hospital,
+  Sofa,
+  FileText,
+  Lightbulb,
+  AlertCircle,
+  Users,
+  MessageCircle,
+  Baby,
+  MessageSquare,
+  Home,
+  TrendingUp,
+  Megaphone,
+  Send,
+  Lightbulb as LightbulbIcon,
+} from "lucide-react";
 
 interface TopicExplorerProps {
   onFindResources: (topics: string[]) => void;
@@ -16,158 +48,158 @@ interface TopicExplorerProps {
 const topicCategories = [
   {
     category: "Understanding Anxiety",
-    emoji: "📚",
+    icon: BookOpen,
     color: "from-blue-400 to-blue-500",
     topics: [
-      { id: "what_is_anxiety", label: "What is Anxiety?", emoji: "❓" },
+      { id: "what_is_anxiety", label: "What is Anxiety?", icon: HelpCircle },
       {
         id: "types_of_anxiety",
         label: "Types of Disorders",
-        emoji: "📋",
+        icon: ClipboardList,
       },
-      { id: "myths_facts", label: "Myths vs. Facts", emoji: "🔍" },
+      { id: "myths_facts", label: "Myths vs. Facts", icon: SearchIcon },
       {
         id: "anxiety_vs_worry",
         label: "Anxiety vs. Normal Worry",
-        emoji: "🤔",
+        icon: HelpCircleIcon,
       },
     ],
   },
   {
     category: "Symptoms & Signs",
-    emoji: "🧠",
+    icon: Brain,
     color: "from-purple-400 to-purple-500",
     topics: [
       {
         id: "physical_symptoms",
         label: "Physical Symptoms",
-        emoji: "💪",
+        icon: Dumbbell,
       },
       {
         id: "emotional_impact",
         label: "Emotional Impact",
-        emoji: "😔",
+        icon: Frown,
       },
-      { id: "behavioral_signs", label: "Behavioral Signs", emoji: "🏃" },
+      { id: "behavioral_signs", label: "Behavioral Signs", icon: Activity },
       {
         id: "recognizing_anxiety",
         label: "Recognizing in Others",
-        emoji: "👀",
+        icon: Eye,
       },
     ],
   },
   {
     category: "Science & Causes",
-    emoji: "🔬",
+    icon: Microscope,
     color: "from-green-400 to-green-500",
     topics: [
-      { id: "brain_science", label: "Brain Science", emoji: "🧬" },
-      { id: "genetic_factors", label: "Genetic Factors", emoji: "🧬" },
+      { id: "brain_science", label: "Brain Science", icon: Brain },
+      { id: "genetic_factors", label: "Genetic Factors", icon: Dna },
       {
         id: "environmental_triggers",
         label: "Environmental Triggers",
-        emoji: "🌍",
+        icon: Globe,
       },
       {
         id: "research_studies",
         label: "Research & Studies",
-        emoji: "📊",
+        icon: BarChart3,
       },
     ],
   },
   {
     category: "Treatment & Support",
-    emoji: "💊",
+    icon: Pill,
     color: "from-orange-400 to-orange-500",
     topics: [
       {
         id: "treatment_overview",
         label: "Treatment Options",
-        emoji: "🏥",
+        icon: Hospital,
       },
-      { id: "therapy_types", label: "Therapy Types", emoji: "🛋️" },
+      { id: "therapy_types", label: "Therapy Types", icon: Sofa },
       {
         id: "medication_info",
         label: "Medication Info",
-        emoji: "💊",
+        icon: Pill,
       },
       {
         id: "self_help",
         label: "Self-Help Strategies",
-        emoji: "📝",
+        icon: FileText,
       },
     ],
   },
   {
     category: "When to Seek Help",
-    emoji: "💡",
+    icon: Lightbulb,
     color: "from-yellow-400 to-yellow-500",
     topics: [
       {
         id: "when_to_seek_help",
         label: "When to Get Help",
-        emoji: "🚨",
+        icon: AlertCircle,
       },
       {
         id: "finding_therapist",
         label: "Finding a Therapist",
-        emoji: "🔎",
+        icon: SearchIcon,
       },
       {
         id: "what_to_expect",
         label: "What to Expect",
-        emoji: "📋",
+        icon: ClipboardList,
       },
       {
         id: "talking_to_doctor",
         label: "Talking to Your Doctor",
-        emoji: "💬",
+        icon: MessageCircle,
       },
     ],
   },
   {
     category: "Supporting Others",
-    emoji: "🤝",
+    icon: Users,
     color: "from-pink-400 to-pink-500",
     topics: [
       {
         id: "supporting_family",
         label: "Supporting Family",
-        emoji: "👨‍👩‍👧",
+        icon: Users,
       },
-      { id: "parenting", label: "Parenting Guide", emoji: "👶" },
-      { id: "what_not_to_say", label: "What NOT to Say", emoji: "🙊" },
+      { id: "parenting", label: "Parenting Guide", icon: Baby },
+      { id: "what_not_to_say", label: "What NOT to Say", icon: MessageSquare },
       {
         id: "supportive_environment",
         label: "Creating Support",
-        emoji: "🏠",
+        icon: Home,
       },
     ],
   },
   {
     category: "Awareness & Advocacy",
-    emoji: "📊",
+    icon: BarChart3,
     color: "from-red-400 to-red-500",
     topics: [
       {
         id: "statistics_data",
         label: "Statistics & Data",
-        emoji: "📈",
+        icon: TrendingUp,
       },
       {
         id: "breaking_stigma",
         label: "Breaking the Stigma",
-        emoji: "💪",
+        icon: Dumbbell,
       },
       {
         id: "awareness_campaigns",
         label: "Awareness Campaigns",
-        emoji: "📢",
+        icon: Megaphone,
       },
       {
         id: "sharing_educating",
         label: "Sharing & Educating",
-        emoji: "📤",
+        icon: Send,
       },
     ],
   },
@@ -269,7 +301,10 @@ export function TopicExplorer({ onFindResources }: TopicExplorerProps) {
                     <div
                       className={`bg-gradient-to-br ${category.color} rounded-lg p-2`}
                     >
-                      <span className="text-2xl">{category.emoji}</span>
+                      {(() => {
+                        const CategoryIcon = category.icon;
+                        return <CategoryIcon className="h-6 w-6 text-white" />;
+                      })()}
                     </div>
                     <h3 className="text-lg font-bold text-foreground">
                       {category.category}
@@ -280,6 +315,7 @@ export function TopicExplorer({ onFindResources }: TopicExplorerProps) {
                   <div className="flex flex-wrap gap-2">
                     {category.topics.map((topic) => {
                       const isSelected = selectedTopics.includes(topic.id);
+                      const TopicIcon = topic.icon;
                       return (
                         <Button
                           key={topic.id}
@@ -292,7 +328,7 @@ export function TopicExplorer({ onFindResources }: TopicExplorerProps) {
                               : "hover:scale-105"
                           }`}
                         >
-                          <span className="mr-2">{topic.emoji}</span>
+                          <TopicIcon className="h-4 w-4 mr-2" />
                           {topic.label}
                         </Button>
                       );
@@ -322,10 +358,13 @@ export function TopicExplorer({ onFindResources }: TopicExplorerProps) {
 
             {/* Help Text */}
             <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-950/20 border-2 border-blue-200 dark:border-blue-800 rounded-xl text-center">
-              <p className="text-sm text-muted-foreground">
-                💡 <strong>Tip:</strong> Select multiple topics to find
-                resources that cover all of them. This is great for exploring
-                connections between different aspects of anxiety.
+              <p className="text-sm text-muted-foreground flex items-center justify-center gap-2">
+                <LightbulbIcon className="h-4 w-4" />
+                <span>
+                  <strong>Tip:</strong> Select multiple topics to find resources
+                  that cover all of them. This is great for exploring
+                  connections between different aspects of anxiety.
+                </span>
               </p>
             </div>
           </CardContent>

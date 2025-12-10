@@ -13,6 +13,7 @@ import {
   TrendingUp,
   Sparkles,
   ArrowRight,
+  Lightbulb,
 } from "lucide-react";
 
 interface JourneyNavigatorProps {
@@ -137,10 +138,7 @@ export function JourneyNavigator({
                   </div>
 
                   {/* Title */}
-                  <CardTitle className="text-xl flex items-center gap-2">
-                    <span className="text-2xl">{stage.emoji}</span>
-                    {stage.title}
-                  </CardTitle>
+                  <CardTitle className="text-xl">{stage.title}</CardTitle>
 
                   <CardDescription className="text-base leading-relaxed">
                     {stage.description}
@@ -171,7 +169,10 @@ export function JourneyNavigator({
         {/* Info Banner */}
         <div className="bg-primary/5 border-2 border-primary/20 rounded-xl p-6 text-center">
           <p className="text-muted-foreground">
-            💡 <strong>Not sure where you are?</strong> It's okay! Browse all
+            <span className="flex items-center gap-2">
+              <Lightbulb className="h-4 w-4" />
+              <strong>Not sure where you are?</strong> It's okay! Browse all
+            </span>
             resources or use our{" "}
             <button
               onClick={() => onSelectJourney("all")}
