@@ -1,52 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/ui/button";
 import { Badge } from "../../components/ui/badge";
-import {
-  Heart,
-  ArrowRight,
-  Shield,
-  Award,
-  CheckCircle,
-  AlertCircle,
-} from "lucide-react";
+import { Heart, ArrowRight, AlertCircle } from "lucide-react";
 import { LEGAL_DISCLAIMER } from "../../constants";
 
 export function HeroSection() {
   const navigate = useNavigate();
-  const coreValues = [
-    {
-      icon: CheckCircle,
-      label: "Respect & agency",
-      description:
-        "People living with anxiety are the architects of their future. Our role is to provide clear, trustworthy information so they can make informed decisions on their own terms.",
-    },
-    {
-      icon: Award,
-      label: "Evidence + lived experience",
-      description: "We combine research with real-world wisdom.",
-    },
-    {
-      icon: Shield,
-      label: "Transparency",
-      description: "We’re clear about what we do and do not do.",
-    },
-    {
-      icon: CheckCircle,
-      label: "Inclusivity & cultural humility",
-      description: "We listen first and build with communities.",
-    },
-    {
-      icon: CheckCircle,
-      label: "Resilience-focused",
-      description: "We amplify strengths, not just symptoms.",
-    },
-    {
-      icon: Award,
-      label: "Collaboration",
-      description:
-        "We collaborate with mission-aligned contributors and organizations to build and share educational resources.",
-    },
-  ];
 
   return (
     <section className="gradient-hero text-black py-20 lg:py-28">
@@ -70,32 +29,6 @@ export function HeroSection() {
                 nonprofit that does not just talk about anxiety - we collaborate
                 on projects that create real change.
               </p>
-            </div>
-
-            {/* Core Values - Mobile / Tablet */}
-            <div className="lg:hidden">
-              <div className="bg-black/5 backdrop-blur-sm rounded-2xl p-6 border border-black/10 space-y-4">
-                <h3 className="text-lg font-semibold text-black">
-                  Our Core Values
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {coreValues.map(({ icon: Icon, label, description }) => (
-                    <div key={label} className="flex items-start space-x-3">
-                      <div className="bg-black/10 rounded-full p-2">
-                        <Icon className="h-5 w-5 text-black" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-semibold text-black">
-                          {label}
-                        </p>
-                        <p className="text-sm text-black/80 leading-snug">
-                          {description}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
