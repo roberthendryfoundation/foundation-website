@@ -3,6 +3,7 @@ import { QuickLinksSection } from "../sections/home/QuickLinksSection";
 import { StoriesTeaserSection } from "../sections/home/StoriesTeaserSection";
 import { StatsSection } from "../sections/home/StatsSection";
 import { FeaturesSection } from "../sections/home/FeaturesSection";
+import { CoreValuesSection } from "../sections/home/CoreValuesSection";
 import { CTASection } from "../sections/home/CTASection";
 import { FeaturedResourcesWidget } from "../sections/home/FeaturedResourcesWidget";
 import { LatestResourcesSection } from "../sections/home/LatestResourcesSection";
@@ -20,6 +21,7 @@ export function HomePage() {
       <div className="space-y-0">
         <HeroSection />
         <QuickLinksSection />
+        <CoreValuesSection />
         <StoriesTeaserSection />
         <StatsSection />
         <FeaturesSection />
