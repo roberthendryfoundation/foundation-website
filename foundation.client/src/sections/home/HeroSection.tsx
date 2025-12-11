@@ -51,7 +51,7 @@ export function HeroSection() {
   return (
     <section className="gradient-hero text-black py-20 lg:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_1.85fr] gap-12 items-center">
           {/* Left */}
           <div className="space-y-8">
             <div className="space-y-4">
@@ -132,18 +132,12 @@ export function HeroSection() {
 
           {/* Right */}
           <div className="hidden lg:block">
-            <div className="bg-black/5 backdrop-blur-sm rounded-2xl p-8 border border-black/10 space-y-6">
-              <h3 className="text-lg font-semibold text-black mb-4">
-                Our Core Values
-              </h3>
-              {coreValues.map(({ icon: Icon, label, description }) => (
-                <div key={label} className="flex items-start space-x-3">
-                  <Icon className="h-6 w-6 text-black flex-shrink-0" />
-                  <span className="text-black">
-                    <strong>{label}:</strong> {description}
-                  </span>
-                </div>
-              ))}
+            <div className="relative rounded-2xl overflow-hidden shadow-xl">
+              <img
+                src="/hero-image.webp"
+                alt="The Robert A. Hendry Foundation"
+                className="w-full h-auto object-cover"
+              />
             </div>
           </div>
         </div>
