@@ -1,27 +1,36 @@
-export function StatsSection() {
-  const stats = [
-    {
-      number: "40 Million",
-      label: "Adults in the U.S. affected by anxiety annually",
-    },
-    { number: "Only 36%", label: "Of people with anxiety seek treatment" },
-    {
-      number: "31.9%",
-      label: "Of adolescents have experienced an anxiety disorder",
-    },
-    { number: "#1", label: "Most common mental health condition" },
-  ];
+import { urgencyStats } from "./homeContent";
 
+export function StatsSection() {
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-          {stats.map((stat, i) => (
-            <div key={i} className="text-center">
-              <div className="text-3xl lg:text-4xl text-primary mb-2">
-                {stat.number}
-              </div>
-              <div className="text-muted-foreground">{stat.label}</div>
+    <section
+      className="bg-primary py-14 text-primary-foreground sm:py-16 lg:py-20"
+      aria-labelledby="stats-heading"
+    >
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 animate-fade-up">
+        <div className="max-w-2xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-footer-muted">
+            Why it matters
+          </p>
+          <h2
+            id="stats-heading"
+            className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl"
+          >
+            Anxiety support needs more than awareness.
+          </h2>
+        </div>
+
+        <div className="mt-10 grid grid-cols-2 gap-x-5 gap-y-8 lg:grid-cols-4">
+          {urgencyStats.map((stat) => (
+            <div
+              key={stat.label}
+              className="border-l border-primary-foreground/15 pl-4"
+            >
+              <p className="text-3xl font-bold tracking-tight sm:text-4xl">
+                {stat.value}
+              </p>
+              <p className="mt-2 text-sm leading-6 text-footer-muted">
+                {stat.label}
+              </p>
             </div>
           ))}
         </div>

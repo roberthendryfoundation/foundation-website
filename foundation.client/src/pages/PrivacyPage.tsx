@@ -11,7 +11,7 @@ export function PrivacyPage() {
       />
       <div className="min-h-screen bg-background">
         {/* Header */}
-        <div className="bg-gradient-to-br from-primary/10 to-accent/10 py-20">
+        <div className="bg-section-alt py-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-center mb-6">
               <div className="bg-primary/20 rounded-full p-4">
@@ -242,8 +242,8 @@ export function PrivacyPage() {
               </div>
             </section>
 
-            <section className="bg-destructive/10 border-l-4 border-destructive p-6 rounded">
-              <h3 className="text-lg font-semibold text-destructive mb-2">
+            <section className="bg-primary/5 border-l-4 border-primary p-6 rounded">
+              <h3 className="text-lg font-semibold text-primary mb-2">
                 Crisis Notice
               </h3>
               <p className="text-sm text-muted-foreground">

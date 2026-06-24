@@ -1,12 +1,13 @@
 import { HeroSection } from "../sections/home/HeroSection";
-import { QuickLinksSection } from "../sections/home/QuickLinksSection";
-import { StoriesTeaserSection } from "../sections/home/StoriesTeaserSection";
+import { HomeExploreRail } from "../sections/home/HomeExploreRail";
+import { WhatWeDoSection } from "../sections/home/WhatWeDoSection";
 import { StatsSection } from "../sections/home/StatsSection";
-import { FeaturesSection } from "../sections/home/FeaturesSection";
-import { CoreValuesSection } from "../sections/home/CoreValuesSection";
+import { CoreValuesPreview } from "../sections/home/CoreValuesPreview";
+import { StoriesFeatureSection } from "../sections/home/StoriesFeatureSection";
+import { HowWeWorkSection } from "../sections/home/HowWeWorkSection";
+import { ResourcesPreviewSection } from "../sections/home/ResourcesPreviewSection";
+import { LatestNewsSection } from "../sections/home/LatestNewsSection";
 import { CTASection } from "../sections/home/CTASection";
-import { FeaturedResourcesWidget } from "../sections/home/FeaturedResourcesWidget";
-import { LatestResourcesSection } from "../sections/home/LatestResourcesSection";
 import { SEO } from "../components/SEO";
 
 export function HomePage() {
@@ -20,28 +21,14 @@ export function HomePage() {
       />
       <div className="space-y-0">
         <HeroSection />
-        <QuickLinksSection />
-        <CoreValuesSection />
-        <StoriesTeaserSection />
+        <HomeExploreRail />
+        <WhatWeDoSection />
         <StatsSection />
-        <FeaturesSection />
-
-        {/* ✅ Featured Educational Resources (manually curated) */}
-        <FeaturedResourcesWidget />
-
-        {/* ✅ Latest News (automatically pulls from News & Updates category) */}
-        <LatestResourcesSection
-          limit={3}
-          categorySlugs={["news-updates"]}
-          title="Latest News"
-          description="Stay updated with our newest announcements and anxiety research news."
-          viewAllText="View All News"
-          viewAllLink={`/resources?categories=${encodeURIComponent(
-            "News & Updates"
-          )}`}
-        />
-
-        {/* Testimonials coming when we have real ones */}
+        <CoreValuesPreview />
+        <StoriesFeatureSection />
+        <HowWeWorkSection />
+        <ResourcesPreviewSection />
+        <LatestNewsSection />
         <CTASection />
       </div>
     </>

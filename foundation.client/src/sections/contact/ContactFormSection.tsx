@@ -12,6 +12,7 @@ import { Textarea } from "../../components/ui/textarea";
 import { Label } from "../../components/ui/label";
 import { Button } from "../../components/ui/button";
 import { Shield, AlertCircle, Send, CheckCircle2 } from "lucide-react";
+import { alertSurfaceClass } from "../../constants/brand";
 
 export function ContactFormSection() {
   // Get Formspree ID from environment variable
@@ -46,8 +47,8 @@ export function ContactFormSection() {
     return (
       <Card className="border-border shadow-soft">
         <CardContent className="p-12 text-center">
-          <div className="bg-success/10 rounded-full p-4 w-fit mx-auto mb-6">
-            <CheckCircle2 className="h-12 w-12 text-success" />
+          <div className="bg-secondary/10 rounded-full p-4 w-fit mx-auto mb-6">
+            <CheckCircle2 className="h-12 w-12 text-secondary" />
           </div>
           <h3 className="text-2xl font-semibold mb-4 text-foreground">
             Message Sent!
@@ -78,8 +79,8 @@ export function ContactFormSection() {
       <CardContent>
         {/* Configuration error */}
         {!formspreeId && (
-          <div className="mb-6 bg-destructive/10 border border-destructive/20 rounded-lg p-4">
-            <p className="text-sm text-destructive">
+          <div className="mb-6 bg-primary/5 border border-primary/20 rounded-lg p-4">
+            <p className="text-sm text-primary">
               <strong>⚠️ Configuration Error:</strong> Formspree ID is missing.
               Please add VITE_FORMSPREE_ID to your .env file.
             </p>
@@ -103,9 +104,9 @@ export function ContactFormSection() {
               <option value="urgent">Urgent</option>
             </select>
             {formData.urgency === "urgent" && (
-              <div className="flex items-start space-x-2 p-3 bg-amber-50 border border-amber-200 rounded-md">
-                <AlertCircle className="h-4 w-4 text-amber-600 mt-0.5" />
-                <p className="text-sm text-amber-800">
+              <div className={`flex items-start space-x-2 p-3 rounded-md ${alertSurfaceClass}`}>
+                <AlertCircle className="h-4 w-4 text-secondary mt-0.5" />
+                <p className="text-sm text-muted-foreground">
                   We're not equipped for urgent support. If you need immediate
                   help, call or text <strong>988</strong> (U.S.).
                 </p>
@@ -228,9 +229,9 @@ export function ContactFormSection() {
 
           {/* Error state */}
           {state.errors && Object.keys(state.errors).length > 0 && (
-            <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-4 text-center">
-              <AlertCircle className="h-5 w-5 text-destructive mx-auto mb-2" />
-              <p className="text-sm text-destructive">
+            <div className="bg-secondary/10 border border-secondary/25 rounded-lg p-4 text-center">
+              <AlertCircle className="h-5 w-5 text-secondary mx-auto mb-2" />
+              <p className="text-sm text-secondary">
                 Failed to send message. Please try again or email us directly.
               </p>
             </div>

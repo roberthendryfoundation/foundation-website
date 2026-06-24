@@ -6,8 +6,6 @@ import { Input } from "../../components/ui/input";
 import {
   Search,
   AlertCircle,
-  Grid3x3,
-  List,
   Filter,
   ChevronLeft,
   ChevronRight,
@@ -16,6 +14,9 @@ import { useAdvancedResourceSearch } from "../../hooks/useAdvancedSearch";
 import { ResourceGridSkeleton } from "../../components/Loading";
 import { ResourceCard } from "../../components/ResourceCard";
 import { FilterSidebar } from "../../components/FilterSidebar";
+import { ResourceFilterPanel } from "./ResourceFilterPanel";
+import { FeaturedResourcesStrip } from "./FeaturedResourcesStrip";
+import { ResourceToolbar } from "./ResourceToolbar";
 
 interface ResourceLibraryProps {
   categoryFilter?: string;
@@ -56,6 +57,7 @@ export function ResourceLibrarySection({
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [selectedAudience, setSelectedAudience] = useState<string[]>([]);
 
   // ✅ EDUCATION: Learning level + topics state
   const [selectedLearningLevel, setSelectedLearningLevel] = useState<
@@ -82,6 +84,7 @@ export function ResourceLibrarySection({
     const categoriesFromUrl = params.get("categories");
     const typesFromUrl = params.get("types");
     const tagsFromUrl = params.get("tags");
+    const audienceFromUrl = params.get("audience");
     const searchFromUrl = params.get("search");
 
     if (categoriesFromUrl) {
@@ -92,6 +95,9 @@ export function ResourceLibrarySection({
     }
     if (tagsFromUrl) {
       setSelectedTags(tagsFromUrl.split(","));
+    }
+    if (audienceFromUrl) {
+      setSelectedAudience(audienceFromUrl.split(","));
     }
     if (searchFromUrl) {
       setSearchTerm(searchFromUrl);
@@ -122,6 +128,12 @@ export function ResourceLibrarySection({
       params.delete("tags");
     }
 
+    if (selectedAudience.length > 0) {
+      params.set("audience", selectedAudience.join(","));
+    } else {
+      params.delete("audience");
+    }
+
     if (searchTerm) {
       params.set("search", searchTerm);
     } else {
@@ -136,7 +148,7 @@ export function ResourceLibrarySection({
       navigate(`?${newSearch}`, { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedCategories, selectedTypes, selectedTags, searchTerm, navigate]);
+  }, [selectedCategories, selectedTypes, selectedTags, selectedAudience, searchTerm, navigate]);
 
   // Listen for search events from hero section + learning level/topic events
   useEffect(() => {
@@ -186,7 +198,9 @@ export function ResourceLibrarySection({
         categoryFilter ||
         (selectedCategories.length > 0 ? selectedCategories : undefined), // ✅ FIX: Use all categories
       type: selectedTypes.length > 0 ? selectedTypes : undefined, // ✅ FIX: Use all types
-      tags: selectedTags.length > 0 ? selectedTags : undefined, // ✅ FIX: Actually use tags!
+      tags: selectedTags.length > 0 ? selectedTags : undefined,
+      targetAudience:
+        selectedAudience.length > 0 ? selectedAudience : undefined,
       // ✅ EDUCATION FILTERS
       learningLevel: selectedLearningLevel,
       topicAreas: selectedTopics.length > 0 ? selectedTopics : undefined,
@@ -228,9 +242,9 @@ export function ResourceLibrarySection({
     return (
       <section className="py-20 bg-gradient-to-b from-muted/30 to-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-br from-destructive/5 to-destructive/10 border-2 border-destructive/20 rounded-2xl p-12 text-center backdrop-blur-sm">
-            <div className="bg-destructive/10 rounded-full p-4 w-fit mx-auto mb-6">
-              <AlertCircle className="h-16 w-16 text-destructive" />
+          <div className="bg-secondary/5 border-2 border-secondary/20 rounded-2xl p-12 text-center backdrop-blur-sm">
+            <div className="bg-secondary/10 rounded-full p-4 w-fit mx-auto mb-6">
+              <AlertCircle className="h-16 w-16 text-secondary" />
             </div>
             <h3 className="text-2xl font-semibold mb-3 text-foreground">
               Unable to load resources
@@ -266,6 +280,7 @@ export function ResourceLibrarySection({
     setSelectedCategories([]);
     setSelectedTypes([]);
     setSelectedTags([]);
+    setSelectedAudience([]);
     // ✅ EDUCATION: Clear learning level + topics + depth filters
     setSelectedLearningLevel(undefined);
     setSelectedTopics([]);
@@ -276,63 +291,99 @@ export function ResourceLibrarySection({
     selectedCategories.length +
     selectedTypes.length +
     selectedTags.length +
+    selectedAudience.length +
     (selectedLearningLevel ? 1 : 0) +
     selectedTopics.length +
     (selectedContentDepth ? 1 : 0);
 
   return (
-    <section id="resource-library" className="py-12 bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+    <section id="resource-library" className="bg-background py-10 md:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Mobile editorial header */}
         {!hideHeader && (
-          <div className="mb-8">
-            <h2 className="text-3xl font-bold mb-2 text-foreground">{title}</h2>
+          <div className="mb-6 md:hidden">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+              03 / Educational Resources
+            </p>
+            <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-950">
+              {title}
+            </h2>
             {description && (
-              <p className="text-muted-foreground">{description}</p>
+              <p className="mt-2 text-sm leading-6 text-slate-600">
+                {description}
+              </p>
             )}
           </div>
         )}
 
-        {/* Search Bar (Top) */}
-        {!categoryFilter && !limit && (
-          <div className="mb-6">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-              <Input
-                placeholder="Search resources..."
-                value={searchTerm}
-                onChange={(e) => {
-                  setSearchTerm(e.target.value);
-                  setCurrentPage(0);
-                }}
-                className="pl-10 h-11"
-              />
+        {/* Desktop editorial header */}
+        {!hideHeader && (
+          <div className="mb-8 hidden md:flex md:flex-col md:gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-2xl">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#415771]">
+                Resource Library
+              </p>
+              <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-950">
+                {title}
+              </h2>
+              {description && (
+                <p className="mt-3 text-base leading-7 text-slate-600">
+                  {description}
+                </p>
+              )}
             </div>
+            {!categoryFilter && !limit && (
+              <div className="relative w-full max-w-md">
+                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                <Input
+                  placeholder="Search resources…"
+                  value={searchTerm}
+                  onChange={(e) => {
+                    setSearchTerm(e.target.value);
+                    setCurrentPage(0);
+                  }}
+                  className="h-11 border-slate-200 pl-10 shadow-sm"
+                />
+              </div>
+            )}
           </div>
         )}
 
         {/* Two-Column Layout: Sidebar + Content */}
         {!categoryFilter && !limit && (
-          <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8">
-            {/* LEFT SIDEBAR: Filters (hidden on mobile, toggle button) */}
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[280px_1fr]">
             <aside className={`${showFilters ? "block" : "hidden"} lg:block`}>
-              <div className="lg:sticky lg:top-24">
-                <FilterSidebar
-                  selectedCategories={selectedCategories}
-                  onCategoryChange={setSelectedCategories}
-                  selectedTypes={selectedTypes}
-                  onTypeChange={setSelectedTypes}
-                  selectedTags={selectedTags}
-                  onTagChange={setSelectedTags}
-                  onClearAll={clearFilters}
-                  activeFilterCount={activeFilterCount}
-                />
+              <div className="lg:sticky lg:top-28">
+                <div className="hidden lg:block">
+                  <ResourceFilterPanel
+                    selectedCategories={selectedCategories}
+                    onCategoryChange={setSelectedCategories}
+                    selectedTypes={selectedTypes}
+                    onTypeChange={setSelectedTypes}
+                    selectedTags={selectedTags}
+                    onTagChange={setSelectedTags}
+                    selectedAudience={selectedAudience}
+                    onAudienceChange={setSelectedAudience}
+                    onClearAll={clearFilters}
+                    activeFilterCount={activeFilterCount}
+                  />
+                </div>
+                <div className="lg:hidden">
+                  <FilterSidebar
+                    selectedCategories={selectedCategories}
+                    onCategoryChange={setSelectedCategories}
+                    selectedTypes={selectedTypes}
+                    onTypeChange={setSelectedTypes}
+                    selectedTags={selectedTags}
+                    onTagChange={setSelectedTags}
+                    onClearAll={clearFilters}
+                    activeFilterCount={activeFilterCount}
+                  />
+                </div>
               </div>
             </aside>
 
-            {/* RIGHT CONTENT AREA */}
-            <div className="space-y-6">
-              {/* Mobile Filter Toggle */}
+            <div className="min-w-0 space-y-6">
               <div className="lg:hidden">
                 <Button
                   variant="outline"
@@ -340,7 +391,7 @@ export function ResourceLibrarySection({
                   onClick={() => setShowFilters(!showFilters)}
                   className="w-full"
                 >
-                  <Filter className="h-4 w-4 mr-2" />
+                  <Filter className="mr-2 h-4 w-4" />
                   {showFilters ? "Hide Filters" : "Show Filters"}
                   {activeFilterCount > 0 && (
                     <Badge className="ml-2" variant="default">
@@ -350,59 +401,48 @@ export function ResourceLibrarySection({
                 </Button>
               </div>
 
-              {/* Top Bar: Results + Sort + View Toggle */}
-              <div className="flex items-center justify-between gap-4 flex-wrap">
-                {/* Results Count */}
+              <FeaturedResourcesStrip />
+
+              <ResourceToolbar
+                currentPage={currentPage}
+                pageSize={pageSize}
+                totalResources={totalResources}
+                sortBy={sortBy}
+                onSortChange={(value) => {
+                  setSortBy(value);
+                  setCurrentPage(0);
+                }}
+                viewMode={viewMode}
+                onViewModeChange={setViewMode}
+              />
+
+              {/* Mobile results bar */}
+              <div className="flex items-center justify-between gap-4 md:hidden">
                 <div className="text-sm text-muted-foreground">
                   Showing {currentPage * pageSize + 1}–
                   {Math.min((currentPage + 1) * pageSize, totalResources)} of{" "}
                   {totalResources} resources
                 </div>
-
-                {/* Right: Sort + View Toggle */}
-                <div className="flex items-center gap-3">
-                  {/* Sort Dropdown */}
-                  <select
-                    value={sortBy}
-                    onChange={(e) => {
-                      setSortBy(
-                        e.target.value as
-                          | "recent"
-                          | "title"
-                          | "manual"
-                          | "relevance"
-                      );
-                      setCurrentPage(0);
-                    }}
-                    className="h-10 rounded-lg border border-border bg-background px-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
-                  >
-                    <option value="recent">Newest First</option>
-                    <option value="relevance">Best Match</option>
-                    <option value="title">A-Z</option>
-                    <option value="manual">Manual Order</option>
-                  </select>
-
-                  <div className="flex gap-1 bg-muted/50 p-1 rounded-lg">
-                    <Button
-                      variant={viewMode === "grid" ? "default" : "ghost"}
-                      size="icon"
-                      onClick={() => setViewMode("grid")}
-                      className="h-8 w-8"
-                      aria-label="Grid view"
-                    >
-                      <Grid3x3 className="h-4 w-4" />
-                    </Button>
-                    <Button
-                      variant={viewMode === "list" ? "default" : "ghost"}
-                      size="icon"
-                      onClick={() => setViewMode("list")}
-                      className="h-8 w-8"
-                      aria-label="List view"
-                    >
-                      <List className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
+                <select
+                  value={sortBy}
+                  onChange={(e) => {
+                    setSortBy(
+                      e.target.value as
+                        | "recent"
+                        | "title"
+                        | "manual"
+                        | "relevance"
+                    );
+                    setCurrentPage(0);
+                  }}
+                  className="h-9 rounded-lg border border-border bg-background px-2 text-sm"
+                  aria-label="Sort resources"
+                >
+                  <option value="recent">Newest</option>
+                  <option value="relevance">Best Match</option>
+                  <option value="title">A-Z</option>
+                  <option value="manual">Manual</option>
+                </select>
               </div>
 
               {/* Resource Grid */}
@@ -426,17 +466,34 @@ export function ResourceLibrarySection({
                   )}
                 </div>
               ) : (
-                <div
-                  className={
-                    viewMode === "grid"
-                      ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                      : "space-y-4"
-                  }
-                >
-                  {paginatedResources.map((res, index) => (
-                    <ResourceCard key={res._id} resource={res} index={index} />
-                  ))}
-                </div>
+                <>
+                  <div className="space-y-3 md:hidden">
+                    {paginatedResources.map((res, index) => (
+                      <ResourceCard
+                        key={res._id}
+                        resource={res}
+                        index={index}
+                        variant="compact"
+                      />
+                    ))}
+                  </div>
+                  <div
+                    className={
+                      viewMode === "grid"
+                        ? "hidden md:grid md:grid-cols-2 gap-5"
+                        : "hidden md:block md:space-y-4"
+                    }
+                  >
+                    {paginatedResources.map((res, index) => (
+                      <ResourceCard
+                        key={res._id}
+                        resource={res}
+                        index={index}
+                        variant={viewMode === "grid" ? "editorial" : "default"}
+                      />
+                    ))}
+                  </div>
+                </>
               )}
 
               {/* Pagination */}

@@ -11,7 +11,7 @@ export function TermsPage() {
       />
       <div className="min-h-screen bg-background">
         {/* Header */}
-        <div className="bg-gradient-to-br from-primary/10 to-accent/10 py-20">
+        <div className="bg-section-alt py-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-center mb-6">
               <div className="bg-primary/20 rounded-full p-4">
@@ -42,8 +42,8 @@ export function TermsPage() {
 
             <section className="mb-12">
               <h2 className="text-2xl font-bold mb-4">Critical Disclaimers</h2>
-              <div className="bg-destructive/10 border-2 border-destructive p-6 rounded-lg mb-6">
-                <h3 className="text-lg font-semibold text-destructive mb-3">
+              <div className="bg-secondary/10 border-2 border-secondary/30 p-6 rounded-lg mb-6">
+                <h3 className="text-lg font-semibold text-primary mb-3">
                   NOT A SUBSTITUTE FOR PROFESSIONAL CARE
                 </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-3">
@@ -75,7 +75,7 @@ export function TermsPage() {
 
             <section className="mb-12">
               <h2 className="text-2xl font-bold mb-4">Emergency Situations</h2>
-              <div className="bg-destructive/10 border-l-4 border-destructive p-6 rounded mb-4">
+              <div className="bg-primary/5 border-l-4 border-primary p-6 rounded mb-4">
                 <p className="text-sm text-foreground leading-relaxed">
                   <strong>
                     If you're experiencing a mental health crisis or medical

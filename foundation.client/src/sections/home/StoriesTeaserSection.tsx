@@ -30,7 +30,7 @@ export function StoriesTeaserSection() {
   }
 
   return (
-    <section className="py-16 bg-gradient-to-br from-muted/40 via-white to-muted/40">
+    <section className="py-16 bg-section-alt">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         <div className="flex items-center gap-4">
           <div className="bg-primary/10 rounded-full p-3">

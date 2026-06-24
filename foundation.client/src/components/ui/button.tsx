@@ -15,17 +15,17 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        default:
+          "bg-primary text-primary-foreground hover:bg-primary-hover shadow-sm",
         destructive:
-          "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/40 dark:focus-visible:ring-destructive/50 dark:bg-destructive/60",
+          "bg-destructive text-destructive-foreground hover:bg-primary-light focus-visible:ring-secondary/40",
         outline:
-          // slightly different look (more card-like), but same meaning
-          "border border-input bg-background/80 text-foreground hover:bg-accent/50 hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
+          "border border-border bg-background text-foreground hover:bg-accent hover:text-accent-foreground",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+          "bg-secondary text-secondary-foreground hover:bg-secondary-hover shadow-sm",
         ghost:
-          "hover:bg-accent/60 hover:text-accent-foreground dark:hover:bg-accent/40",
-        link: "text-primary underline-offset-4 hover:underline",
+          "text-foreground hover:bg-accent hover:text-accent-foreground",
+        link: "text-secondary underline-offset-4 hover:text-primary hover:underline",
       },
       size: {
         // nudge sizes (more roomy defaults)

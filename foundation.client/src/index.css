@@ -2,92 +2,131 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Brand Colors */
+/*
+ * Robert A. Hendry Foundation — Brand Color System
+ * Single source of truth for all theme tokens.
+ *
+ * Primary:   #0D1B2A (Deep Navy)
+ * Secondary: #415A77 (Slate Blue)
+ * Neutral:   #FFFFFF
+ */
 
 :root {
-  --font-size: 14px;
-  /* Mental Health Foundation Brand Colors */
-  --background: #fafbfc;
-  --foreground: #2c3e50;
+  --font-size: 16px;
+
+  /* ── Raw brand palette ── */
+  --brand-primary: #0d1b2a;
+  --brand-primary-hover: #152a40;
+  --brand-primary-light: #1e3348;
+  --brand-secondary: #415a77;
+  --brand-secondary-hover: #4f6b87;
+  --brand-secondary-light: #5a7491;
+  --brand-neutral: #ffffff;
+
+  /* ── Surfaces ── */
+  --background: #ffffff;
+  --foreground: #0d1b2a;
+  --section-alt: #f0f3f6;
   --card: #ffffff;
-  --card-foreground: #2c3e50;
+  --card-foreground: #0d1b2a;
   --popover: #ffffff;
-  --popover-foreground: #2c3e50;
-  /* Calming primary blue-green */
-  --primary: #4a90a4;
-  --primary-foreground: #ffffff;
-  --primary-light: #7fb6c5; /* lighter shade of your #4a90a4 */
-  /* Soft secondary colors */
-  --secondary: #f3f4f6;
-  --secondary-foreground: #1f2937;
-  /* Muted colors for less emphasis */
-  --muted: #f1f5f7;
-  --muted-foreground: #4b5563; /* 6b7280 */
-  /* Accent colors - warm and inviting */
-  --accent: #bfdbfe;
-  --accent-foreground: #1e3a8a;
-  /* Success green for positive actions */
-  --success: #059669;
-  --success-foreground: #ffffff;
-  /* Warm orange for donate/CTA buttons */
-  --donate: #f59e0b;
-  --donate-foreground: #ffffff;
-  /* Soft destructive for alerts */
-  --destructive: #dc2626;
-  --destructive-foreground: #ffffff;
-  /* Border and input styling */
-  --border: rgba(74, 144, 164, 0.2);
+  --popover-foreground: #0d1b2a;
+
+  /* ── Semantic roles ── */
+  --primary: var(--brand-primary);
+  --primary-foreground: var(--brand-neutral);
+  --primary-hover: var(--brand-primary-hover);
+  --primary-light: var(--brand-primary-light);
+
+  --secondary: var(--brand-secondary);
+  --secondary-foreground: var(--brand-neutral);
+  --secondary-hover: var(--brand-secondary-hover);
+
+  /* Body copy — derived slate for comfortable reading (≈7:1 on white) */
+  --muted: var(--section-alt);
+  --muted-foreground: #3a4f63;
+
+  /* Soft tints for hovers, highlights, ghost states */
+  --accent: #e8edf2;
+  --accent-foreground: var(--brand-primary);
+
+  /* Semantic aliases — palette-derived only */
+  --success: var(--brand-secondary);
+  --success-foreground: var(--brand-neutral);
+  --destructive: var(--brand-primary-hover);
+  --destructive-foreground: var(--brand-neutral);
+
+  /* Footer on deep navy */
+  --footer-foreground: #f1f5f9;
+  --footer-muted: #cbd5e1;
+
+  /* Borders & inputs */
+  --border: rgba(65, 90, 119, 0.22);
   --input: transparent;
   --input-background: #ffffff;
-  --switch-background: #e5e7eb;
-  /* Typography weights */
+  --switch-background: #d8dfe6;
+  --ring: var(--brand-secondary);
+
+  /* Charts — primary/secondary shades only */
+  --chart-1: #0d1b2a;
+  --chart-2: #1e3348;
+  --chart-3: #415a77;
+  --chart-4: #5a7491;
+  --chart-5: #7a92a8;
+
   --font-weight-medium: 500;
   --font-weight-normal: 400;
   --font-weight-semibold: 600;
-  /* Focus ring for accessibility */
-  --ring: #4a90a4;
-  /* Chart colors for data visualization */
-  --chart-1: #4a90a4;
-  --chart-2: #059669;
-  --chart-3: #f59e0b;
-  --chart-4: #8b5cf6;
-  --chart-5: #ef4444;
   --radius: 0.75rem;
 }
 
 .dark {
-  --background: #1a202c;
-  --foreground: #e2e8f0;
-  --primary: #63b3ed;
-  --primary-foreground: #1a202c;
-  --muted: #4a5568;
-  --muted-foreground: #a0aec0;
-  --border: rgba(99, 179, 237, 0.2);
+  --background: #0d1b2a;
+  --foreground: #e8edf2;
+  --section-alt: #152a40;
+  --card: #152a40;
+  --card-foreground: #e8edf2;
+  --popover: #152a40;
+  --popover-foreground: #e8edf2;
+  --primary: #e8edf2;
+  --primary-foreground: #0d1b2a;
+  --primary-hover: #ffffff;
+  --secondary: #5a7491;
+  --secondary-hover: #6b849c;
+  --muted: #1e3348;
+  --muted-foreground: #a8b8c8;
+  --accent: #1e3348;
+  --accent-foreground: #e8edf2;
+  --border: rgba(168, 184, 200, 0.2);
+  --input-background: #152a40;
 }
 
-/* Tailwind theme integration */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-section-alt: var(--section-alt);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
   --color-primary-light: var(--primary-light);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-secondary-light: var(--brand-secondary-light);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
-  --color-donate: var(--donate);
-  --color-donate-foreground: var(--donate-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-footer-foreground: var(--footer-foreground);
+  --color-footer-muted: var(--footer-muted);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-input-background: var(--input-background);
@@ -111,8 +150,23 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: "Nunito Sans", "Inter", -apple-system, BlinkMacSystemFont,
-      "Segoe UI", "Roboto", sans-serif;
+    font-family:
+      "Nunito Sans",
+      "Inter",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      "Roboto",
+      sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--primary);
   }
 }
 
@@ -159,6 +213,7 @@
     font-size: 1rem;
     font-weight: var(--font-weight-normal);
     line-height: 1.6;
+    color: var(--muted-foreground);
   }
 
   .lead {
@@ -171,6 +226,7 @@
     font-size: 0.875rem;
     font-weight: var(--font-weight-medium);
     line-height: 1.5;
+    color: var(--foreground);
   }
 
   button {
@@ -187,39 +243,29 @@
   }
 }
 
-/* Focus styles for accessibility */
 @layer base {
   *:focus-visible {
-    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
   }
 
-  /* Stronger focus for interactive elements */
   button:focus-visible,
   a:focus-visible,
   input:focus-visible,
   textarea:focus-visible,
   select:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 4px rgb(74 144 164 / 0.5), 0 0 0 8px white;
+    box-shadow:
+      0 0 0 4px rgb(65 90 119 / 0.45),
+      0 0 0 8px white;
   }
 }
 
-/* Smooth scrolling */
 html {
   font-size: var(--font-size);
   scroll-behavior: smooth;
 }
 
-/* Custom utility classes for the mental health theme */
 @layer utilities {
-  .text-donate {
-    color: var(--donate);
-  }
-
-  .bg-donate {
-    background-color: var(--donate);
-  }
-
   .text-success {
     color: var(--success);
   }
@@ -229,52 +275,56 @@ html {
   }
 
   .gradient-hero {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    background: linear-gradient(
+      135deg,
+      var(--section-alt) 0%,
+      var(--background) 50%,
+      var(--accent) 100%
+    );
   }
 
   .shadow-soft {
-    box-shadow: 0 4px 6px -1px rgba(74, 144, 164, 0.1),
-      0 2px 4px -1px rgba(74, 144, 164, 0.06);
+    box-shadow:
+      0 4px 6px -1px rgb(13 27 42 / 0.08),
+      0 2px 4px -1px rgb(13 27 42 / 0.05);
   }
 
-  /* Typography System for Visual Hierarchy */
   .display-1 {
-    @apply text-5xl lg:text-7xl font-bold tracking-tight leading-tight;
+    @apply text-5xl lg:text-7xl font-bold tracking-tight leading-tight text-primary;
   }
 
   .display-2 {
-    @apply text-4xl lg:text-6xl font-bold tracking-tight;
+    @apply text-4xl lg:text-6xl font-bold tracking-tight text-primary;
   }
 
   .heading-1 {
-    @apply text-3xl lg:text-5xl font-semibold tracking-tight;
+    @apply text-3xl lg:text-5xl font-semibold tracking-tight text-primary;
   }
 
   .heading-2 {
-    @apply text-2xl lg:text-4xl font-semibold;
+    @apply text-2xl lg:text-4xl font-semibold text-primary;
   }
 
   .heading-3 {
-    @apply text-xl lg:text-3xl font-medium;
+    @apply text-xl lg:text-3xl font-medium text-primary;
   }
 
   .body-large {
-    @apply text-xl lg:text-2xl leading-relaxed;
+    @apply text-xl lg:text-2xl leading-relaxed text-muted-foreground;
   }
 
   .body {
-    @apply text-base leading-relaxed;
+    @apply text-base leading-relaxed text-muted-foreground;
   }
 
   .body-small {
-    @apply text-sm leading-normal;
+    @apply text-sm leading-normal text-muted-foreground;
   }
 
   .caption {
     @apply text-xs leading-tight text-muted-foreground;
   }
 
-  /* Micro-interactions for better feel */
   .hover-lift {
     @apply transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg;
   }
@@ -284,10 +334,88 @@ html {
   }
 
   .hover-glow {
-    @apply transition-shadow duration-200 hover:shadow-xl hover:shadow-primary/20;
+    @apply transition-shadow duration-200 hover:shadow-xl hover:shadow-primary/15;
   }
 
-  /* Shimmer animation for loading skeletons */
+  .seal-watermark {
+    @apply relative overflow-hidden;
+  }
+
+  .seal-watermark::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("/logos/seal/seal.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: min(45vw, 320px);
+    opacity: 0.045;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .seal-watermark > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Footer: override global heading/paragraph colors on dark navy */
+  .site-footer {
+    color: var(--footer-foreground);
+    isolation: isolate;
+  }
+
+  .site-footer h1,
+  .site-footer h2,
+  .site-footer h3,
+  .site-footer h4,
+  .site-footer h5,
+  .site-footer h6 {
+    color: var(--footer-foreground);
+  }
+
+  .site-footer p,
+  .site-footer li,
+  .site-footer span {
+    color: var(--footer-muted);
+  }
+
+  .site-footer strong {
+    color: var(--footer-foreground);
+  }
+
+  .site-footer a {
+    color: var(--footer-muted);
+  }
+
+  .site-footer a:hover {
+    color: var(--footer-foreground);
+  }
+
+  .site-footer .footer-heading {
+    color: var(--footer-foreground);
+  }
+
+  .site-footer .footer-link {
+    color: var(--footer-muted);
+    transition: color 0.2s ease;
+  }
+
+  .site-footer .footer-link:hover {
+    color: var(--footer-foreground);
+  }
+
+  .site-footer .footer-watermark {
+    z-index: 0;
+    opacity: 0.035;
+    pointer-events: none;
+  }
+
+  .site-footer .footer-content {
+    position: relative;
+    z-index: 10;
+  }
+
   @keyframes shimmer {
     0% {
       background-position: -200% 0;
@@ -301,11 +429,39 @@ html {
     animation: shimmer 2s infinite;
     background-size: 200% 100%;
   }
+
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 0.65s ease-out both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-up {
+      animation: none;
+    }
+  }
 }
 
-/* Mobile UX Improvements */
 @media (max-width: 768px) {
-  /* Ensure minimum touch target size (44px per Apple HIG) */
   button,
   input[type="checkbox"],
   input[type="radio"],
@@ -315,34 +471,29 @@ html {
     min-width: 44px;
   }
 
-  /* Increase padding for small interactive elements */
   .badge,
   .tag,
   [role="option"] {
     padding: 0.75rem 1rem;
-    font-size: 0.9375rem; /* 15px */
+    font-size: 0.9375rem;
   }
 
-  /* Larger text input padding for easier tap */
   input[type="text"],
   input[type="email"],
   input[type="tel"],
   input[type="search"],
   textarea {
     padding: 0.875rem;
-    font-size: 1rem; /* Prevent zoom on iOS */
+    font-size: 1rem;
   }
 
-  /* Increase spacing between tappable elements */
   .filter-group > label,
   .checkbox-group > label {
     padding: 0.5rem 0;
   }
 }
 
-/* Print styles for better printing experience */
 @media print {
-  /* Hide unnecessary elements when printing */
   nav,
   header,
   footer,
@@ -359,7 +510,6 @@ html {
     display: none !important;
   }
 
-  /* Reset body styles for printing */
   body {
     background: white !important;
     color: black !important;
@@ -369,7 +519,6 @@ html {
     padding: 0;
   }
 
-  /* Ensure main content is visible */
   main,
   #main-content,
   article {
@@ -380,7 +529,6 @@ html {
     padding: 0 !important;
   }
 
-  /* Improve typography for print */
   h1 {
     font-size: 24pt;
     page-break-after: avoid;
@@ -408,20 +556,17 @@ html {
     widows: 3;
   }
 
-  /* Show link URLs after links */
   a[href]:after {
     content: " (" attr(href) ")";
     font-size: 10pt;
     color: #666;
   }
 
-  /* Don't show URLs for internal navigation */
   a[href^="/"]:after,
   a[href^="#"]:after {
     content: "";
   }
 
-  /* Page breaks */
   h1,
   h2,
   h3,
@@ -438,20 +583,17 @@ html {
     page-break-inside: avoid;
   }
 
-  /* Remove shadows and backgrounds */
   * {
     box-shadow: none !important;
     text-shadow: none !important;
     background: transparent !important;
   }
 
-  /* Ensure images are responsive */
   img {
     max-width: 100% !important;
     height: auto !important;
   }
 
-  /* Table printing */
   table {
     border-collapse: collapse;
     width: 100%;
@@ -463,12 +605,10 @@ html {
     padding: 8pt;
   }
 
-  /* Add page info */
   @page {
     margin: 2cm;
   }
 
-  /* Print-specific utilities */
   .print-only {
     display: block !important;
   }

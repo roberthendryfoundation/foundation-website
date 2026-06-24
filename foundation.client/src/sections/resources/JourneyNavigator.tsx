@@ -15,6 +15,7 @@ import {
   ArrowRight,
   Lightbulb,
 } from "lucide-react";
+import { brandAccentAt } from "../../constants/brand";
 
 interface JourneyNavigatorProps {
   onSelectJourney: (stage: string) => void;
@@ -28,9 +29,6 @@ const journeyStages = [
     title: "In Crisis",
     icon: AlertCircle,
     emoji: "🆘",
-    color: "from-red-500 to-red-600",
-    borderColor: "border-red-200 hover:border-red-400",
-    bgColor: "bg-red-50",
     description: "Immediate help and support for urgent situations",
     keywords: ["Emergency", "Urgent", "Now"],
   },
@@ -39,9 +37,6 @@ const journeyStages = [
     title: "Just Discovering",
     icon: Search,
     emoji: "🔍",
-    color: "from-blue-500 to-blue-600",
-    borderColor: "border-blue-200 hover:border-blue-400",
-    bgColor: "bg-blue-50",
     description: "Understanding anxiety and recognizing symptoms",
     keywords: ["What is anxiety?", "Am I anxious?", "Self-assessment"],
   },
@@ -50,9 +45,6 @@ const journeyStages = [
     title: "Learning to Manage",
     icon: Compass,
     emoji: "🧭",
-    color: "from-purple-500 to-purple-600",
-    borderColor: "border-purple-200 hover:border-purple-400",
-    bgColor: "bg-purple-50",
     description: "Building foundational coping skills and techniques",
     keywords: ["Breathing", "Grounding", "Basic coping"],
   },
@@ -61,9 +53,6 @@ const journeyStages = [
     title: "Building Strategies",
     icon: TrendingUp,
     emoji: "💪",
-    color: "from-orange-500 to-orange-600",
-    borderColor: "border-orange-200 hover:border-orange-400",
-    bgColor: "bg-orange-50",
     description: "Developing long-term management strategies",
     keywords: ["CBT", "Therapy", "Advanced tools"],
   },
@@ -72,9 +61,6 @@ const journeyStages = [
     title: "Thriving",
     icon: Sparkles,
     emoji: "🌟",
-    color: "from-green-500 to-green-600",
-    borderColor: "border-green-200 hover:border-green-400",
-    bgColor: "bg-green-50",
     description: "Maintaining wellness and preventing relapse",
     keywords: ["Maintenance", "Prevention", "Lifestyle"],
   },
@@ -86,7 +72,7 @@ export function JourneyNavigator({
   resourceCounts = {},
 }: JourneyNavigatorProps) {
   return (
-    <section className="py-16 bg-gradient-to-br from-muted/30 via-background to-muted/20">
+    <section className="py-16 bg-section-alt">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
@@ -105,6 +91,7 @@ export function JourneyNavigator({
             const Icon = stage.icon;
             const count = resourceCounts[stage.id] || 0;
             const isSelected = selectedJourney === stage.id;
+            const accent = brandAccentAt(index);
 
             return (
               <Card
@@ -112,8 +99,8 @@ export function JourneyNavigator({
                 className={`group cursor-pointer transition-all duration-300 border-2 ${
                   isSelected
                     ? "border-primary shadow-xl scale-[1.02] ring-4 ring-primary/20"
-                    : `${stage.borderColor} hover:shadow-xl hover:scale-[1.02]`
-                }`}
+                    : `${accent.borderColor} hover:shadow-xl hover:scale-[1.02]`
+                } ${accent.bgColor}`}
                 onClick={() => onSelectJourney(stage.id)}
                 style={{
                   animationDelay: `${index * 100}ms`,
@@ -124,7 +111,7 @@ export function JourneyNavigator({
                   <div className="flex items-start justify-between mb-3">
                     {/* Icon */}
                     <div
-                      className={`bg-gradient-to-br ${stage.color} rounded-xl p-3 group-hover:scale-110 transition-transform duration-300`}
+                      className={`bg-gradient-to-br ${accent.color} rounded-xl p-3 group-hover:scale-110 transition-transform duration-300`}
                     >
                       <Icon className="h-6 w-6 text-white" />
                     </div>

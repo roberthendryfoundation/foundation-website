@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { SEAL_LOGO_SRC } from "../constants/logos";
 
 interface SEOProps {
   title?: string;
@@ -13,7 +14,7 @@ export function SEO({
   title = "The Robert A. Hendry Foundation - Action-Based Anxiety Nonprofit",
   description = "A 501(c)(3) nonprofit that identifies, collaborates on, and completes projects to help people with anxiety. Evidence-based education and real change through action.",
   keywords = "anxiety nonprofit, anxiety foundation, anxiety projects, mental health nonprofit, action-based foundation, anxiety education, anxiety awareness, Robert Hendry, collaborative projects",
-  ogImage = "/og-image.png",
+  ogImage = SEAL_LOGO_SRC,
   ogType = "website",
   canonical,
 }: SEOProps) {
@@ -51,7 +52,7 @@ export function SEO({
       <meta name="author" content="The Robert A. Hendry Foundation" />
 
       {/* Mental Health Specific */}
-      <meta name="theme-color" content="#6366f1" />
+      <meta name="theme-color" content="#0D1B2A" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta
         name="apple-mobile-web-app-status-bar-style"

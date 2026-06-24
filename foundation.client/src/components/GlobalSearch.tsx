@@ -127,7 +127,7 @@ export function GlobalSearch({ isMobile = false }: GlobalSearchProps) {
       >
         <Search className="h-5 w-5" />
         {/* Tooltip hint for ⌘K on desktop */}
-        <span className="hidden lg:block absolute -bottom-8 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+        <span className="hidden lg:block absolute -bottom-8 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
           Press ⌘K
         </span>
       </button>

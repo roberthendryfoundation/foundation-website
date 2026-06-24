@@ -1,18 +1,5 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../../components/ui/Card";
-import { Badge } from "../../components/ui/badge";
-import {
-  BookOpen,
-  Brain,
-  Microscope,
-  ArrowRight,
-  Sparkles,
-} from "lucide-react";
+import { BookOpen, Brain, Microscope, ArrowRight } from "lucide-react";
+import { learningPaths } from "./resourcesContent";
 
 interface LearningPathNavigatorProps {
   onSelectLevel: (level: string) => void;
@@ -20,183 +7,105 @@ interface LearningPathNavigatorProps {
   resourceCounts?: Record<string, number>;
 }
 
-const learningPaths = [
-  {
-    id: "beginner",
-    title: "Anxiety 101",
-    icon: BookOpen,
-    emoji: "📖",
-    color: "from-blue-500 to-blue-600",
-    borderColor: "border-blue-200 hover:border-blue-400",
-    bgColor: "bg-blue-50",
-    description: "Start here: Learn the basics of anxiety disorders",
-    topics: [
-      "What is anxiety?",
-      "Common types",
-      "Myths vs. facts",
-      "Anxiety vs. worry",
-    ],
-    audience: "New learners, General public",
-  },
-  {
-    id: "intermediate",
-    title: "Deep Understanding",
-    icon: Brain,
-    emoji: "🧠",
-    color: "from-purple-500 to-purple-600",
-    borderColor: "border-purple-200 hover:border-purple-400",
-    bgColor: "bg-purple-50",
-    description: "Explore symptoms, causes, and treatment options in detail",
-    topics: [
-      "Symptoms explained",
-      "Brain science",
-      "Treatment options",
-      "Supporting others",
-    ],
-    audience: "Individuals, Parents, Educators",
-  },
-  {
-    id: "advanced",
-    title: "Research & Evidence",
-    icon: Microscope,
-    emoji: "🔬",
-    color: "from-green-500 to-green-600",
-    borderColor: "border-green-200 hover:border-green-400",
-    bgColor: "bg-green-50",
-    description: "Access research studies, data, and clinical guidelines",
-    topics: [
-      "Latest research",
-      "Clinical studies",
-      "Statistics & data",
-      "Expert insights",
-    ],
-    audience: "Researchers, Healthcare professionals",
-  },
-];
+const pathIcons = {
+  beginner: BookOpen,
+  intermediate: Brain,
+  advanced: Microscope,
+};
+
+const pathSteps = ["01", "02", "03"];
 
 export function LearningPathNavigator({
   onSelectLevel,
   selectedLevel,
   resourceCounts = {},
 }: LearningPathNavigatorProps) {
+  const handleSelect = (id: string) => {
+    onSelectLevel(id);
+    window.dispatchEvent(
+      new CustomEvent("learningLevelFilter", { detail: id })
+    );
+    setTimeout(() => {
+      document.getElementById("resource-library")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 100);
+  };
+
   return (
-    <section className="py-16 bg-gradient-to-br from-muted/30 via-background to-muted/20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-4">
-            <Sparkles className="h-4 w-4 text-primary" />
-            <span className="text-sm font-medium text-primary">
-              Educational Resources
-            </span>
+    <section className="hidden bg-slate-50/60 py-14 md:block">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mb-8 flex items-end justify-between gap-8">
+          <div className="max-w-2xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#415771]">
+              Learning Path
+            </p>
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-950">
+              Choose your starting point.
+            </h2>
+            <p className="mt-3 text-base leading-7 text-slate-600">
+              Whether you're just learning about anxiety or diving into research,
+              we have resources for every level.
+            </p>
           </div>
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-            Choose Your Learning Path
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Whether you're just learning about anxiety or diving deep into
-            research, we have resources for every level.
-          </p>
         </div>
 
-        {/* Learning Path Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid gap-5 lg:grid-cols-3">
           {learningPaths.map((path, index) => {
-            const Icon = path.icon;
+            const Icon = pathIcons[path.id as keyof typeof pathIcons] ?? BookOpen;
             const count = resourceCounts[path.id] || 0;
             const isSelected = selectedLevel === path.id;
 
             return (
-              <Card
+              <article
                 key={path.id}
-                className={`group cursor-pointer transition-all duration-300 border-2 ${
+                className={`relative rounded-2xl border bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-md ${
                   isSelected
-                    ? "border-primary shadow-xl scale-[1.02] ring-4 ring-primary/20"
-                    : `${path.borderColor} hover:shadow-xl hover:scale-[1.02]`
+                    ? "border-[#415771] ring-2 ring-[#415771]/20"
+                    : "border-slate-200 hover:border-slate-300"
                 }`}
-                onClick={() => onSelectLevel(path.id)}
-                style={{
-                  animationDelay: `${index * 100}ms`,
-                  animation: "fadeInUp 0.5s ease-out forwards",
-                }}
               >
-                <CardHeader>
-                  <div className="flex items-start justify-between mb-3">
-                    {/* Icon */}
-                    <div
-                      className={`bg-gradient-to-br ${path.color} rounded-xl p-3 group-hover:scale-110 transition-transform duration-300`}
+                <div className="flex items-start justify-between">
+                  <p className="text-sm font-semibold tracking-[0.2em] text-[#415771]">
+                    {pathSteps[index]}
+                  </p>
+                  {count > 0 && (
+                    <span className="rounded-full bg-[#f4f7fa] px-2.5 py-0.5 text-xs font-semibold text-slate-600">
+                      {count}
+                    </span>
+                  )}
+                </div>
+                <div className="mt-4 flex h-10 w-10 items-center justify-center rounded-xl bg-[#f4f7fa] text-[#415771]">
+                  <Icon className="h-4 w-4" />
+                </div>
+                <h3 className="mt-4 text-xl font-bold text-slate-950">
+                  {path.title}
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-slate-600">
+                  {path.description}
+                </p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {path.topics.slice(0, 3).map((topic) => (
+                    <span
+                      key={topic}
+                      className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700"
                     >
-                      <Icon className="h-6 w-6 text-white" />
-                    </div>
-
-                    {/* Resource Count Badge */}
-                    {count > 0 && (
-                      <Badge variant="secondary" className="font-semibold">
-                        {count} resources
-                      </Badge>
-                    )}
-                  </div>
-
-                  {/* Title */}
-                  <CardTitle className="text-xl">{path.title}</CardTitle>
-
-                  <CardDescription className="text-base leading-relaxed">
-                    {path.description}
-                  </CardDescription>
-                </CardHeader>
-
-                <CardContent>
-                  {/* Topics Covered */}
-                  <div className="space-y-2 mb-4">
-                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
-                      Topics Covered:
-                    </p>
-                    <ul className="space-y-1">
-                      {path.topics.map((topic, idx) => (
-                        <li
-                          key={idx}
-                          className="text-sm text-muted-foreground flex items-center gap-2"
-                        >
-                          <span className="h-1.5 w-1.5 rounded-full bg-primary"></span>
-                          {topic}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Audience */}
-                  <div className="mb-3">
-                    <Badge variant="outline" className="text-xs">
-                      For: {path.audience}
-                    </Badge>
-                  </div>
-
-                  {/* CTA */}
-                  <div className="flex items-center text-sm font-medium text-primary group-hover:translate-x-1 transition-transform">
-                    <span>Explore resources</span>
-                    <ArrowRight className="h-4 w-4 ml-1" />
-                  </div>
-                </CardContent>
-              </Card>
+                      {topic}
+                    </span>
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => handleSelect(path.id)}
+                  className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-slate-950 transition hover:text-[#415771]"
+                >
+                  Explore resources
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+              </article>
             );
           })}
-        </div>
-
-        {/* Info Banner */}
-        <div className="bg-primary/5 border-2 border-primary/20 rounded-xl p-6 text-center">
-          <p className="text-muted-foreground flex items-center justify-center gap-2">
-            <Sparkles className="h-4 w-4 text-primary" />
-            <span>
-              <strong>Not sure where to start?</strong> Begin with{" "}
-              <button
-                onClick={() => onSelectLevel("beginner")}
-                className="text-primary hover:underline font-semibold"
-              >
-                Anxiety 101
-              </button>{" "}
-              to build a foundation, then explore topics that interest you.
-            </span>
-          </p>
         </div>
       </div>
     </section>

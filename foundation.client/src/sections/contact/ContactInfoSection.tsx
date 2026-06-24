@@ -57,13 +57,13 @@ export function ContactInfoSection() {
             <div className="flex items-start space-x-3">
               <div
                 className={`rounded-full p-2 ${
-                  method.type === "emergency" ? "bg-destructive/10" : "bg-muted"
+                  method.type === "emergency" ? "bg-secondary/10" : "bg-muted"
                 }`}
               >
                 <method.icon
                   className={`h-4 w-4 ${
                     method.type === "emergency"
-                      ? "text-destructive"
+                      ? "text-secondary"
                       : "text-muted-foreground"
                   }`}
                 />

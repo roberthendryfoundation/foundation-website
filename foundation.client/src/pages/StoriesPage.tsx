@@ -43,7 +43,7 @@ export function StoriesPage() {
         <Loading fullScreen message="Loading Stories & Community Voices..." />
       )}
 
-      <section className="bg-gradient-to-br from-primary/5 to-accent/10 py-16">
+      <section className="bg-section-alt py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
           <div className="inline-flex items-center justify-center rounded-full bg-primary/10 p-3">
             <BookOpen className="h-6 w-6 text-primary" />
@@ -86,7 +86,7 @@ export function StoriesPage() {
           </div>
 
           {storiesError && (
-            <p className="text-sm text-destructive">
+            <p className="text-sm text-secondary">
               We’re having trouble loading stories right now. Please try again
               soon.
             </p>
