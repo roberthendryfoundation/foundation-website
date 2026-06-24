@@ -17,6 +17,72 @@ import {
   type Story,
 } from "../hooks/useSanityData";
 
+// TODO: Restore story image when final photography is available.
+const showStoryImages = false;
+
+function StoryCard({ story }: { story: Story }) {
+  const storySlug = story.slug?.current;
+  const storyUrl = storySlug ? `/stories/${storySlug}` : "#";
+
+  return (
+    <Link to={storyUrl} className="block h-full">
+      <article className="h-full overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md">
+        {/* TODO: Restore story image when final photography is available. */}
+        {showStoryImages && story.image?.url && (
+          <div className="h-48 w-full overflow-hidden">
+            <img
+              src={story.image.url}
+              alt={story.image.alt || story.title}
+              className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+              loading="lazy"
+            />
+          </div>
+        )}
+
+        <div className="p-7 md:p-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#415771]">
+            Personal Story
+          </p>
+          <div
+            className="mt-4 h-px w-12 bg-[#415771]/30"
+            aria-hidden="true"
+          />
+          <h3 className="mt-5 text-xl font-semibold leading-tight text-slate-950">
+            {story.title}
+          </h3>
+          <p className="mt-6 text-sm leading-7 text-slate-700">
+            {story.summary}
+          </p>
+          <div className="mt-5 flex flex-wrap items-center gap-2">
+            {story.wordCount ? (
+              <Badge variant="outline" className="text-xs">
+                {story.wordCount} words
+              </Badge>
+            ) : null}
+            {story.themes?.map((theme: string) => (
+              <Badge
+                key={theme}
+                variant="secondary"
+                className="bg-primary/10 text-xs text-primary"
+              >
+                {theme}
+              </Badge>
+            ))}
+          </div>
+          {storySlug && (
+            <div className="mt-5 border-t border-slate-100 pt-4">
+              <span className="inline-flex w-full items-center justify-center gap-2 text-sm font-semibold text-primary">
+                Read Story
+                <ArrowRight className="h-4 w-4" />
+              </span>
+            </div>
+          )}
+        </div>
+      </article>
+    </Link>
+  );
+}
+
 export function StoriesPage() {
   const {
     data: stories = [],
@@ -61,26 +127,26 @@ export function StoriesPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between flex-col md:flex-row gap-6 mb-10">
-            <div className="space-y-2 text-center md:text-left">
-              <Badge className="bg-primary/10 text-primary border-primary/20">
+      <section className="bg-white py-16">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div className="space-y-2 text-center md:max-w-2xl md:text-left">
+              <Badge className="border-primary/20 bg-primary/10 text-primary">
                 Curated Stories
               </Badge>
               <h2 className="text-3xl font-semibold text-foreground">
                 Edited pieces grounded in lived experience
               </h2>
-              <p className="text-muted-foreground max-w-2xl">
+              <p className="text-muted-foreground">
                 Each story is shaped with the people who lived it. We keep them
                 concise, practical, and under 2,000 words so you can act on what
                 you learn.
               </p>
             </div>
-            <Button size="lg" asChild>
+            <Button size="lg" asChild className="shrink-0 lg:hidden">
               <a href="#community-voices" className="flex items-center">
                 Jump to Community Voices
-                <ArrowRight className="h-4 w-4 ml-2" />
+                <ArrowRight className="ml-2 h-4 w-4" />
               </a>
             </Button>
           </div>
@@ -93,66 +159,36 @@ export function StoriesPage() {
           )}
 
           {hasStories ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {stories.map((story: Story) => {
-                const storySlug = story.slug?.current;
-                const storyUrl = storySlug ? `/stories/${storySlug}` : "#";
+            <div className="lg:grid lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-start lg:gap-12">
+              <div className="mx-auto w-full max-w-xl space-y-6 lg:mx-0 lg:max-w-none">
+                {stories.map((story: Story) => (
+                  <StoryCard key={story._id} story={story} />
+                ))}
+              </div>
 
-                return (
-                  <Link key={story._id} to={storyUrl} className="block h-full">
-                    <Card className="h-full border-border shadow-soft hover:shadow-md transition-shadow cursor-pointer">
-                      {story.image?.url && (
-                        <div className="h-48 w-full overflow-hidden rounded-t-xl">
-                          <img
-                            src={story.image.url}
-                            alt={story.image.alt || story.title}
-                            className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
-                            loading="lazy"
-                          />
-                        </div>
-                      )}
-                      <CardHeader>
-                        <CardTitle className="text-xl leading-tight">
-                          {story.title}
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent className="space-y-3">
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                          {story.summary}
-                        </p>
-                        <div className="flex flex-wrap items-center gap-2">
-                          {story.wordCount ? (
-                            <Badge variant="outline" className="text-xs">
-                              {story.wordCount} words
-                            </Badge>
-                          ) : null}
-                          {story.themes?.map((theme: string) => (
-                            <Badge
-                              key={theme}
-                              variant="secondary"
-                              className="text-xs bg-primary/10 text-primary"
-                            >
-                              {theme}
-                            </Badge>
-                          ))}
-                        </div>
-                        {storySlug && (
-                          <div className="pt-2">
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              className="w-full justify-center text-primary hover:text-primary"
-                            >
-                              Read Story
-                              <ArrowRight className="h-4 w-4 ml-2" />
-                            </Button>
-                          </div>
-                        )}
-                      </CardContent>
-                    </Card>
-                  </Link>
-                );
-              })}
+              <aside className="mt-10 hidden lg:block lg:sticky lg:top-28">
+                <div className="rounded-2xl border border-slate-200 bg-slate-50/80 p-8">
+                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#415771]">
+                    Why these stories matter
+                  </p>
+                  <p className="mt-4 text-base leading-7 text-slate-700">
+                    Real experiences help families, partners, and practitioners
+                    understand anxiety with more empathy and clarity. These
+                    pieces are co-edited to stay practical, honest, and grounded
+                    in lived experience—not clinical advice.
+                  </p>
+                  <p className="mt-4 text-sm leading-6 text-slate-600">
+                    Each story is kept under 2,000 words so you can read, reflect,
+                    and act without feeling overwhelmed.
+                  </p>
+                  <Button size="lg" asChild className="mt-6 w-full">
+                    <a href="#community-voices" className="flex items-center justify-center">
+                      Jump to Community Voices
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </a>
+                  </Button>
+                </div>
+              </aside>
             </div>
           ) : (
             !storiesLoading && (

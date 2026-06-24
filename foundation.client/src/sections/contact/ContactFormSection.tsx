@@ -14,6 +14,9 @@ import { Button } from "../../components/ui/button";
 import { Shield, AlertCircle, Send, CheckCircle2 } from "lucide-react";
 import { alertSurfaceClass } from "../../constants/brand";
 
+const formFieldClass =
+  "h-auto w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition focus-visible:border-slate-900 focus-visible:ring-2 focus-visible:ring-slate-900/10 focus-visible:ring-offset-0";
+
 export function ContactFormSection() {
   // Get Formspree ID from environment variable
   const formspreeId = import.meta.env.VITE_FORMSPREE_ID;
@@ -96,7 +99,7 @@ export function ContactFormSection() {
               name="urgency"
               value={formData.urgency}
               onChange={handleInputChange}
-              className="w-full p-3 border border-border rounded-md bg-input-background"
+              className={formFieldClass}
               required
             >
               <option value="non-urgent">Non-urgent</option>
@@ -123,6 +126,7 @@ export function ContactFormSection() {
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
+                className={formFieldClass}
                 required
               />
               <ValidationError
@@ -139,6 +143,7 @@ export function ContactFormSection() {
                 type="email"
                 value={formData.email}
                 onChange={handleInputChange}
+                className={formFieldClass}
                 required
               />
               <ValidationError
@@ -158,6 +163,7 @@ export function ContactFormSection() {
               type="tel"
               value={formData.phone}
               onChange={handleInputChange}
+              className={formFieldClass}
             />
           </div>
 
@@ -169,6 +175,7 @@ export function ContactFormSection() {
               name="subject"
               value={formData.subject}
               onChange={handleInputChange}
+              className={formFieldClass}
               required
             />
             <ValidationError
@@ -189,6 +196,7 @@ export function ContactFormSection() {
               rows={6}
               required
               maxLength={2000}
+              className={formFieldClass}
             />
             <div className="flex justify-between text-xs text-muted-foreground">
               <ValidationError

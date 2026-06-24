@@ -2,7 +2,9 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { SEAL_LOGO_SRC } from "../../constants/logos";
 import { useStories, useTestimonials } from "../../hooks/useSanityData";
-import { homeImages } from "./homeContent";
+
+// TODO: Restore story image when final photography is available.
+const showStoryImages = false;
 
 function CommunityVoiceCard({
   quote,
@@ -87,8 +89,7 @@ export function StoriesFeatureSection() {
     );
   }
 
-  const storyImage =
-    featuredStory?.image?.url ?? homeImages.storyFallback;
+  const storyImage = featuredStory?.image?.url;
   const storyImageAlt =
     featuredStory?.image?.alt ??
     "Community voices shaping anxiety support";
@@ -114,25 +115,32 @@ export function StoriesFeatureSection() {
         <div className="mt-9 grid gap-6 lg:grid-cols-[1.55fr_0.95fr] lg:items-stretch">
           {featuredStory ? (
             <article className="group flex h-full flex-col overflow-hidden rounded-[22px] border border-border bg-white shadow-sm transition duration-300 hover:shadow-md lg:rounded-[28px]">
-              <div className="relative h-[280px] overflow-hidden sm:h-[320px] lg:h-[420px]">
-                <img
-                  src={storyImage}
-                  alt={storyImageAlt}
-                  className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
-                />
-                <div
-                  className="absolute inset-0 bg-primary/10"
-                  aria-hidden="true"
-                />
-              </div>
-              <div className="flex flex-1 flex-col bg-white p-6 lg:p-8">
+              {/* TODO: Restore story image when final photography is available. */}
+              {showStoryImages && storyImage && (
+                <div className="relative h-[280px] overflow-hidden sm:h-[320px] lg:h-[420px]">
+                  <img
+                    src={storyImage}
+                    alt={storyImageAlt}
+                    className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                  <div
+                    className="absolute inset-0 bg-primary/10"
+                    aria-hidden="true"
+                  />
+                </div>
+              )}
+              <div className="flex flex-1 flex-col bg-white p-7 lg:p-8">
                 <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">
                   Curated Story
                 </p>
+                <div
+                  className="mt-4 h-px w-12 bg-primary/30"
+                  aria-hidden="true"
+                />
                 <h3 className="mt-5 text-2xl font-bold text-primary">
                   {featuredStory.title}
                 </h3>
-                <p className="mt-4 flex-1 text-base leading-8 text-muted-foreground">
+                <p className="mt-6 flex-1 text-base leading-8 text-muted-foreground">
                   {featuredStory.summary}
                 </p>
                 <Link
@@ -145,26 +153,24 @@ export function StoriesFeatureSection() {
               </div>
             </article>
           ) : (
-            <article className="flex h-full flex-col overflow-hidden rounded-[22px] border border-border bg-white shadow-sm lg:rounded-[28px]">
-              <div className="relative h-[280px] overflow-hidden sm:h-[320px] lg:h-[420px]">
-                <img
-                  src={homeImages.storyFallback}
-                  alt="Community voices shaping anxiety support"
-                  className="h-full w-full object-cover object-center"
-                />
-              </div>
-              <div className="p-6 lg:p-8">
-                <p className="text-muted-foreground">
-                  Curated stories coming soon.
-                </p>
-                <Link
-                  to="/stories"
-                  className="mt-4 inline-flex items-center text-sm font-semibold text-primary"
-                >
-                  Visit stories
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </div>
+            <article className="flex h-full flex-col overflow-hidden rounded-[22px] border border-border bg-white p-7 shadow-sm lg:rounded-[28px] lg:p-8">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">
+                Curated Story
+              </p>
+              <div
+                className="mt-4 h-px w-12 bg-primary/30"
+                aria-hidden="true"
+              />
+              <p className="mt-5 text-muted-foreground">
+                Curated stories coming soon.
+              </p>
+              <Link
+                to="/stories"
+                className="mt-6 inline-flex items-center text-sm font-semibold text-primary"
+              >
+                Visit stories
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </article>
           )}
 

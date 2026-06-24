@@ -38,7 +38,7 @@ export function Logo({
     : isCompact
       ? "h-8 w-8"
       : isFooter
-        ? "h-24 w-24"
+        ? "h-32 w-32 md:h-36 md:w-36"
         : "h-10 w-10";
 
   const textSize = isCompact ? "text-base" : isFooter ? "text-base" : "text-lg";
