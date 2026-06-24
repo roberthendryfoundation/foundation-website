@@ -407,7 +407,7 @@ html {
 
   .site-footer .footer-watermark {
     z-index: 0;
-    opacity: 0.035;
+    opacity: 0.04;
     pointer-events: none;
   }
 

@@ -246,8 +246,15 @@ export function Layout({ children }: LayoutProps) {
         />
 
         {/* Mobile condensed footer */}
-        <div className="footer-content relative z-10 mx-auto max-w-6xl px-5 py-16 text-center md:hidden md:px-6 md:py-20">
-          <Logo variant="footer" mark="seal" inverse className="mx-auto" />
+        <div className="footer-content relative z-10 mx-auto max-w-6xl px-5 py-16 text-center md:hidden">
+          <div className="flex justify-center">
+            <Logo
+              variant="footer"
+              mark="seal"
+              inverse
+              showText={false}
+            />
+          </div>
           <p className="footer-heading mt-5 text-sm font-semibold">
             The Robert A. Hendry Foundation
           </p>
@@ -268,24 +275,28 @@ export function Layout({ children }: LayoutProps) {
               </Link>
             ))}
           </nav>
-          <p className="mt-8 text-xs leading-relaxed">
-            {LEGAL_DISCLAIMER}
-          </p>
+          <p className="mt-8 text-xs leading-relaxed">{LEGAL_DISCLAIMER}</p>
           <FooterLegalBar centered />
         </div>
 
         <div className="footer-content relative z-10 mx-auto hidden max-w-6xl px-5 py-16 sm:px-6 md:block md:py-20 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="space-y-4">
-              <Logo variant="footer" mark="seal" inverse />
-              <p className="text-sm leading-relaxed">
-                We're a 501(c)(3) nonprofit building an action-based foundation
-                that identifies, collaborates on, and completes projects to help
-                people with anxiety. We share educational resources and build
-                infrastructure to support our mission.
-              </p>
-            </div>
+          <div className="max-w-2xl">
+            <Logo variant="footer" mark="seal" inverse showText={false} />
+            <p className="footer-heading mt-5 text-base font-semibold">
+              The Robert A. Hendry Foundation
+            </p>
+            <p className="mt-2 text-xs leading-6">
+              Information-only nonprofit. No clinical services.
+            </p>
+            <p className="mt-4 max-w-xl text-sm leading-relaxed">
+              We&apos;re a 501(c)(3) nonprofit building an action-based
+              foundation that identifies, collaborates on, and completes
+              projects to help people with anxiety. We share educational
+              resources and build infrastructure to support our mission.
+            </p>
+          </div>
 
+          <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-3">
             <div>
               <h4 className="footer-heading mb-4 font-semibold">
                 Quick Links
@@ -293,10 +304,7 @@ export function Layout({ children }: LayoutProps) {
               <ul className="space-y-2">
                 {navItems.map((item) => (
                   <li key={item.path}>
-                    <Link
-                      to={item.path}
-                      className={footerLinkClass}
-                    >
+                    <Link to={item.path} className={footerLinkClass}>
                       {item.name}
                     </Link>
                   </li>
