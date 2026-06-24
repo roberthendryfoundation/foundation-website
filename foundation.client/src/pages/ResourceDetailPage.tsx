@@ -86,19 +86,17 @@ export function ResourceDetailPage() {
       beginner: {
         icon: BookOpen,
         text: "Beginner",
-        class: "bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300",
+        class: "bg-primary/10 text-primary",
       },
       intermediate: {
         icon: Brain,
         text: "Intermediate",
-        class:
-          "bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300",
+        class: "bg-secondary/10 text-secondary",
       },
       advanced: {
         icon: Microscope,
         text: "Advanced",
-        class:
-          "bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-300",
+        class: "bg-primary/15 text-primary-light",
       },
     };
     return badges[level as keyof typeof badges] || badges.beginner;
@@ -173,7 +171,7 @@ export function ResourceDetailPage() {
               <CardContent className="p-8 space-y-6">
                 {/* External Badge + Source */}
                 <div className="flex items-center gap-2 text-sm">
-                  <Badge className="bg-blue-500 text-white border-0">
+                  <Badge className="bg-secondary text-secondary-foreground border-0">
                     🔗 External Resource
                   </Badge>
                   <span className="text-muted-foreground">from</span>
@@ -375,7 +373,7 @@ export function ResourceDetailPage() {
                   {resource.shareable && (
                     <Badge
                       variant="outline"
-                      className="bg-orange-50 text-orange-700 border-orange-200 dark:bg-orange-950 dark:text-orange-300 dark:border-orange-800"
+                      className="bg-secondary/10 text-secondary border-secondary/25"
                     >
                       <Share2 className="h-3 w-3 mr-1" />
                       Shareable
@@ -570,7 +568,7 @@ export function ResourceDetailPage() {
               </Card>
 
               {/* Need Help Card */}
-              <Card className="bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-800 no-print">
+              <Card className="bg-primary/5 border-primary/20 no-print">
                 <CardHeader>
                   <CardTitle className="text-lg">Need Help Now?</CardTitle>
                 </CardHeader>

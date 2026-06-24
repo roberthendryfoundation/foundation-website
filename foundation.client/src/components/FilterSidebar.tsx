@@ -101,7 +101,7 @@ export function FilterSidebar({
                 variant="ghost"
                 size="sm"
                 onClick={onClearAll}
-                className="h-7 text-xs hover:bg-destructive/10 hover:text-destructive"
+                className="h-7 text-xs hover:bg-secondary/10 hover:text-secondary"
               >
                 <X className="h-3 w-3 mr-1" />
                 Clear all
@@ -136,7 +136,7 @@ export function FilterSidebar({
                     type="checkbox"
                     checked={selectedCategories.includes(category._id)}
                     onChange={() => toggleCategory(category._id)}
-                    className="rounded border-gray-300 text-primary focus:ring-primary focus:ring-offset-0 cursor-pointer"
+                    className="rounded border-border text-primary focus:ring-primary focus:ring-offset-0 cursor-pointer"
                   />
                   <span className="text-sm text-foreground group-hover:text-primary transition-colors">
                     {category.name}
@@ -174,7 +174,7 @@ export function FilterSidebar({
                   type="checkbox"
                   checked={selectedTypes.includes(type.id)}
                   onChange={() => toggleType(type.id)}
-                  className="rounded border-gray-300 text-primary focus:ring-primary focus:ring-offset-0 cursor-pointer"
+                  className="rounded border-border text-primary focus:ring-primary focus:ring-offset-0 cursor-pointer"
                 />
                 <span className="text-sm text-foreground group-hover:text-primary transition-colors">
                   {type.label}

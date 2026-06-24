@@ -3,6 +3,8 @@ import { Badge } from "../../components/ui/badge";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import { BookOpen, Search, TrendingUp } from "lucide-react";
+import { SealWatermark } from "../../components/SealWatermark";
+import { heroSectionClass } from "../../constants/brand";
 
 export function ResourcesHeroSection() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -42,7 +44,9 @@ export function ResourcesHeroSection() {
   };
 
   return (
-    <section className="relative py-20 lg:py-32 bg-gradient-to-br from-primary/10 via-background to-accent/10 overflow-hidden">
+    <SealWatermark
+      className={`relative py-20 lg:py-32 ${heroSectionClass} overflow-hidden`}
+    >
       {/* Background decoration */}
       <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
 
@@ -136,6 +140,6 @@ export function ResourcesHeroSection() {
           background-size: 24px 24px;
         }
       `}</style>
-    </section>
+    </SealWatermark>
   );
 }

@@ -1,14 +1,13 @@
 import { SEO } from "../components/SEO";
 import { AboutHeroSection } from "../sections/about/AboutHeroSection";
-import { OurStorySection } from "../sections/about/OurStorySection";
-import { MissionVisionSection } from "../sections/about/MissionVisionSection";
-import { CuratedStoriesSection } from "../sections/about/CuratedStoriesSection";
-import { WhyAnxietySection } from "../sections/about/WhyAnxietySection";
-import { ValuesSection } from "../sections/about/ValuesSection";
-import { RoadmapSection } from "../sections/about/RoadmapSection";
-import { TeamSection } from "../sections/about/TeamSection";
-import { TestimonialsSection } from "../sections/about/TestimonialsSection";
-import { AccreditationsSection } from "../sections/about/AccreditationsSection";
+import { FounderStorySection } from "../sections/about/FounderStorySection";
+import { HowWeWorkSection } from "../sections/about/HowWeWorkSection";
+import { AnxietyCredibilityBand } from "../sections/about/AnxietyCredibilityBand";
+import { AboutJourneyTimeline } from "../sections/about/AboutJourneyTimeline";
+import { LeadershipSection } from "../sections/about/LeadershipSection";
+import { ResponsibleDesignAccordion } from "../sections/about/ResponsibleDesignAccordion";
+import { AboutSupportNote } from "../sections/about/AboutSupportNote";
+import { AboutFinalCTA } from "../sections/about/AboutFinalCTA";
 
 export function AboutPage() {
   return (
@@ -20,15 +19,14 @@ export function AboutPage() {
         canonical="/about"
       />
       <AboutHeroSection />
-      <MissionVisionSection />
-      <OurStorySection />
-      <CuratedStoriesSection />
-      <WhyAnxietySection />
-      <ValuesSection />
-      <RoadmapSection />
-      <TeamSection />
-      <TestimonialsSection />
-      <AccreditationsSection />
+      <FounderStorySection />
+      <HowWeWorkSection />
+      <AnxietyCredibilityBand />
+      <AboutJourneyTimeline />
+      <LeadershipSection />
+      <ResponsibleDesignAccordion />
+      <AboutSupportNote />
+      <AboutFinalCTA />
     </div>
   );
 }

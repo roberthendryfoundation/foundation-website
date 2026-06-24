@@ -50,10 +50,10 @@ export function CoreValuesSection() {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-primary/5 to-accent/10">
+    <section className="py-20 bg-section-alt">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl mb-4 text-foreground">
+          <h2 className="text-3xl lg:text-4xl mb-4 text-primary">
             Our Core Values
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">

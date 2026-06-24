@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import {
-  Heart,
   Phone,
   Mail,
   MapPin,
@@ -16,6 +15,10 @@ import {
 } from "lucide-react";
 import { GlobalSearch } from "../components/GlobalSearch";
 import { BackToTop } from "../components/BackToTop";
+import { Logo } from "../components/Logo";
+import { cn } from "../components/ui/utils";
+import { LEGAL_DISCLAIMER } from "../constants";
+import { SEAL_LOGO_SRC } from "../constants/logos";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -40,9 +43,81 @@ export function Layout({ children }: LayoutProps) {
     return location.pathname === path;
   };
 
+  const isAboutPage = location.pathname === "/about";
+  const isResourcesPage = location.pathname === "/resources";
+  const [topicBarVisible, setTopicBarVisible] = useState(false);
+
+  useEffect(() => {
+    const handleTopicBar = (e: Event) => {
+      const customEvent = e as CustomEvent<boolean>;
+      setTopicBarVisible(!!customEvent.detail);
+    };
+    window.addEventListener("resourcesTopicBar", handleTopicBar);
+    return () => window.removeEventListener("resourcesTopicBar", handleTopicBar);
+  }, []);
+
+  useEffect(() => {
+    setTopicBarVisible(false);
+  }, [location.pathname]);
+
+  const desktopNavLinkClass = (path: string) =>
+    cn(
+      "relative px-3 py-2 text-sm font-medium text-primary transition-colors duration-200",
+      "hover:text-secondary",
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm",
+      "after:absolute after:left-1/2 after:-bottom-0.5 after:h-[2px] after:-translate-x-1/2 after:rounded-full after:transition-all after:duration-200",
+      isCurrentPage(path)
+        ? "font-semibold after:w-7 after:bg-primary after:opacity-100"
+        : "after:w-0 after:bg-secondary after:opacity-0 hover:after:w-5 hover:after:opacity-70"
+    );
+
+  const mobileNavLinkClass = (path: string) =>
+    cn(
+      "block w-full px-3 py-3 text-base font-medium text-primary rounded-md transition-colors duration-200",
+      "hover:bg-accent hover:text-secondary",
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+      isCurrentPage(path) &&
+        "font-semibold bg-accent/80 border-l-2 border-secondary"
+    );
+
+  const footerLinkClass =
+    "footer-link text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-footer-foreground/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary rounded-sm";
+
+  const FooterLegalBar = ({ centered = false }: { centered?: boolean }) => (
+    <div
+      className={cn(
+        "relative z-10 mt-8 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm",
+        centered
+          ? "text-center md:flex-row md:items-center md:justify-between md:text-left"
+          : "md:flex-row md:items-center md:justify-between"
+      )}
+    >
+      <p className="text-sm">
+        &copy; {new Date().getFullYear()} The Robert A. Hendry Foundation. All
+        rights reserved.
+      </p>
+      <nav
+        aria-label="Footer legal links"
+        className={cn(
+          "flex flex-wrap gap-x-5 gap-y-2",
+          centered && "justify-center md:justify-end"
+        )}
+      >
+        <Link to="/privacy" className={footerLinkClass}>
+          Privacy Policy
+        </Link>
+        <Link to="/terms" className={footerLinkClass}>
+          Terms of Service
+        </Link>
+        <a href="#main-content" className={footerLinkClass}>
+          Accessibility
+        </a>
+      </nav>
+    </div>
+  );
+
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Skip to main content for accessibility */}
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded-md z-50"
@@ -50,24 +125,12 @@ export function Layout({ children }: LayoutProps) {
         Skip to main content
       </a>
 
-      {/* Header */}
-      <header className="bg-white shadow-soft border-b border-border sticky top-0 z-40">
+      <header className="sticky top-0 z-50 border-b border-border/70 bg-white/90 text-foreground shadow-[0_1px_12px_rgba(13,27,42,0.04)] backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            {/* Logo */}
-            <Link to="/" className="flex items-center space-x-3">
-              <div className="bg-primary rounded-full p-2">
-                <Heart className="h-6 w-6 text-primary-foreground" />
-              </div>
-              <div>
-                <h1 className="text-lg font-semibold text-foreground">
-                  The Robert A. Hendry Foundation
-                </h1>
-                <p className="text-xs text-muted-foreground">
-                  Action-based anxiety nonprofit
-                </p>
-              </div>
-            </Link>
+          <div className="relative flex h-16 items-center md:justify-between md:min-h-[4.75rem] lg:min-h-20">
+            <div className="absolute left-1/2 top-1/2 z-[1] -translate-x-1/2 -translate-y-1/2 md:static md:translate-x-0 md:translate-y-0">
+              <Logo variant="header" mark="navbar" className="md:mr-2" />
+            </div>
 
             {/* Navigation */}
             <nav
@@ -76,96 +139,67 @@ export function Layout({ children }: LayoutProps) {
               aria-label="Main navigation"
             >
               {navItems.map((item) => (
-                <Button
+                <Link
                   key={item.path}
-                  variant={isCurrentPage(item.path) ? "default" : "ghost"}
-                  className="text-sm"
-                  asChild
+                  to={item.path}
+                  className={desktopNavLinkClass(item.path)}
+                  aria-current={isCurrentPage(item.path) ? "page" : undefined}
                 >
-                  <Link
-                    to={item.path}
-                    aria-current={isCurrentPage(item.path) ? "page" : undefined}
-                  >
-                    {item.name}
-                  </Link>
-                </Button>
+                  {item.name}
+                </Link>
               ))}
 
-              {/* Search Icon in Navigation */}
               <div className="pl-2">
                 <GlobalSearch />
               </div>
             </nav>
 
-            {/* CTA Buttons - Desktop */}
             <div className="hidden md:flex items-center space-x-3">
-              <Button
-                variant="outline"
-                size="sm"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground"
-                asChild
-              >
+              <Button variant="secondary" size="sm" asChild>
                 <Link to="/resources">Browse Resources</Link>
               </Button>
-              {/*<Button*/}
-              {/*    className="bg-donate hover:bg-donate/90 text-donate-foreground"*/}
-              {/*    size="sm"*/}
-              {/*    asChild*/}
-              {/*>*/}
-              {/*    <Link to="/donate">Donate</Link>*/}
-              {/*</Button>*/}
             </div>
 
-            {/* Mobile Actions */}
-            <div className="md:hidden flex items-center gap-2">
-              {/* Mobile Search */}
-              <GlobalSearch isMobile={true} />
-
-              {/* Mobile Menu Toggle */}
-              <Button
-                variant="ghost"
-                size="icon"
+            <div className="relative z-10 ml-auto flex items-center md:hidden">
+              <button
+                type="button"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-border/80 bg-white/70 text-primary shadow-sm transition-colors hover:bg-section-alt focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-label="Toggle menu"
                 aria-expanded={mobileMenuOpen}
               >
                 {mobileMenuOpen ? (
-                  <X className="h-6 w-6" />
+                  <X className="h-5 w-5" />
                 ) : (
-                  <Menu className="h-6 w-6" />
+                  <Menu className="h-5 w-5" />
                 )}
-              </Button>
+              </button>
             </div>
           </div>
 
-          {/* Mobile Menu Slide-out */}
           {mobileMenuOpen && (
-            <div className="md:hidden absolute top-full left-0 right-0 bg-background border-b shadow-lg z-50 animate-in slide-in-from-top-5 duration-200">
+            <div className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-border shadow-lg z-50 animate-in slide-in-from-top-5 duration-200">
               <nav
                 className="flex flex-col p-4 space-y-2"
                 role="navigation"
                 aria-label="Mobile navigation"
               >
                 {navItems.map((item) => (
-                  <Button
+                  <Link
                     key={item.path}
-                    variant={isCurrentPage(item.path) ? "default" : "ghost"}
-                    className="w-full justify-start text-left"
-                    asChild
+                    to={item.path}
+                    className={mobileNavLinkClass(item.path)}
+                    aria-current={
+                      isCurrentPage(item.path) ? "page" : undefined
+                    }
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    <Link
-                      to={item.path}
-                      aria-current={
-                        isCurrentPage(item.path) ? "page" : undefined
-                      }
-                    >
-                      {item.name}
-                    </Link>
-                  </Button>
+                    {item.name}
+                  </Link>
                 ))}
                 <Button
-                  className="w-full mt-4 bg-primary"
+                  variant="secondary"
+                  className="w-full mt-4"
                   asChild
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -177,43 +211,74 @@ export function Layout({ children }: LayoutProps) {
         </div>
       </header>
 
-      {/* Main content */}
       <main id="main-content" className="flex-1" role="main">
         {children}
       </main>
 
-      {/* Floating Crisis Button (Mobile Only) */}
-      <div className="fixed bottom-6 right-6 z-50 md:hidden">
-        <a href="tel:988" aria-label="Call 988 Crisis Hotline">
-          <Button
-            size="lg"
-            className="bg-destructive hover:bg-destructive/90 shadow-2xl rounded-full h-16 w-16 flex items-center justify-center animate-pulse hover:animate-none"
-          >
-            <Phone className="h-8 w-8" />
-          </Button>
-        </a>
-      </div>
+      {!isAboutPage && (
+        <div
+          className={cn(
+            "fixed right-5 z-40 md:hidden",
+            isResourcesPage && topicBarVisible ? "bottom-24" : "bottom-5"
+          )}
+        >
+          <a href="tel:988" aria-label="Call 988 Crisis Hotline">
+            <Button
+              size="lg"
+              variant="secondary"
+              className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-700 text-white shadow-xl hover:bg-slate-600"
+            >
+              <Phone className="h-5 w-5" />
+            </Button>
+          </a>
+        </div>
+      )}
 
-      {/* Footer */}
-      <footer className="bg-muted/50 border-t border-border" role="contentinfo">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Organization Info */}
-            <div className="space-y-4">
-              <Link to="/" className="flex items-center space-x-3">
-                <div className="bg-primary rounded-full p-2">
-                  <Heart className="h-5 w-5 text-primary-foreground" />
-                </div>
-                <div>
-                  <h3 className="font-semibold">
-                    The Robert A. Hendry Foundation
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    Information only nonprofit (no clinical services)
-                  </p>
-                </div>
+      <footer
+        className="site-footer relative overflow-hidden bg-primary border-t border-white/10"
+        role="contentinfo"
+      >
+        <img
+          src={SEAL_LOGO_SRC}
+          alt=""
+          aria-hidden="true"
+          className="footer-watermark pointer-events-none absolute left-1/2 top-1/2 h-[280px] w-[280px] -translate-x-1/2 -translate-y-1/2 md:h-[480px] md:w-[480px]"
+        />
+
+        {/* Mobile condensed footer */}
+        <div className="footer-content relative z-10 mx-auto max-w-6xl px-5 py-16 text-center md:hidden md:px-6 md:py-20">
+          <Logo variant="footer" mark="seal" inverse className="mx-auto" />
+          <p className="footer-heading mt-5 text-sm font-semibold">
+            The Robert A. Hendry Foundation
+          </p>
+          <p className="mt-2 text-xs leading-6">
+            Information-only nonprofit. No clinical services.
+          </p>
+          <p className="mx-auto mt-4 max-w-sm text-sm leading-6">
+            We&apos;re a 501(c)(3) nonprofit building action-based anxiety
+            resources.
+          </p>
+          <nav
+            aria-label="Footer navigation"
+            className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2"
+          >
+            {navItems.map((item) => (
+              <Link key={item.path} to={item.path} className={footerLinkClass}>
+                {item.name}
               </Link>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+            ))}
+          </nav>
+          <p className="mt-8 text-xs leading-relaxed">
+            {LEGAL_DISCLAIMER}
+          </p>
+          <FooterLegalBar centered />
+        </div>
+
+        <div className="footer-content relative z-10 mx-auto hidden max-w-6xl px-5 py-16 sm:px-6 md:block md:py-20 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="space-y-4">
+              <Logo variant="footer" mark="seal" inverse />
+              <p className="text-sm leading-relaxed">
                 We're a 501(c)(3) nonprofit building an action-based foundation
                 that identifies, collaborates on, and completes projects to help
                 people with anxiety. We share educational resources and build
@@ -221,56 +286,48 @@ export function Layout({ children }: LayoutProps) {
               </p>
             </div>
 
-            {/* Quick Links */}
             <div>
-              <h4 className="font-semibold mb-4">Quick Links</h4>
+              <h4 className="footer-heading mb-4 font-semibold">
+                Quick Links
+              </h4>
               <ul className="space-y-2">
                 {navItems.map((item) => (
                   <li key={item.path}>
                     <Link
                       to={item.path}
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      className={footerLinkClass}
                     >
                       {item.name}
                     </Link>
                   </li>
                 ))}
-                {/*<li>*/}
-                {/*    <Link*/}
-                {/*        to="/donate"*/}
-                {/*        className="text-sm text-donate hover:underline"*/}
-                {/*    >*/}
-                {/*        Donate*/}
-                {/*    </Link>*/}
-                {/*</li>*/}
               </ul>
             </div>
 
-            {/* Contact Info */}
             <div>
-              <h4 className="font-semibold mb-4">Connect</h4>
+              <h4 className="footer-heading mb-4 font-semibold">Connect</h4>
               <div className="space-y-3">
                 <div className="flex items-start space-x-3">
-                  <Mail className="h-4 w-4 text-muted-foreground mt-0.5" />
-                  <span className="text-sm text-muted-foreground">
+                  <Mail className="mt-0.5 h-4 w-4 shrink-0 opacity-80" />
+                  <span className="text-sm">
                     Have a project idea or want to collaborate? Visit our{" "}
                     <Link
                       to="/contact"
-                      className="text-primary hover:underline"
+                      className="footer-link font-medium underline-offset-4 hover:underline"
                     >
                       contact page
                     </Link>
                   </span>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <Phone className="h-4 w-4 text-muted-foreground mt-0.5" />
-                  <span className="text-sm text-muted-foreground">
+                  <Phone className="mt-0.5 h-4 w-4 shrink-0 opacity-80" />
+                  <span className="text-sm">
                     <strong>Crisis Support:</strong>
                     <br />
                     Call or text{" "}
                     <a
                       href="tel:988"
-                      className="text-primary hover:underline font-semibold"
+                      className="footer-link font-semibold underline-offset-4 hover:underline"
                     >
                       988
                     </a>{" "}
@@ -278,26 +335,25 @@ export function Layout({ children }: LayoutProps) {
                   </span>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <MapPin className="h-4 w-4 text-muted-foreground mt-0.5" />
-                  <span className="text-sm text-muted-foreground">
-                    We're a startup organization currently operating virtually
-                    as we build our infrastructure.
+                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 opacity-80" />
+                  <span className="text-sm">
+                    We&apos;re a startup organization currently operating
+                    virtually as we build our infrastructure.
                   </span>
                 </div>
               </div>
             </div>
 
-            {/* Our Commitment */}
             <div>
-              <h4 className="font-semibold mb-4">Our Commitment</h4>
+              <h4 className="footer-heading mb-4 font-semibold">
+                Our Commitment
+              </h4>
               <div className="space-y-3">
                 <div className="flex items-center space-x-2">
-                  <Shield className="h-4 w-4 text-success" />
-                  <span className="text-sm text-muted-foreground">
-                    Transparency
-                  </span>
+                  <Shield className="h-4 w-4 opacity-80" />
+                  <span className="text-sm">Transparency</span>
                 </div>
-                <div className="text-xs text-muted-foreground space-y-1">
+                <div className="space-y-1 text-xs">
                   <p className="flex items-center gap-1">
                     <TrendingUp className="h-3 w-3" />
                     Resilience - We get things done
@@ -319,39 +375,15 @@ export function Layout({ children }: LayoutProps) {
             </div>
           </div>
 
-          {/* Bottom Footer */}
-          <div className="mt-8 pt-8 border-t border-border">
-            <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-              <p className="text-sm text-muted-foreground">
-                &copy; {new Date().getFullYear()} The Robert A. Hendry
-                Foundation. All rights reserved.
-              </p>
-              <div className="flex space-x-6">
-                <Link
-                  to="/privacy"
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  Privacy Policy
-                </Link>
-                <Link
-                  to="/terms"
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  Terms of Service
-                </Link>
-                <a
-                  href="#main-content"
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  Accessibility
-                </a>
-              </div>
-            </div>
+          <div className="mt-8 border-t border-white/10 pt-8">
+            <p className="max-w-3xl text-xs leading-relaxed">
+              {LEGAL_DISCLAIMER}
+            </p>
+            <FooterLegalBar />
           </div>
         </div>
       </footer>
 
-      {/* Back to Top Button */}
       <BackToTop />
     </div>
   );

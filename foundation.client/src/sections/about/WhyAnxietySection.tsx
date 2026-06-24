@@ -51,7 +51,7 @@ export function WhyAnxietySection() {
           ))}
         </div>
 
-        <div className="bg-gradient-to-br from-primary/5 to-accent/10 rounded-xl p-8 border border-border">
+        <div className="bg-section-alt rounded-xl p-8 border border-border">
           <p className="text-lg text-muted-foreground leading-relaxed text-center">
             <strong className="text-foreground">Anxiety is treatable.</strong>{" "}
             But millions of people don't get help because of stigma, cost, or

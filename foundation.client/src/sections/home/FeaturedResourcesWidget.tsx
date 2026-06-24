@@ -25,7 +25,7 @@ export function FeaturedResourcesWidget() {
 
   if (isLoading) {
     return (
-      <section className="py-16 bg-gradient-to-b from-background to-muted/30">
+      <section className="py-16 bg-section-alt">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="animate-pulse">
             <div className="h-8 w-64 bg-muted rounded mb-4"></div>
@@ -109,7 +109,7 @@ export function FeaturedResourcesWidget() {
                 {/* Featured Badge */}
                 {resource.featured && (
                   <div className="absolute top-3 right-3">
-                    <Star className="h-5 w-5 text-yellow-500 fill-yellow-500" />
+                    <Star className="h-5 w-5 text-secondary fill-secondary" />
                   </div>
                 )}
 
@@ -161,7 +161,7 @@ export function FeaturedResourcesWidget() {
                     </span>
                   )}
                   {resource.shareable && (
-                    <span className="flex items-center gap-1 text-orange-600 dark:text-orange-400">
+                    <span className="flex items-center gap-1 text-secondary">
                       <Share2 className="h-3 w-3" />
                       Shareable
                     </span>

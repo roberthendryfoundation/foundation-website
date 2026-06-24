@@ -40,6 +40,7 @@ import {
   Send,
   Lightbulb as LightbulbIcon,
 } from "lucide-react";
+import { alertSurfaceClass, brandAccentAt } from "../../constants/brand";
 
 interface TopicExplorerProps {
   onFindResources: (topics: string[]) => void;
@@ -49,7 +50,6 @@ const topicCategories = [
   {
     category: "Understanding Anxiety",
     icon: BookOpen,
-    color: "from-blue-400 to-blue-500",
     topics: [
       { id: "what_is_anxiety", label: "What is Anxiety?", icon: HelpCircle },
       {
@@ -68,7 +68,6 @@ const topicCategories = [
   {
     category: "Symptoms & Signs",
     icon: Brain,
-    color: "from-purple-400 to-purple-500",
     topics: [
       {
         id: "physical_symptoms",
@@ -91,7 +90,6 @@ const topicCategories = [
   {
     category: "Science & Causes",
     icon: Microscope,
-    color: "from-green-400 to-green-500",
     topics: [
       { id: "brain_science", label: "Brain Science", icon: Brain },
       { id: "genetic_factors", label: "Genetic Factors", icon: Dna },
@@ -110,7 +108,6 @@ const topicCategories = [
   {
     category: "Treatment & Support",
     icon: Pill,
-    color: "from-orange-400 to-orange-500",
     topics: [
       {
         id: "treatment_overview",
@@ -133,7 +130,6 @@ const topicCategories = [
   {
     category: "When to Seek Help",
     icon: Lightbulb,
-    color: "from-yellow-400 to-yellow-500",
     topics: [
       {
         id: "when_to_seek_help",
@@ -160,7 +156,6 @@ const topicCategories = [
   {
     category: "Supporting Others",
     icon: Users,
-    color: "from-pink-400 to-pink-500",
     topics: [
       {
         id: "supporting_family",
@@ -179,7 +174,6 @@ const topicCategories = [
   {
     category: "Awareness & Advocacy",
     icon: BarChart3,
-    color: "from-red-400 to-red-500",
     topics: [
       {
         id: "statistics_data",
@@ -238,7 +232,7 @@ export function TopicExplorer({ onFindResources }: TopicExplorerProps) {
   };
 
   return (
-    <section className="py-16 bg-gradient-to-br from-background via-muted/10 to-background">
+    <section className="hidden bg-section-alt py-16 md:block">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Card className="border-2 shadow-xl">
           <CardHeader>
@@ -287,10 +281,12 @@ export function TopicExplorer({ onFindResources }: TopicExplorerProps) {
 
             {/* Topic Categories */}
             <div className="space-y-6">
-              {topicCategories.map((category, index) => (
+              {topicCategories.map((category, index) => {
+                const accent = brandAccentAt(index);
+                return (
                 <div
                   key={category.category}
-                  className="p-4 bg-muted/30 rounded-xl border-2 border-border"
+                  className="p-4 bg-white rounded-xl border-2 border-border"
                   style={{
                     animationDelay: `${index * 100}ms`,
                     animation: "fadeInUp 0.5s ease-out forwards",
@@ -299,7 +295,7 @@ export function TopicExplorer({ onFindResources }: TopicExplorerProps) {
                   {/* Category Header */}
                   <div className="flex items-center gap-3 mb-4">
                     <div
-                      className={`bg-gradient-to-br ${category.color} rounded-lg p-2`}
+                      className={`bg-gradient-to-br ${accent.color} rounded-lg p-2`}
                     >
                       {(() => {
                         const CategoryIcon = category.icon;
@@ -335,7 +331,8 @@ export function TopicExplorer({ onFindResources }: TopicExplorerProps) {
                     })}
                   </div>
                 </div>
-              ))}
+              );
+              })}
             </div>
 
             {/* Find Resources Button */}
@@ -357,7 +354,7 @@ export function TopicExplorer({ onFindResources }: TopicExplorerProps) {
             </div>
 
             {/* Help Text */}
-            <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-950/20 border-2 border-blue-200 dark:border-blue-800 rounded-xl text-center">
+            <div className={`mt-6 p-4 rounded-xl text-center ${alertSurfaceClass}`}>
               <p className="text-sm text-muted-foreground flex items-center justify-center gap-2">
                 <LightbulbIcon className="h-4 w-4" />
                 <span>

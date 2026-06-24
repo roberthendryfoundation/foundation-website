@@ -1,12 +1,17 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { ResourcesHeroSection } from "../sections/resources/ResourcesHeroSection-Enhanced";
+import { ResourceHero } from "../sections/resources/ResourceHero";
+import { QuickAccessCarousel } from "../sections/resources/QuickAccessCarousel";
 import { QuickResourcesSection } from "../sections/resources/QuickResourcesSection";
+import { LearningPathTabs } from "../sections/resources/LearningPathTabs";
 import { LearningPathNavigator } from "../sections/resources/LearningPathNavigator";
-import { TopicExplorer } from "../sections/resources/TopicExplorer";
+import { TopicBrowserTabs } from "../sections/resources/TopicBrowserTabs";
+import { TopicAccordionFilter } from "../sections/resources/TopicAccordionFilter";
+import { FeaturedResource } from "../sections/resources/FeaturedResource";
 import { ResourceLibrarySection } from "../sections/resources/ResourcesLibrarySection";
+import { ExternalSupportDirectory } from "../sections/resources/ExternalSupportDirectory";
 import { ExternalResourcesSection } from "../sections/resources/ExternalResourcesSection";
-import { ResourcesCTASection } from "../sections/resources/ResourcesCTASection";
+import { ResourceCTA } from "../sections/resources/ResourceCTA";
 import { SEO } from "../components/SEO";
 import { useLearningLevelCounts } from "../hooks/useSanityData";
 
@@ -96,25 +101,33 @@ export function ResourcesPage() {
         canonical="/resources"
       />
       <div className="space-y-0">
-        <ResourcesHeroSection />
+        <ResourceHero />
+        <QuickAccessCarousel />
         <QuickResourcesSection />
 
-        {/* ✅ EDUCATION: Learning Path Navigation */}
+        <LearningPathTabs
+          onSelectLevel={handleLearningLevelSelect}
+          selectedLevel={selectedLearningLevel}
+          resourceCounts={learningLevelCounts}
+        />
         <LearningPathNavigator
           onSelectLevel={handleLearningLevelSelect}
           selectedLevel={selectedLearningLevel}
           resourceCounts={learningLevelCounts}
         />
 
-        {/* ✅ EDUCATION: Topic Explorer */}
-        <TopicExplorer onFindResources={handleTopicSearch} />
+        <TopicAccordionFilter onFindResources={handleTopicSearch} />
+        <TopicBrowserTabs onFindResources={handleTopicSearch} />
 
+        <FeaturedResource />
         <ResourceLibrarySection
           learningLevel={selectedLearningLevel}
           topicAreas={selectedTopics}
         />
+
+        <ExternalSupportDirectory />
         <ExternalResourcesSection />
-        <ResourcesCTASection />
+        <ResourceCTA />
       </div>
     </>
   );

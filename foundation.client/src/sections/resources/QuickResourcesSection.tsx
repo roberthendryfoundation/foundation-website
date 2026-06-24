@@ -1,140 +1,106 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../../components/ui/Card";
-import { Button } from "../../components/ui/button";
-import { Phone, Brain, PlayCircle, Users } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Phone, Brain, PlayCircle, Users, ArrowRight } from "lucide-react";
+import { quickResources } from "./resourcesContent";
+
+const isExternal = (url?: string) =>
+  !!url && (url.startsWith("http") || url.startsWith("tel:"));
+
+const actionIcons = {
+  tool: Brain,
+  audio: PlayCircle,
+  directory: Users,
+};
 
 export function QuickResourcesSection() {
-  const quickResources = [
-    {
-      title: "Crisis Support (U.S.)",
-      description:
-        "If you're in distress, call or text 988 for the Suicide & Crisis Lifeline.",
-      icon: Phone,
-      type: "emergency",
-      action: "Call or text 988",
-    },
-    {
-      title: "Self-Assessment (External)",
-      description:
-        "Third-party screening tools to reflect on what you're feeling.",
-      icon: Brain,
-      type: "tool",
-      action: "Explore Tools",
-      url: "https://screening.mhanational.org", // external
-    },
-    {
-      title: "Breathing Exercises",
-      description: "Short, guided videos you can try right now.",
-      icon: PlayCircle,
-      type: "audio",
-      action: "Listen",
-      url: "/resources/breathing", // internal route
-    },
-    {
-      title: "Find a Therapist (External)",
-      description: "Search reputable directories for licensed providers.",
-      icon: Users,
-      type: "directory",
-      action: "Search",
-      url: "https://www.psychologytoday.com/us/therapists", // external
-    },
-  ];
-
-  // helper to decide internal vs external
-  const isExternal = (url?: string) =>
-    !!url && (url.startsWith("http") || url.startsWith("tel:"));
+  const crisis = quickResources[0];
+  const actions = quickResources.slice(1);
 
   return (
-    <section id="quick-access" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl lg:text-4xl mb-4 text-foreground">
-            Quick Access Resources
+    <section id="quick-access" className="hidden bg-white py-14 md:block lg:py-16">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mb-8 max-w-2xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#415771]">
+            Quick Access
+          </p>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-950">
+            Essential support, right away.
           </h2>
-          <p className="text-xl text-muted-foreground">
-            Immediate access to essential mental health tools and support.
+          <p className="mt-3 text-base leading-7 text-slate-600">
+            Immediate access to mental health tools and trusted support resources.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {quickResources.map((resource, index) => (
-            <Card
-              key={index}
-              className={`relative border-border shadow-soft hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ${
-                resource.type === "emergency"
-                  ? "border-destructive border-2 shadow-destructive/20"
-                  : "hover:border-primary/30"
-              }`}
-            >
-              {resource.type === "emergency" && (
-                <div className="absolute inset-0 border-2 border-destructive rounded-lg animate-pulse opacity-20 pointer-events-none"></div>
-              )}
-              <CardHeader className="text-center">
-                <div
-                  className={`rounded-full p-3 w-fit mx-auto mb-4 ${
-                    resource.type === "emergency"
-                      ? "bg-destructive/10"
-                      : "bg-primary/10"
-                  }`}
-                >
-                  <resource.icon
-                    className={`h-6 w-6 ${
-                      resource.type === "emergency"
-                        ? "text-destructive"
-                        : "text-primary"
-                    }`}
-                  />
-                </div>
-                <CardTitle className="text-lg">{resource.title}</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center">
-                <CardDescription className="mb-4">
-                  {resource.description}
-                </CardDescription>
+        <div className="grid gap-5 lg:grid-cols-[1.1fr_1.9fr]">
+          <div className="relative overflow-hidden rounded-3xl border border-[#415771]/30 bg-[#f4f7fa] p-7 shadow-md shadow-slate-900/5">
+            <div className="relative z-10">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#415771]">
+                U.S. Crisis Support
+              </p>
+              <div className="mt-4 flex h-11 w-11 items-center justify-center rounded-xl bg-white text-[#415771] shadow-sm">
+                <Phone className="h-5 w-5" />
+              </div>
+              <h3 className="mt-4 text-2xl font-bold text-slate-950">
+                Need support now?
+              </h3>
+              <p className="mt-3 text-sm leading-6 text-slate-600">
+                {crisis.description}
+              </p>
+              <a
+                href="tel:988"
+                className="mt-6 inline-flex items-center gap-2 rounded-xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#415771]"
+              >
+                {crisis.action}
+                <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
 
-                {resource.url ? (
-                  isExternal(resource.url) ? (
-                    <a
-                      href={resource.url}
-                      target={
-                        resource.url.startsWith("http") ? "_blank" : undefined
-                      }
-                      rel={
-                        resource.url.startsWith("http")
-                          ? "noopener noreferrer"
-                          : undefined
-                      }
-                    >
-                      <Button
-                        size="sm"
-                        className={
-                          resource.type === "emergency"
-                            ? "bg-destructive hover:bg-destructive/90"
-                            : ""
-                        }
-                      >
-                        {resource.action}
-                      </Button>
-                    </a>
-                  ) : (
-                    <Link to={resource.url}>
-                      <Button size="sm">{resource.action}</Button>
-                    </Link>
-                  )
-                ) : (
-                  <p className="text-sm font-semibold text-destructive">
-                    {resource.action}
+          <div className="grid gap-5 sm:grid-cols-3">
+            {actions.map((resource) => {
+              const Icon =
+                actionIcons[resource.type as keyof typeof actionIcons] ??
+                Brain;
+              const card = (
+                <article className="group flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f4f7fa] text-[#415771]">
+                    <Icon className="h-4 w-4" />
+                  </div>
+                  <h3 className="mt-4 text-base font-semibold leading-snug text-slate-950">
+                    {resource.title}
+                  </h3>
+                  <p className="mt-2 flex-1 text-sm leading-6 text-slate-600">
+                    {resource.description}
                   </p>
-                )}
-              </CardContent>
-            </Card>
-          ))}
+                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-slate-950 transition group-hover:text-[#415771]">
+                    {resource.action}
+                    <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
+                  </span>
+                </article>
+              );
+
+              if (!resource.url) return <div key={resource.title}>{card}</div>;
+
+              if (isExternal(resource.url)) {
+                return (
+                  <a
+                    key={resource.title}
+                    href={resource.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block h-full"
+                  >
+                    {card}
+                  </a>
+                );
+              }
+
+              return (
+                <Link key={resource.title} to={resource.url} className="block h-full">
+                  {card}
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

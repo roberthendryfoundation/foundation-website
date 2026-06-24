@@ -80,12 +80,12 @@ export function SocialShare({
           />
 
           {/* Share Menu - positioned to avoid cutoff */}
-          <div className="absolute left-0 bottom-full mb-2 sm:bottom-auto sm:top-full sm:left-auto sm:right-0 sm:mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-border z-50 py-2">
+          <div className="absolute left-0 bottom-full mb-2 sm:bottom-auto sm:top-full sm:left-auto sm:right-0 sm:mt-2 w-48 bg-white dark:bg-primary rounded-lg shadow-lg border border-border z-50 py-2">
             <button
               onClick={() => handleShare("twitter")}
               className="w-full px-4 py-2 text-left text-sm hover:bg-muted flex items-center gap-3 transition-colors"
             >
-              <Twitter className="h-4 w-4 text-[#1DA1F2]" />
+              <Twitter className="h-4 w-4 text-secondary" />
               Twitter / X
             </button>
 
@@ -93,7 +93,7 @@ export function SocialShare({
               onClick={() => handleShare("facebook")}
               className="w-full px-4 py-2 text-left text-sm hover:bg-muted flex items-center gap-3 transition-colors"
             >
-              <Facebook className="h-4 w-4 text-[#1877F2]" />
+              <Facebook className="h-4 w-4 text-secondary" />
               Facebook
             </button>
 
@@ -101,7 +101,7 @@ export function SocialShare({
               onClick={() => handleShare("linkedin")}
               className="w-full px-4 py-2 text-left text-sm hover:bg-muted flex items-center gap-3 transition-colors"
             >
-              <Linkedin className="h-4 w-4 text-[#0A66C2]" />
+              <Linkedin className="h-4 w-4 text-secondary" />
               LinkedIn
             </button>
 
@@ -121,8 +121,8 @@ export function SocialShare({
             >
               {copied ? (
                 <>
-                  <Check className="h-4 w-4 text-green-600" />
-                  <span className="text-green-600">Copied!</span>
+                  <Check className="h-4 w-4 text-secondary" />
+                  <span className="text-secondary">Copied!</span>
                 </>
               ) : (
                 <>

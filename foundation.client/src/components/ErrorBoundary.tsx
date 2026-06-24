@@ -46,8 +46,8 @@ export class ErrorBoundary extends Component<Props, State> {
       return (
         <div className="min-h-screen flex items-center justify-center bg-muted/30 px-4">
           <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8 text-center">
-            <div className="bg-destructive/10 rounded-full p-4 w-fit mx-auto mb-6">
-              <AlertCircle className="h-12 w-12 text-destructive" />
+            <div className="bg-primary/5 rounded-full p-4 w-fit mx-auto mb-6">
+              <AlertCircle className="h-12 w-12 text-primary" />
             </div>
 
             <h1 className="text-2xl font-semibold mb-4 text-foreground">
@@ -61,7 +61,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
             {import.meta.env.DEV && this.state.error && (
               <details className="mb-6 text-left">
-                <summary className="cursor-pointer text-sm font-medium text-destructive mb-2">
+                <summary className="cursor-pointer text-sm font-medium text-primary mb-2">
                   Error Details (Development Only)
                 </summary>
                 <pre className="text-xs bg-muted p-4 rounded overflow-auto max-h-40">

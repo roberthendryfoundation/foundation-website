@@ -42,7 +42,7 @@ export function LatestResourcesSection({
 
   if (isLoading) {
     return (
-      <section className="py-20 bg-muted/30">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <p className="text-muted-foreground">Loading latest resources...</p>
@@ -57,7 +57,7 @@ export function LatestResourcesSection({
   }
 
   return (
-    <section className="py-20 bg-muted/30">
+    <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
@@ -141,7 +141,7 @@ export function LatestResourcesSection({
                             year: "numeric",
                             month: "short",
                             day: "numeric",
-                          }
+                          },
                         )
                       : "Recently added"}
                   </span>
