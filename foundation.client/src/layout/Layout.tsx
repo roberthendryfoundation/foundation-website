@@ -128,7 +128,7 @@ export function Layout({ children }: LayoutProps) {
       <header className="sticky top-0 z-50 border-b border-border/70 bg-white/90 text-foreground shadow-[0_1px_12px_rgba(13,27,42,0.04)] backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative flex h-16 items-center md:justify-between md:min-h-[4.75rem] lg:min-h-20">
-            <div className="absolute left-1/2 top-1/2 z-[1] -translate-x-1/2 -translate-y-1/2 md:static md:translate-x-0 md:translate-y-0">
+            <div className="absolute left-[calc(50%-0.5rem)] top-1/2 z-[1] -translate-x-1/2 -translate-y-1/2 md:static md:left-auto md:translate-x-0 md:translate-y-0">
               <Logo variant="header" mark="navbar" className="md:mr-2" />
             </div>
 
